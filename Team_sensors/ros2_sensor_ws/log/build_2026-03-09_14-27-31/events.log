@@ -1,0 +1,139 @@
+[0.000000] (-) TimerEvent: {}
+[0.000162] (passthrough_filter_cpp) JobQueued: {'identifier': 'passthrough_filter_cpp', 'dependencies': OrderedDict()}
+[0.000180] (pointcloud_filter) JobQueued: {'identifier': 'pointcloud_filter', 'dependencies': OrderedDict()}
+[0.000190] (time_sync_tools) JobQueued: {'identifier': 'time_sync_tools', 'dependencies': OrderedDict()}
+[0.000431] (passthrough_filter_cpp) JobStarted: {'identifier': 'passthrough_filter_cpp'}
+[0.003628] (pointcloud_filter) JobStarted: {'identifier': 'pointcloud_filter'}
+[0.005867] (time_sync_tools) JobStarted: {'identifier': 'time_sync_tools'}
+[0.009281] (passthrough_filter_cpp) JobProgress: {'identifier': 'passthrough_filter_cpp', 'progress': 'cmake'}
+[0.009560] (passthrough_filter_cpp) Command: {'cmd': ['/usr/bin/cmake', '/home/dhruv/ros2_sensor_ws/src/sensor_fusion_pkg', '-DCMAKE_INSTALL_PREFIX=/home/dhruv/ros2_sensor_ws/install/passthrough_filter_cpp'], 'cwd': '/home/dhruv/ros2_sensor_ws/build/passthrough_filter_cpp', 'env': OrderedDict([('GJS_DEBUG_TOPICS', 'JS ERROR;JS LOG'), ('USER', 'dhruv'), ('XDG_SESSION_TYPE', 'wayland'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib'), ('HOME', '/home/dhruv'), ('OLDPWD', '/home/dhruv/ros2_sensor_ws'), ('DESKTOP_SESSION', 'ubuntu'), ('GIO_LAUNCHED_DESKTOP_FILE', '/usr/share/applications/terminator.desktop'), ('ROS_PYTHON_VERSION', '3'), ('GNOME_SHELL_SESSION_MODE', 'ubuntu'), ('GTK_MODULES', 'gail:atk-bridge'), ('MANAGERPID', '1274'), ('SYSTEMD_EXEC_PID', '1457'), ('DBUS_SESSION_BUS_ADDRESS', 'unix:path=/run/user/1000/bus'), ('COLORTERM', 'truecolor'), ('TERMINATOR_DBUS_NAME', 'net.tenshu.Terminator25ef4b219e3b005583550f2b0f9f990c3'), ('GIO_LAUNCHED_DESKTOP_FILE_PID', '21098'), ('IM_CONFIG_PHASE', '1'), ('WAYLAND_DISPLAY', 'wayland-0'), ('COLCON_PREFIX_PATH', '/home/dhruv/ros2_sensor_ws/install:/home/dhruv/ros2_ws/install'), ('ROS_DISTRO', 'humble'), ('LOGNAME', 'dhruv'), ('JOURNAL_STREAM', '8:6031'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('XDG_SESSION_CLASS', 'user'), ('USERNAME', 'dhruv'), ('TERM', 'xterm-256color'), ('GNOME_DESKTOP_SESSION_ID', 'this-is-deprecated'), ('ROS_LOCALHOST_ONLY', '0'), ('PATH', '/opt/ros/humble/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin'), ('SESSION_MANAGER', 'local/dhruv-Predator-PH315-54:@/tmp/.ICE-unix/1403,unix/dhruv-Predator-PH315-54:/tmp/.ICE-unix/1403'), ('INVOCATION_ID', 'e5c7fc0d1503477fb1f03cafb88fea5e'), ('XDG_MENU_PREFIX', 'gnome-'), ('GNOME_SETUP_DISPLAY', ':1'), ('XDG_RUNTIME_DIR', '/run/user/1000'), ('DISPLAY', ':0'), ('TERMINATOR_DBUS_PATH', '/net/tenshu/Terminator2'), ('LANG', 'en_US.UTF-8'), ('XDG_CURRENT_DESKTOP', 'ubuntu:GNOME'), ('IBUS_DISABLE_SNOOPER', '1'), ('XMODIFIERS', '@im=ibus'), ('XDG_SESSION_DESKTOP', 'ubuntu'), ('XAUTHORITY', '/run/user/1000/.mutter-Xwaylandauth.Y78IL3'), ('SSH_AGENT_LAUNCHER', 'gnome-keyring'), ('SSH_AUTH_SOCK', '/run/user/1000/keyring/ssh'), ('AMENT_PREFIX_PATH', '/home/dhruv/ros2_ws/install/rplidar_ros:/home/dhruv/ros2_ws/install/point_cloud_filter:/home/dhruv/ros2_sensor_ws/install/time_sync_tools:/home/dhruv/ros2_sensor_ws/install/sensor_fusion_pkg:/home/dhruv/ros2_sensor_ws/install/pointcloud_filter:/opt/ros/humble'), ('SHELL', '/bin/bash'), ('TERMINATOR_UUID', 'urn:uuid:c4c04fa1-8d05-4e0e-945d-2d1cf6ec6375'), ('QT_ACCESSIBILITY', '1'), ('GDMSESSION', 'ubuntu'), ('GJS_DEBUG_OUTPUT', 'stderr'), ('QT_IM_MODULE', 'ibus'), ('PWD', '/home/dhruv/ros2_sensor_ws/build/passthrough_filter_cpp'), ('XDG_CONFIG_DIRS', '/etc/xdg/xdg-ubuntu:/etc/xdg'), ('XDG_DATA_DIRS', '/usr/share/ubuntu:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop'), ('PYTHONPATH', '/home/dhruv/ros2_ws/install/point_cloud_filter/lib/python3.10/site-packages:/home/dhruv/ros2_sensor_ws/install/time_sync_tools/lib/python3.10/site-packages:/home/dhruv/ros2_sensor_ws/install/sensor_fusion_pkg/lib/python3.10/site-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('COLCON', '1'), ('VTE_VERSION', '6800'), ('CMAKE_PREFIX_PATH', '/home/dhruv/ros2_ws/install/rplidar_ros:/home/dhruv/ros2_ws/install/point_cloud_filter:/home/dhruv/ros2_sensor_ws/install/time_sync_tools:/home/dhruv/ros2_sensor_ws/install/sensor_fusion_pkg:/home/dhruv/ros2_sensor_ws/install/pointcloud_filter:/opt/ros/humble')]), 'shell': False}
+[0.010871] (pointcloud_filter) JobProgress: {'identifier': 'pointcloud_filter', 'progress': 'cmake'}
+[0.011151] (pointcloud_filter) Command: {'cmd': ['/usr/bin/cmake', '/home/dhruv/ros2_sensor_ws/src/pointcloud_filter', '-DCMAKE_INSTALL_PREFIX=/home/dhruv/ros2_sensor_ws/install/pointcloud_filter'], 'cwd': '/home/dhruv/ros2_sensor_ws/build/pointcloud_filter', 'env': OrderedDict([('GJS_DEBUG_TOPICS', 'JS ERROR;JS LOG'), ('USER', 'dhruv'), ('XDG_SESSION_TYPE', 'wayland'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib'), ('HOME', '/home/dhruv'), ('OLDPWD', '/home/dhruv/ros2_sensor_ws'), ('DESKTOP_SESSION', 'ubuntu'), ('GIO_LAUNCHED_DESKTOP_FILE', '/usr/share/applications/terminator.desktop'), ('ROS_PYTHON_VERSION', '3'), ('GNOME_SHELL_SESSION_MODE', 'ubuntu'), ('GTK_MODULES', 'gail:atk-bridge'), ('MANAGERPID', '1274'), ('SYSTEMD_EXEC_PID', '1457'), ('DBUS_SESSION_BUS_ADDRESS', 'unix:path=/run/user/1000/bus'), ('COLORTERM', 'truecolor'), ('TERMINATOR_DBUS_NAME', 'net.tenshu.Terminator25ef4b219e3b005583550f2b0f9f990c3'), ('GIO_LAUNCHED_DESKTOP_FILE_PID', '21098'), ('IM_CONFIG_PHASE', '1'), ('WAYLAND_DISPLAY', 'wayland-0'), ('COLCON_PREFIX_PATH', '/home/dhruv/ros2_sensor_ws/install:/home/dhruv/ros2_ws/install'), ('ROS_DISTRO', 'humble'), ('LOGNAME', 'dhruv'), ('JOURNAL_STREAM', '8:6031'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('XDG_SESSION_CLASS', 'user'), ('USERNAME', 'dhruv'), ('TERM', 'xterm-256color'), ('GNOME_DESKTOP_SESSION_ID', 'this-is-deprecated'), ('ROS_LOCALHOST_ONLY', '0'), ('PATH', '/opt/ros/humble/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin'), ('SESSION_MANAGER', 'local/dhruv-Predator-PH315-54:@/tmp/.ICE-unix/1403,unix/dhruv-Predator-PH315-54:/tmp/.ICE-unix/1403'), ('INVOCATION_ID', 'e5c7fc0d1503477fb1f03cafb88fea5e'), ('XDG_MENU_PREFIX', 'gnome-'), ('GNOME_SETUP_DISPLAY', ':1'), ('XDG_RUNTIME_DIR', '/run/user/1000'), ('DISPLAY', ':0'), ('TERMINATOR_DBUS_PATH', '/net/tenshu/Terminator2'), ('LANG', 'en_US.UTF-8'), ('XDG_CURRENT_DESKTOP', 'ubuntu:GNOME'), ('IBUS_DISABLE_SNOOPER', '1'), ('XMODIFIERS', '@im=ibus'), ('XDG_SESSION_DESKTOP', 'ubuntu'), ('XAUTHORITY', '/run/user/1000/.mutter-Xwaylandauth.Y78IL3'), ('SSH_AGENT_LAUNCHER', 'gnome-keyring'), ('SSH_AUTH_SOCK', '/run/user/1000/keyring/ssh'), ('AMENT_PREFIX_PATH', '/home/dhruv/ros2_ws/install/rplidar_ros:/home/dhruv/ros2_ws/install/point_cloud_filter:/home/dhruv/ros2_sensor_ws/install/time_sync_tools:/home/dhruv/ros2_sensor_ws/install/sensor_fusion_pkg:/home/dhruv/ros2_sensor_ws/install/pointcloud_filter:/opt/ros/humble'), ('SHELL', '/bin/bash'), ('TERMINATOR_UUID', 'urn:uuid:c4c04fa1-8d05-4e0e-945d-2d1cf6ec6375'), ('QT_ACCESSIBILITY', '1'), ('GDMSESSION', 'ubuntu'), ('GJS_DEBUG_OUTPUT', 'stderr'), ('QT_IM_MODULE', 'ibus'), ('PWD', '/home/dhruv/ros2_sensor_ws/build/pointcloud_filter'), ('XDG_CONFIG_DIRS', '/etc/xdg/xdg-ubuntu:/etc/xdg'), ('XDG_DATA_DIRS', '/usr/share/ubuntu:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop'), ('PYTHONPATH', '/home/dhruv/ros2_ws/install/point_cloud_filter/lib/python3.10/site-packages:/home/dhruv/ros2_sensor_ws/install/time_sync_tools/lib/python3.10/site-packages:/home/dhruv/ros2_sensor_ws/install/sensor_fusion_pkg/lib/python3.10/site-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('COLCON', '1'), ('VTE_VERSION', '6800'), ('CMAKE_PREFIX_PATH', '/home/dhruv/ros2_ws/install/rplidar_ros:/home/dhruv/ros2_ws/install/point_cloud_filter:/home/dhruv/ros2_sensor_ws/install/time_sync_tools:/home/dhruv/ros2_sensor_ws/install/sensor_fusion_pkg:/home/dhruv/ros2_sensor_ws/install/pointcloud_filter:/opt/ros/humble')]), 'shell': False}
+[0.014837] (passthrough_filter_cpp) StderrLine: {'line': b'\x1b[0mCMake Error: The source directory "/home/dhruv/ros2_sensor_ws/src/sensor_fusion_pkg" does not appear to contain CMakeLists.txt.\n'}
+[0.014926] (passthrough_filter_cpp) StderrLine: {'line': b'Specify --help for usage, or press the help button on the CMake GUI.\x1b[0m\n'}
+[0.059200] (pointcloud_filter) StdoutLine: {'line': b'-- The C compiler identification is GNU 11.4.0\n'}
+[0.092374] (pointcloud_filter) StdoutLine: {'line': b'-- The CXX compiler identification is GNU 11.4.0\n'}
+[0.096510] (pointcloud_filter) StdoutLine: {'line': b'-- Detecting C compiler ABI info\n'}
+[0.099881] (-) TimerEvent: {}
+[0.137539] (pointcloud_filter) StdoutLine: {'line': b'-- Detecting C compiler ABI info - done\n'}
+[0.142062] (pointcloud_filter) StdoutLine: {'line': b'-- Check for working C compiler: /usr/bin/cc - skipped\n'}
+[0.142163] (pointcloud_filter) StdoutLine: {'line': b'-- Detecting C compile features\n'}
+[0.142405] (pointcloud_filter) StdoutLine: {'line': b'-- Detecting C compile features - done\n'}
+[0.144435] (pointcloud_filter) StdoutLine: {'line': b'-- Detecting CXX compiler ABI info\n'}
+[0.175611] (passthrough_filter_cpp) CommandEnded: {'returncode': 1}
+[0.180533] (passthrough_filter_cpp) JobEnded: {'identifier': 'passthrough_filter_cpp', 'rc': 1}
+[0.181008] (time_sync_tools) JobEnded: {'identifier': 'time_sync_tools', 'rc': 'SIGINT'}
+[0.192694] (pointcloud_filter) StdoutLine: {'line': b'-- Detecting CXX compiler ABI info - done\n'}
+[0.197627] (pointcloud_filter) StdoutLine: {'line': b'-- Check for working CXX compiler: /usr/bin/c++ - skipped\n'}
+[0.197802] (pointcloud_filter) StdoutLine: {'line': b'-- Detecting CXX compile features\n'}
+[0.198036] (pointcloud_filter) StdoutLine: {'line': b'-- Detecting CXX compile features - done\n'}
+[0.199563] (pointcloud_filter) StdoutLine: {'line': b'-- Found ament_cmake: 1.3.12 (/opt/ros/humble/share/ament_cmake/cmake)\n'}
+[0.199954] (-) TimerEvent: {}
+[0.286826] (pointcloud_filter) StdoutLine: {'line': b'-- Found Python3: /usr/bin/python3 (found version "3.10.12") found components: Interpreter \n'}
+[0.300090] (-) TimerEvent: {}
+[0.336986] (pointcloud_filter) StdoutLine: {'line': b'-- Found rclcpp: 16.0.17 (/opt/ros/humble/share/rclcpp/cmake)\n'}
+[0.359775] (pointcloud_filter) StdoutLine: {'line': b'-- Found rosidl_generator_c: 3.1.8 (/opt/ros/humble/share/rosidl_generator_c/cmake)\n'}
+[0.362487] (pointcloud_filter) StdoutLine: {'line': b'-- Found rosidl_adapter: 3.1.8 (/opt/ros/humble/share/rosidl_adapter/cmake)\n'}
+[0.367040] (pointcloud_filter) StdoutLine: {'line': b'-- Found rosidl_generator_cpp: 3.1.8 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)\n'}
+[0.373703] (pointcloud_filter) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c\n'}
+[0.382630] (pointcloud_filter) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp\n'}
+[0.400226] (-) TimerEvent: {}
+[0.406509] (pointcloud_filter) StdoutLine: {'line': b'-- Found rmw_implementation_cmake: 6.1.2 (/opt/ros/humble/share/rmw_implementation_cmake/cmake)\n'}
+[0.407930] (pointcloud_filter) StdoutLine: {'line': b'-- Found rmw_fastrtps_cpp: 6.2.9 (/opt/ros/humble/share/rmw_fastrtps_cpp/cmake)\n'}
+[0.454385] (pointcloud_filter) StdoutLine: {'line': b'-- Found OpenSSL: /usr/lib/x86_64-linux-gnu/libcrypto.so (found version "3.0.2")  \n'}
+[0.471088] (pointcloud_filter) StdoutLine: {'line': b'-- Found FastRTPS: /opt/ros/humble/include  \n'}
+[0.494034] (pointcloud_filter) StdoutLine: {'line': b"-- Using RMW implementation 'rmw_fastrtps_cpp' as default\n"}
+[0.498428] (pointcloud_filter) StdoutLine: {'line': b'-- Looking for pthread.h\n'}
+[0.500311] (-) TimerEvent: {}
+[0.548698] (pointcloud_filter) StdoutLine: {'line': b'-- Looking for pthread.h - found\n'}
+[0.548968] (pointcloud_filter) StdoutLine: {'line': b'-- Performing Test CMAKE_HAVE_LIBC_PTHREAD\n'}
+[0.600468] (-) TimerEvent: {}
+[0.613434] (pointcloud_filter) StdoutLine: {'line': b'-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success\n'}
+[0.614162] (pointcloud_filter) StdoutLine: {'line': b'-- Found Threads: TRUE  \n'}
+[0.645787] (pointcloud_filter) StdoutLine: {'line': b'-- Found sensor_msgs: 4.9.0 (/opt/ros/humble/share/sensor_msgs/cmake)\n'}
+[0.663465] (pointcloud_filter) StdoutLine: {'line': b'-- Found pcl_conversions: 2.4.5 (/opt/ros/humble/share/pcl_conversions/cmake)\n'}
+[0.685678] (pointcloud_filter) StdoutLine: {'line': b"-- Checking for module 'eigen3'\n"}
+[0.692388] (pointcloud_filter) StdoutLine: {'line': b'--   Found eigen3, version 3.4.0\n'}
+[0.700516] (-) TimerEvent: {}
+[0.708750] (pointcloud_filter) StdoutLine: {'line': b'-- Found Eigen: /usr/include/eigen3 (Required is at least version "3.1") \n'}
+[0.708817] (pointcloud_filter) StdoutLine: {'line': b'-- Eigen found (include: /usr/include/eigen3, version: 3.4.0)\n'}
+[0.729185] (pointcloud_filter) StdoutLine: {'line': b"-- Checking for module 'flann'\n"}
+[0.736049] (pointcloud_filter) StdoutLine: {'line': b'--   Found flann, version 1.9.1\n'}
+[0.756369] (pointcloud_filter) StdoutLine: {'line': b'-- Found FLANN: /usr/lib/x86_64-linux-gnu/libflann_cpp.so  \n'}
+[0.756467] (pointcloud_filter) StdoutLine: {'line': b'-- FLANN found (include: /usr/include, lib: /usr/lib/x86_64-linux-gnu/libflann_cpp.so)\n'}
+[0.800607] (-) TimerEvent: {}
+[0.900847] (-) TimerEvent: {}
+[1.001103] (-) TimerEvent: {}
+[1.101357] (-) TimerEvent: {}
+[1.201669] (-) TimerEvent: {}
+[1.302149] (-) TimerEvent: {}
+[1.353741] (pointcloud_filter) StdoutLine: {'line': b"-- Checking for module 'libusb-1.0'\n"}
+[1.360872] (pointcloud_filter) StdoutLine: {'line': b'--   Found libusb-1.0, version 1.0.25\n'}
+[1.379872] (pointcloud_filter) StdoutLine: {'line': b'-- Found libusb: /usr/lib/x86_64-linux-gnu/libusb-1.0.so  \n'}
+[1.380553] (pointcloud_filter) StdoutLine: {'line': b'-- OpenNI found (version: 1.5.4.0, include: /usr/include/ni, lib: /usr/lib/libOpenNI.so;libusb::libusb)\n'}
+[1.402271] (-) TimerEvent: {}
+[1.409420] (pointcloud_filter) StdoutLine: {'line': b'-- OpenNI2 found (version: 2.2.0.33, include: /usr/include/openni2, lib: /usr/lib/x86_64-linux-gnu/libOpenNI2.so;libusb::libusb)\n'}
+[1.496671] (pointcloud_filter) StdoutLine: {'line': b'-- Eigen found (include: /usr/include/eigen3, version: 3.4.0)\n'}
+[1.500168] (pointcloud_filter) StdoutLine: {'line': b'-- OpenNI found (version: 1.5.4.0, include: /usr/include/ni, lib: /usr/lib/libOpenNI.so;libusb::libusb)\n'}
+[1.502359] (-) TimerEvent: {}
+[1.503528] (pointcloud_filter) StdoutLine: {'line': b'-- OpenNI2 found (version: 2.2.0.33, include: /usr/include/openni2, lib: /usr/lib/x86_64-linux-gnu/libOpenNI2.so;libusb::libusb)\n'}
+[1.585457] (pointcloud_filter) StdoutLine: {'line': b'-- Found Qhull version 8.0.2\n'}
+[1.602507] (-) TimerEvent: {}
+[1.669749] (pointcloud_filter) StdoutLine: {'line': b'-- OpenNI found (version: 1.5.4.0, include: /usr/include/ni, lib: /usr/lib/libOpenNI.so;libusb::libusb)\n'}
+[1.702649] (-) TimerEvent: {}
+[1.750820] (pointcloud_filter) StdoutLine: {'line': b'-- Found PCL_COMMON: /usr/lib/x86_64-linux-gnu/libpcl_common.so  \n'}
+[1.751323] (pointcloud_filter) StdoutLine: {'line': b'-- Found PCL_KDTREE: /usr/lib/x86_64-linux-gnu/libpcl_kdtree.so  \n'}
+[1.751850] (pointcloud_filter) StdoutLine: {'line': b'-- Found PCL_OCTREE: /usr/lib/x86_64-linux-gnu/libpcl_octree.so  \n'}
+[1.752300] (pointcloud_filter) StdoutLine: {'line': b'-- Found PCL_SEARCH: /usr/lib/x86_64-linux-gnu/libpcl_search.so  \n'}
+[1.752837] (pointcloud_filter) StdoutLine: {'line': b'-- Found PCL_SAMPLE_CONSENSUS: /usr/lib/x86_64-linux-gnu/libpcl_sample_consensus.so  \n'}
+[1.753344] (pointcloud_filter) StdoutLine: {'line': b'-- Found PCL_FILTERS: /usr/lib/x86_64-linux-gnu/libpcl_filters.so  \n'}
+[1.753526] (pointcloud_filter) StdoutLine: {'line': b'-- Found PCL_2D: /usr/include/pcl-1.12  \n'}
+[1.753610] (pointcloud_filter) StdoutLine: {'line': b'-- Found PCL_GEOMETRY: /usr/include/pcl-1.12  \n'}
+[1.754145] (pointcloud_filter) StdoutLine: {'line': b'-- Found PCL_IO: /usr/lib/x86_64-linux-gnu/libpcl_io.so  \n'}
+[1.754845] (pointcloud_filter) StdoutLine: {'line': b'-- Found PCL_FEATURES: /usr/lib/x86_64-linux-gnu/libpcl_features.so  \n'}
+[1.755387] (pointcloud_filter) StdoutLine: {'line': b'-- Found PCL_ML: /usr/lib/x86_64-linux-gnu/libpcl_ml.so  \n'}
+[1.755895] (pointcloud_filter) StdoutLine: {'line': b'-- Found PCL_SEGMENTATION: /usr/lib/x86_64-linux-gnu/libpcl_segmentation.so  \n'}
+[1.756443] (pointcloud_filter) StdoutLine: {'line': b'-- Found PCL_VISUALIZATION: /usr/lib/x86_64-linux-gnu/libpcl_visualization.so  \n'}
+[1.757072] (pointcloud_filter) StdoutLine: {'line': b'-- Found PCL_SURFACE: /usr/lib/x86_64-linux-gnu/libpcl_surface.so  \n'}
+[1.757597] (pointcloud_filter) StdoutLine: {'line': b'-- Found PCL_REGISTRATION: /usr/lib/x86_64-linux-gnu/libpcl_registration.so  \n'}
+[1.758238] (pointcloud_filter) StdoutLine: {'line': b'-- Found PCL_KEYPOINTS: /usr/lib/x86_64-linux-gnu/libpcl_keypoints.so  \n'}
+[1.758821] (pointcloud_filter) StdoutLine: {'line': b'-- Found PCL_TRACKING: /usr/lib/x86_64-linux-gnu/libpcl_tracking.so  \n'}
+[1.759392] (pointcloud_filter) StdoutLine: {'line': b'-- Found PCL_RECOGNITION: /usr/lib/x86_64-linux-gnu/libpcl_recognition.so  \n'}
+[1.759950] (pointcloud_filter) StdoutLine: {'line': b'-- Found PCL_STEREO: /usr/lib/x86_64-linux-gnu/libpcl_stereo.so  \n'}
+[1.760447] (pointcloud_filter) StdoutLine: {'line': b'-- Found PCL_APPS: /usr/lib/x86_64-linux-gnu/libpcl_apps.so  \n'}
+[1.760927] (pointcloud_filter) StdoutLine: {'line': b'-- Found PCL_IN_HAND_SCANNER: /usr/include/pcl-1.12  \n'}
+[1.761088] (pointcloud_filter) StdoutLine: {'line': b'-- Found PCL_MODELER: /usr/include/pcl-1.12  \n'}
+[1.761312] (pointcloud_filter) StdoutLine: {'line': b'-- Found PCL_POINT_CLOUD_EDITOR: /usr/include/pcl-1.12  \n'}
+[1.761865] (pointcloud_filter) StdoutLine: {'line': b'-- Found PCL_OUTOFCORE: /usr/lib/x86_64-linux-gnu/libpcl_outofcore.so  \n'}
+[1.762447] (pointcloud_filter) StdoutLine: {'line': b'-- Found PCL_PEOPLE: /usr/lib/x86_64-linux-gnu/libpcl_people.so  \n'}
+[1.764296] (pointcloud_filter) StdoutLine: {'line': b'-- Found pcl_ros: 2.4.5 (/opt/ros/humble/share/pcl_ros/cmake)\n'}
+[1.783085] (pointcloud_filter) StdoutLine: {'line': b'-- Found eigen3_cmake_module: 0.1.1 (/opt/ros/humble/share/eigen3_cmake_module/cmake)\n'}
+[1.783879] (pointcloud_filter) StdoutLine: {'line': b'-- Found Eigen3: TRUE (found version "3.4.0") \n'}
+[1.783943] (pointcloud_filter) StdoutLine: {'line': b'-- Ensuring Eigen3 include directory is part of orocos-kdl CMake target\n'}
+[1.802787] (-) TimerEvent: {}
+[1.835067] (pointcloud_filter) StderrLine: {'line': b'\x1b[33mCMake Warning (dev) at CMakeLists.txt:14 (find_package):\n'}
+[1.835143] (pointcloud_filter) StderrLine: {'line': b'  Policy CMP0074 is not set: find_package uses <PackageName>_ROOT variables.\n'}
+[1.835178] (pointcloud_filter) StderrLine: {'line': b'  Run "cmake --help-policy CMP0074" for policy details.  Use the cmake_policy\n'}
+[1.835208] (pointcloud_filter) StderrLine: {'line': b'  command to set the policy and suppress this warning.\n'}
+[1.835236] (pointcloud_filter) StderrLine: {'line': b'\n'}
+[1.835264] (pointcloud_filter) StderrLine: {'line': b'  CMake variable PCL_ROOT is set to:\n'}
+[1.835292] (pointcloud_filter) StderrLine: {'line': b'\n'}
+[1.835320] (pointcloud_filter) StderrLine: {'line': b'    /usr\n'}
+[1.835347] (pointcloud_filter) StderrLine: {'line': b'\n'}
+[1.835375] (pointcloud_filter) StderrLine: {'line': b'  For compatibility, CMake is ignoring the variable.\n'}
+[1.835407] (pointcloud_filter) StderrLine: {'line': b'This warning is for project developers.  Use -Wno-dev to suppress it.\n'}
+[1.835438] (pointcloud_filter) StderrLine: {'line': b'\x1b[0m\n'}
+[1.849788] (pointcloud_filter) StdoutLine: {'line': b'-- Found ament_lint_auto: 0.12.14 (/opt/ros/humble/share/ament_lint_auto/cmake)\n'}
+[1.894015] (pointcloud_filter) StdoutLine: {'line': b"-- Added test 'cppcheck' to perform static code analysis on C / C++ code\n"}
+[1.894196] (pointcloud_filter) StdoutLine: {'line': b'-- Configured cppcheck include dirs: /home/dhruv/ros2_sensor_ws/src/pointcloud_filter/include\n'}
+[1.894267] (pointcloud_filter) StdoutLine: {'line': b'-- Configured cppcheck exclude dirs and/or files: \n'}
+[1.894759] (pointcloud_filter) StdoutLine: {'line': b"-- Added test 'lint_cmake' to check CMake code style\n"}
+[1.895129] (pointcloud_filter) StdoutLine: {'line': b"-- Added test 'uncrustify' to check C / C++ code style\n"}
+[1.895169] (pointcloud_filter) StdoutLine: {'line': b'-- Configured uncrustify additional arguments: \n'}
+[1.895339] (pointcloud_filter) StdoutLine: {'line': b"-- Added test 'xmllint' to check XML markup files\n"}
+[1.896055] (pointcloud_filter) StdoutLine: {'line': b'-- Configuring done\n'}
+[1.902870] (-) TimerEvent: {}
+[1.923530] (pointcloud_filter) StdoutLine: {'line': b'-- Generating done\n'}
+[1.932146] (pointcloud_filter) StdoutLine: {'line': b'-- Build files have been written to: /home/dhruv/ros2_sensor_ws/build/pointcloud_filter\n'}
+[1.944393] (pointcloud_filter) JobEnded: {'identifier': 'pointcloud_filter', 'rc': 'SIGINT'}
+[1.954734] (-) EventReactorShutdown: {}

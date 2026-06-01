@@ -1,0 +1,60 @@
+On duckling launch
+
+Open hotspot with duckling/duckling
+launch camera
+launch lidar
+
+
+
+
+Commands to launch from the PC:
+
+ssh duckling@10.42.0.1
+password: duckling
+
+one duckling window -> the ROS connection command
+	  run the connection node(on the jetson):
+	  	ros2 run rmw_zenoh_cpp rmw_zenohd
+	  
+	  an other terminal:
+	  	mavproxy.py --master=/dev/ttyTHS1,921600 --out udp:127.0.0.1:14540
+	  other one:
+	  	ros2 launch mavros apm.launch fcu_url:=udp://0.0.0.0:14540@
+	  and then :
+	  	cd ~/ros2_sensor_ws
+		colcon build --packages-select sensor_fusion_pkg
+		source install/setup.bash
+		ros2 launch sensor_fusion_pkg full_system.launch.py
+	  
+
+  
+  
+On the PC:
+	
+	One terminal the vicon:
+		cd ros2_ws/
+		source install/setup.bash
+		ros2 launch vicon_bridge all_segments.launch.py
+	
+	other terminal
+	check if topicfs are shared: 
+		ros2 topic list
+	
+	other terminal launch the octomap :
+		ros2 run octomap_server octomap_server_node --ros-args -r cloud_in:=/voxel_filtered -p frame_id:=camera_link -p resolution:=0.1 -p publish_frequency:=10.0
+		
+	other terminal vicon copy node/!!!!!!!!!!!!!!!!\ careful its default here adapt in function :
+	ros2 run vicon_waypoint_bridge bridge_node --ros-args \
+	  -p vicon_topic:=/vicon/drone/pose \
+	  -p target_x:=1.0 \
+	  -p target_y:=0.0 \
+	  -p target_z:=1.0 \
+	  -p target_yaw_deg:=0.0 \
+	  -p arm_and_takeoff:=true \
+	  -p takeoff_altitude:=1.0	
+		
+		
+	If connection not working try:
+	ros2 daemon stop
+	ros2 daemon start
+		

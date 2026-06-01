@@ -1,0 +1,18 @@
+[0.359s] Invoking command in '/home/dhruv/ros2_sensor_ws/build/time_sync_tools': PYTHONPATH=/home/dhruv/ros2_sensor_ws/build/time_sync_tools/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/dhruv/ros2_sensor_ws/install/time_sync_tools/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/dhruv/ros2_sensor_ws/build/time_sync_tools/build --no-deps symlink_data --force
+[0.518s] running develop
+[0.617s] running egg_info
+[0.617s] writing time_sync_tools.egg-info/PKG-INFO
+[0.617s] writing dependency_links to time_sync_tools.egg-info/dependency_links.txt
+[0.617s] writing entry points to time_sync_tools.egg-info/entry_points.txt
+[0.617s] writing requirements to time_sync_tools.egg-info/requires.txt
+[0.617s] writing top-level names to time_sync_tools.egg-info/top_level.txt
+[0.618s] reading manifest file 'time_sync_tools.egg-info/SOURCES.txt'
+[0.619s] writing manifest file 'time_sync_tools.egg-info/SOURCES.txt'
+[0.620s] running build_ext
+[0.620s] Creating /home/dhruv/ros2_sensor_ws/install/time_sync_tools/lib/python3.10/site-packages/time-sync-tools.egg-link (link to .)
+[0.620s] 
+[0.620s] Installed /home/dhruv/ros2_sensor_ws/build/time_sync_tools
+[0.620s] running symlink_data
+[0.620s] symbolically linking /home/dhruv/ros2_sensor_ws/build/time_sync_tools/resource/time_sync_tools -> /home/dhruv/ros2_sensor_ws/install/time_sync_tools/share/ament_index/resource_index/packages
+[0.620s] symbolically linking /home/dhruv/ros2_sensor_ws/build/time_sync_tools/package.xml -> /home/dhruv/ros2_sensor_ws/install/time_sync_tools/share/time_sync_tools
+[0.637s] Invoked command in '/home/dhruv/ros2_sensor_ws/build/time_sync_tools' returned '0': PYTHONPATH=/home/dhruv/ros2_sensor_ws/build/time_sync_tools/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/dhruv/ros2_sensor_ws/install/time_sync_tools/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/dhruv/ros2_sensor_ws/build/time_sync_tools/build --no-deps symlink_data --force

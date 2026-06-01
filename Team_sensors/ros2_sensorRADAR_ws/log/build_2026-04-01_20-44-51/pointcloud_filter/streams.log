@@ -1,0 +1,142 @@
+[0.009s] Invoking command in '/home/dhruv/ros2_sensorRADAR_ws/build/pointcloud_filter': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/dhruv/ros2_sensorRADAR_ws/install/sensor_fusion_pkg:/home/dhruv/ros2_ws/install/point_cloud_filter:/home/dhruv/install/sensor_fusion_pkg:/opt/ros/humble /usr/bin/cmake /home/dhruv/ros2_sensorRADAR_ws/src/pointcloud_filter -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/dhruv/ros2_sensorRADAR_ws/install/pointcloud_filter
+[0.042s] -- The C compiler identification is GNU 11.4.0
+[0.077s] -- The CXX compiler identification is GNU 11.4.0
+[0.081s] -- Detecting C compiler ABI info
+[0.123s] -- Detecting C compiler ABI info - done
+[0.128s] -- Check for working C compiler: /usr/bin/cc - skipped
+[0.128s] -- Detecting C compile features
+[0.128s] -- Detecting C compile features - done
+[0.130s] -- Detecting CXX compiler ABI info
+[0.179s] -- Detecting CXX compiler ABI info - done
+[0.184s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[0.184s] -- Detecting CXX compile features
+[0.184s] -- Detecting CXX compile features - done
+[0.186s] -- Found ament_cmake: 1.3.12 (/opt/ros/humble/share/ament_cmake/cmake)
+[0.287s] -- Found Python3: /usr/bin/python3 (found version "3.10.12") found components: Interpreter 
+[0.331s] -- Override CMake install command with custom implementation using symlinks instead of copying resources
+[0.352s] -- Found rclcpp: 16.0.17 (/opt/ros/humble/share/rclcpp/cmake)
+[0.382s] -- Found rosidl_generator_c: 3.1.8 (/opt/ros/humble/share/rosidl_generator_c/cmake)
+[0.385s] -- Found rosidl_adapter: 3.1.8 (/opt/ros/humble/share/rosidl_adapter/cmake)
+[0.391s] -- Found rosidl_generator_cpp: 3.1.8 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)
+[0.399s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[0.410s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[0.439s] -- Found rmw_implementation_cmake: 6.1.2 (/opt/ros/humble/share/rmw_implementation_cmake/cmake)
+[0.441s] -- Found rmw_fastrtps_cpp: 6.2.9 (/opt/ros/humble/share/rmw_fastrtps_cpp/cmake)
+[0.492s] -- Found OpenSSL: /usr/lib/x86_64-linux-gnu/libcrypto.so (found version "3.0.2")  
+[0.510s] -- Found FastRTPS: /opt/ros/humble/include  
+[0.538s] -- Using RMW implementation 'rmw_fastrtps_cpp' as default
+[0.544s] -- Looking for pthread.h
+[0.588s] -- Looking for pthread.h - found
+[0.589s] -- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+[0.633s] -- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+[0.634s] -- Found Threads: TRUE  
+[0.667s] -- Found sensor_msgs: 4.9.0 (/opt/ros/humble/share/sensor_msgs/cmake)
+[0.688s] -- Found pcl_conversions: 2.4.5 (/opt/ros/humble/share/pcl_conversions/cmake)
+[0.714s] -- Checking for module 'eigen3'
+[0.722s] --   Found eigen3, version 3.4.0
+[0.741s] -- Found Eigen: /usr/include/eigen3 (Required is at least version "3.1") 
+[0.741s] -- Eigen found (include: /usr/include/eigen3, version: 3.4.0)
+[0.767s] -- Checking for module 'flann'
+[0.775s] --   Found flann, version 1.9.1
+[0.799s] -- Found FLANN: /usr/lib/x86_64-linux-gnu/libflann_cpp.so  
+[0.799s] -- FLANN found (include: /usr/include, lib: /usr/lib/x86_64-linux-gnu/libflann_cpp.so)
+[1.354s] -- Checking for module 'libusb-1.0'
+[1.362s] --   Found libusb-1.0, version 1.0.25
+[1.381s] -- Found libusb: /usr/lib/x86_64-linux-gnu/libusb-1.0.so  
+[1.382s] -- OpenNI found (version: 1.5.4.0, include: /usr/include/ni, lib: /usr/lib/libOpenNI.so;libusb::libusb)
+[1.411s] -- OpenNI2 found (version: 2.2.0.33, include: /usr/include/openni2, lib: /usr/lib/x86_64-linux-gnu/libOpenNI2.so;libusb::libusb)
+[1.500s] -- Eigen found (include: /usr/include/eigen3, version: 3.4.0)
+[1.504s] -- OpenNI found (version: 1.5.4.0, include: /usr/include/ni, lib: /usr/lib/libOpenNI.so;libusb::libusb)
+[1.507s] -- OpenNI2 found (version: 2.2.0.33, include: /usr/include/openni2, lib: /usr/lib/x86_64-linux-gnu/libOpenNI2.so;libusb::libusb)
+[1.591s] -- Found Qhull version 8.0.2
+[1.678s] -- OpenNI found (version: 1.5.4.0, include: /usr/include/ni, lib: /usr/lib/libOpenNI.so;libusb::libusb)
+[1.788s] -- Found PCL_COMMON: /usr/lib/x86_64-linux-gnu/libpcl_common.so  
+[1.788s] -- Found PCL_KDTREE: /usr/lib/x86_64-linux-gnu/libpcl_kdtree.so  
+[1.789s] -- Found PCL_OCTREE: /usr/lib/x86_64-linux-gnu/libpcl_octree.so  
+[1.789s] -- Found PCL_SEARCH: /usr/lib/x86_64-linux-gnu/libpcl_search.so  
+[1.790s] -- Found PCL_SAMPLE_CONSENSUS: /usr/lib/x86_64-linux-gnu/libpcl_sample_consensus.so  
+[1.790s] -- Found PCL_FILTERS: /usr/lib/x86_64-linux-gnu/libpcl_filters.so  
+[1.790s] -- Found PCL_2D: /usr/include/pcl-1.12  
+[1.791s] -- Found PCL_GEOMETRY: /usr/include/pcl-1.12  
+[1.791s] -- Found PCL_IO: /usr/lib/x86_64-linux-gnu/libpcl_io.so  
+[1.792s] -- Found PCL_FEATURES: /usr/lib/x86_64-linux-gnu/libpcl_features.so  
+[1.792s] -- Found PCL_ML: /usr/lib/x86_64-linux-gnu/libpcl_ml.so  
+[1.793s] -- Found PCL_SEGMENTATION: /usr/lib/x86_64-linux-gnu/libpcl_segmentation.so  
+[1.794s] -- Found PCL_VISUALIZATION: /usr/lib/x86_64-linux-gnu/libpcl_visualization.so  
+[1.794s] -- Found PCL_SURFACE: /usr/lib/x86_64-linux-gnu/libpcl_surface.so  
+[1.795s] -- Found PCL_REGISTRATION: /usr/lib/x86_64-linux-gnu/libpcl_registration.so  
+[1.795s] -- Found PCL_KEYPOINTS: /usr/lib/x86_64-linux-gnu/libpcl_keypoints.so  
+[1.796s] -- Found PCL_TRACKING: /usr/lib/x86_64-linux-gnu/libpcl_tracking.so  
+[1.797s] -- Found PCL_RECOGNITION: /usr/lib/x86_64-linux-gnu/libpcl_recognition.so  
+[1.797s] -- Found PCL_STEREO: /usr/lib/x86_64-linux-gnu/libpcl_stereo.so  
+[1.798s] -- Found PCL_APPS: /usr/lib/x86_64-linux-gnu/libpcl_apps.so  
+[1.798s] -- Found PCL_IN_HAND_SCANNER: /usr/include/pcl-1.12  
+[1.798s] -- Found PCL_MODELER: /usr/include/pcl-1.12  
+[1.799s] -- Found PCL_POINT_CLOUD_EDITOR: /usr/include/pcl-1.12  
+[1.799s] -- Found PCL_OUTOFCORE: /usr/lib/x86_64-linux-gnu/libpcl_outofcore.so  
+[1.800s] -- Found PCL_PEOPLE: /usr/lib/x86_64-linux-gnu/libpcl_people.so  
+[1.802s] -- Found pcl_ros: 2.4.5 (/opt/ros/humble/share/pcl_ros/cmake)
+[1.823s] -- Found eigen3_cmake_module: 0.1.1 (/opt/ros/humble/share/eigen3_cmake_module/cmake)
+[1.824s] -- Found Eigen3: TRUE (found version "3.4.0") 
+[1.824s] -- Ensuring Eigen3 include directory is part of orocos-kdl CMake target
+[1.879s] [33mCMake Warning (dev) at CMakeLists.txt:14 (find_package):
+[1.879s]   Policy CMP0074 is not set: find_package uses <PackageName>_ROOT variables.
+[1.879s]   Run "cmake --help-policy CMP0074" for policy details.  Use the cmake_policy
+[1.879s]   command to set the policy and suppress this warning.
+[1.879s] 
+[1.879s]   CMake variable PCL_ROOT is set to:
+[1.879s] 
+[1.879s]     /usr
+[1.879s] 
+[1.879s]   For compatibility, CMake is ignoring the variable.
+[1.879s] This warning is for project developers.  Use -Wno-dev to suppress it.
+[1.879s] [0m
+[1.884s] -- Found tf2_sensor_msgs: 0.25.19 (/opt/ros/humble/share/tf2_sensor_msgs/cmake)
+[1.904s] -- Found ament_lint_auto: 0.12.14 (/opt/ros/humble/share/ament_lint_auto/cmake)
+[1.956s] -- Added test 'cppcheck' to perform static code analysis on C / C++ code
+[1.957s] -- Configured cppcheck include dirs: 
+[1.957s] -- Configured cppcheck exclude dirs and/or files: 
+[1.957s] -- Added test 'flake8' to check Python code syntax and style conventions
+[1.957s] -- Added test 'lint_cmake' to check CMake code style
+[1.958s] -- Added test 'pep257' to check Python code against some of the docstring style conventions in PEP 257
+[1.958s] -- Added test 'uncrustify' to check C / C++ code style
+[1.958s] -- Configured uncrustify additional arguments: 
+[1.959s] -- Added test 'xmllint' to check XML markup files
+[1.960s] -- Configuring done
+[2.018s] -- Generating done
+[2.035s] -- Build files have been written to: /home/dhruv/ros2_sensorRADAR_ws/build/pointcloud_filter
+[2.047s] Invoked command in '/home/dhruv/ros2_sensorRADAR_ws/build/pointcloud_filter' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/dhruv/ros2_sensorRADAR_ws/install/sensor_fusion_pkg:/home/dhruv/ros2_ws/install/point_cloud_filter:/home/dhruv/install/sensor_fusion_pkg:/opt/ros/humble /usr/bin/cmake /home/dhruv/ros2_sensorRADAR_ws/src/pointcloud_filter -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/dhruv/ros2_sensorRADAR_ws/install/pointcloud_filter
+[2.048s] Invoking command in '/home/dhruv/ros2_sensorRADAR_ws/build/pointcloud_filter': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/dhruv/ros2_sensorRADAR_ws/install/sensor_fusion_pkg:/home/dhruv/ros2_ws/install/point_cloud_filter:/home/dhruv/install/sensor_fusion_pkg:/opt/ros/humble /usr/bin/cmake --build /home/dhruv/ros2_sensorRADAR_ws/build/pointcloud_filter -- -j16 -l16
+[2.080s] [ 33%] [32mBuilding CXX object CMakeFiles/radar_passthrough_filter.dir/src/radar_passthrough_filter.cpp.o[0m
+[2.080s] [ 33%] [32mBuilding CXX object CMakeFiles/camera_passthrough_filter.dir/src/camera_passthrough_filter.cpp.o[0m
+[2.080s] [ 50%] [32mBuilding CXX object CMakeFiles/voxel_grid_filter.dir/src/voxel_grid_filter.cpp.o[0m
+[9.674s] [ 66%] [32m[1mLinking CXX executable radar_passthrough_filter[0m
+[9.725s] [ 83%] [32m[1mLinking CXX executable camera_passthrough_filter[0m
+[9.913s] [100%] [32m[1mLinking CXX executable voxel_grid_filter[0m
+[10.494s] [100%] Built target radar_passthrough_filter
+[10.558s] [100%] Built target camera_passthrough_filter
+[10.697s] [100%] Built target voxel_grid_filter
+[10.705s] Invoked command in '/home/dhruv/ros2_sensorRADAR_ws/build/pointcloud_filter' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/dhruv/ros2_sensorRADAR_ws/install/sensor_fusion_pkg:/home/dhruv/ros2_ws/install/point_cloud_filter:/home/dhruv/install/sensor_fusion_pkg:/opt/ros/humble /usr/bin/cmake --build /home/dhruv/ros2_sensorRADAR_ws/build/pointcloud_filter -- -j16 -l16
+[10.710s] Invoking command in '/home/dhruv/ros2_sensorRADAR_ws/build/pointcloud_filter': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/dhruv/ros2_sensorRADAR_ws/install/sensor_fusion_pkg:/home/dhruv/ros2_ws/install/point_cloud_filter:/home/dhruv/install/sensor_fusion_pkg:/opt/ros/humble /usr/bin/cmake --install /home/dhruv/ros2_sensorRADAR_ws/build/pointcloud_filter
+[10.714s] -- Install configuration: ""
+[10.714s] -- Execute custom install script
+[10.714s] -- Symlinking: /home/dhruv/ros2_sensorRADAR_ws/install/pointcloud_filter/lib/pointcloud_filter/camera_passthrough_filter
+[10.719s] -- Symlinking: /home/dhruv/ros2_sensorRADAR_ws/install/pointcloud_filter/lib/pointcloud_filter/radar_passthrough_filter
+[10.724s] -- Symlinking: /home/dhruv/ros2_sensorRADAR_ws/install/pointcloud_filter/lib/pointcloud_filter/voxel_grid_filter
+[10.728s] -- Symlinking: /home/dhruv/ros2_sensorRADAR_ws/install/pointcloud_filter/share/pointcloud_filter/launch/pipeline.launch.py
+[10.732s] -- Symlinking: /home/dhruv/ros2_sensorRADAR_ws/install/pointcloud_filter/share/ament_index/resource_index/package_run_dependencies/pointcloud_filter
+[10.737s] -- Symlinking: /home/dhruv/ros2_sensorRADAR_ws/install/pointcloud_filter/share/ament_index/resource_index/parent_prefix_path/pointcloud_filter
+[10.742s] -- Symlinking: /home/dhruv/ros2_sensorRADAR_ws/install/pointcloud_filter/share/pointcloud_filter/environment/ament_prefix_path.sh
+[10.746s] -- Symlinking: /home/dhruv/ros2_sensorRADAR_ws/install/pointcloud_filter/share/pointcloud_filter/environment/ament_prefix_path.dsv
+[10.750s] -- Symlinking: /home/dhruv/ros2_sensorRADAR_ws/install/pointcloud_filter/share/pointcloud_filter/environment/path.sh
+[10.754s] -- Symlinking: /home/dhruv/ros2_sensorRADAR_ws/install/pointcloud_filter/share/pointcloud_filter/environment/path.dsv
+[10.759s] -- Symlinking: /home/dhruv/ros2_sensorRADAR_ws/install/pointcloud_filter/share/pointcloud_filter/local_setup.bash
+[10.764s] -- Symlinking: /home/dhruv/ros2_sensorRADAR_ws/install/pointcloud_filter/share/pointcloud_filter/local_setup.sh
+[10.768s] -- Symlinking: /home/dhruv/ros2_sensorRADAR_ws/install/pointcloud_filter/share/pointcloud_filter/local_setup.zsh
+[10.772s] -- Symlinking: /home/dhruv/ros2_sensorRADAR_ws/install/pointcloud_filter/share/pointcloud_filter/local_setup.dsv
+[10.777s] -- Symlinking: /home/dhruv/ros2_sensorRADAR_ws/install/pointcloud_filter/share/pointcloud_filter/package.dsv
+[10.781s] -- Symlinking: /home/dhruv/ros2_sensorRADAR_ws/install/pointcloud_filter/share/ament_index/resource_index/packages/pointcloud_filter
+[10.786s] -- Symlinking: /home/dhruv/ros2_sensorRADAR_ws/install/pointcloud_filter/share/pointcloud_filter/cmake/pointcloud_filterConfig.cmake
+[10.790s] -- Symlinking: /home/dhruv/ros2_sensorRADAR_ws/install/pointcloud_filter/share/pointcloud_filter/cmake/pointcloud_filterConfig-version.cmake
+[10.794s] -- Symlinking: /home/dhruv/ros2_sensorRADAR_ws/install/pointcloud_filter/share/pointcloud_filter/package.xml
+[10.800s] Invoked command in '/home/dhruv/ros2_sensorRADAR_ws/build/pointcloud_filter' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/dhruv/ros2_sensorRADAR_ws/install/sensor_fusion_pkg:/home/dhruv/ros2_ws/install/point_cloud_filter:/home/dhruv/install/sensor_fusion_pkg:/opt/ros/humble /usr/bin/cmake --install /home/dhruv/ros2_sensorRADAR_ws/build/pointcloud_filter

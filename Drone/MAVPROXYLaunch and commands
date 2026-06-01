@@ -1,0 +1,49 @@
+Ensure Pixhawk and Jetson are powered.
+
+====Connect Jetson -> pX========
+-- via WIFI(ESP)
+Connect Jetson to Pixhawk ESP wifi network 
+  SSID CraneAero
+  Pass craneaero
+
+-- Via USB
+Connect Jetson to Pixhawk USB-C Cable 
+
+-- Via UART
+connect serial connection adaptor to serial 2 port on PX
+connect serial connection adaptor to uart1 port on Jetson (https://forums.developer.nvidia.com/t/how-to-access-uart1-on-expansion-pins-8-10/328934/6)
+set Serial _Baud Param to 921600 (921) and write params
+
+
+
+======Launch MAVPROXY Link =========
+--via Wifi
+Open Terminal
+$ mavproxy.py --master=0.0.0.0:14552 --out udp:127.0.0.1:14540
+  can add the following suffix for certain windows
+  --map (launches a map window)
+  --console (launches a console window)
+
+--via USB
+Open Terminal
+$ mavproxy.py --master=/dev/ttyACM0 --out udp:127.0.0.1:14540
+  can add the following suffixx for certain windows
+  --map (launches a map window)
+  --console (launches a console window)
+
+--via UART
+Open Terminal
+$ mavproxy.py --master=/dev/ttyTHS1,921600 --out udp:127.0.0.1:14540
+  can add the following suffixx for certain windows
+  --map (launches a map window)
+  --console (launches a console window)
+
+
+To get Mavros:
+In one terminal :
+  mavproxy.py --master=/dev/ttyTHS1,921600 --out udp:127.0.0.1:14540 --console
+In a second one:
+
+  ros2 launch mavros apm.launch fcu_url:=udp://@127.0.0.1:14540
+or
+  ros2 launch mavros apm.launch fcu_url:=udp://0.0.0.0:14540@

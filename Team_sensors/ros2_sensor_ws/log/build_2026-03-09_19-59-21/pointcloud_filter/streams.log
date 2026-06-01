@@ -1,0 +1,26 @@
+[0.007s] Invoking command in '/home/dhruv/ros2_sensor_ws/build/pointcloud_filter': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/dhruv/ros2_ws/install/point_cloud_filter:/home/dhruv/ros2_sensor_ws/install/time_sync_tools:/home/dhruv/ros2_sensor_ws/install/sensor_fusion_pkg:/opt/ros/humble /usr/bin/cmake --build /home/dhruv/ros2_sensor_ws/build/pointcloud_filter -- -j16 -l16
+[0.049s] [100%] Built target voxel_grid_filter_node
+[0.050s] [100%] Built target passthrough_filter_node
+[0.057s] Invoked command in '/home/dhruv/ros2_sensor_ws/build/pointcloud_filter' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/dhruv/ros2_ws/install/point_cloud_filter:/home/dhruv/ros2_sensor_ws/install/time_sync_tools:/home/dhruv/ros2_sensor_ws/install/sensor_fusion_pkg:/opt/ros/humble /usr/bin/cmake --build /home/dhruv/ros2_sensor_ws/build/pointcloud_filter -- -j16 -l16
+[0.064s] Invoking command in '/home/dhruv/ros2_sensor_ws/build/pointcloud_filter': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/dhruv/ros2_ws/install/point_cloud_filter:/home/dhruv/ros2_sensor_ws/install/time_sync_tools:/home/dhruv/ros2_sensor_ws/install/sensor_fusion_pkg:/opt/ros/humble /usr/bin/cmake --install /home/dhruv/ros2_sensor_ws/build/pointcloud_filter
+[0.068s] -- Install configuration: ""
+[0.068s] -- Execute custom install script
+[0.069s] -- Up-to-date symlink: /home/dhruv/ros2_sensor_ws/install/pointcloud_filter/lib/pointcloud_filter/passthrough_filter_node
+[0.069s] -- Up-to-date symlink: /home/dhruv/ros2_sensor_ws/install/pointcloud_filter/lib/pointcloud_filter/passthrough_filter_node
+[0.069s] -- Up-to-date symlink: /home/dhruv/ros2_sensor_ws/install/pointcloud_filter/lib/pointcloud_filter/voxel_grid_filter_node
+[0.069s] -- Up-to-date symlink: /home/dhruv/ros2_sensor_ws/install/pointcloud_filter/share/ament_index/resource_index/package_run_dependencies/pointcloud_filter
+[0.069s] -- Up-to-date symlink: /home/dhruv/ros2_sensor_ws/install/pointcloud_filter/share/ament_index/resource_index/parent_prefix_path/pointcloud_filter
+[0.069s] -- Up-to-date symlink: /home/dhruv/ros2_sensor_ws/install/pointcloud_filter/share/pointcloud_filter/environment/ament_prefix_path.sh
+[0.069s] -- Up-to-date symlink: /home/dhruv/ros2_sensor_ws/install/pointcloud_filter/share/pointcloud_filter/environment/ament_prefix_path.dsv
+[0.069s] -- Up-to-date symlink: /home/dhruv/ros2_sensor_ws/install/pointcloud_filter/share/pointcloud_filter/environment/path.sh
+[0.069s] -- Up-to-date symlink: /home/dhruv/ros2_sensor_ws/install/pointcloud_filter/share/pointcloud_filter/environment/path.dsv
+[0.069s] -- Up-to-date symlink: /home/dhruv/ros2_sensor_ws/install/pointcloud_filter/share/pointcloud_filter/local_setup.bash
+[0.069s] -- Up-to-date symlink: /home/dhruv/ros2_sensor_ws/install/pointcloud_filter/share/pointcloud_filter/local_setup.sh
+[0.069s] -- Up-to-date symlink: /home/dhruv/ros2_sensor_ws/install/pointcloud_filter/share/pointcloud_filter/local_setup.zsh
+[0.070s] -- Up-to-date symlink: /home/dhruv/ros2_sensor_ws/install/pointcloud_filter/share/pointcloud_filter/local_setup.dsv
+[0.070s] -- Symlinking: /home/dhruv/ros2_sensor_ws/install/pointcloud_filter/share/pointcloud_filter/package.dsv
+[0.075s] -- Up-to-date symlink: /home/dhruv/ros2_sensor_ws/install/pointcloud_filter/share/ament_index/resource_index/packages/pointcloud_filter
+[0.075s] -- Up-to-date symlink: /home/dhruv/ros2_sensor_ws/install/pointcloud_filter/share/pointcloud_filter/cmake/pointcloud_filterConfig.cmake
+[0.076s] -- Up-to-date symlink: /home/dhruv/ros2_sensor_ws/install/pointcloud_filter/share/pointcloud_filter/cmake/pointcloud_filterConfig-version.cmake
+[0.076s] -- Up-to-date symlink: /home/dhruv/ros2_sensor_ws/install/pointcloud_filter/share/pointcloud_filter/package.xml
+[0.077s] Invoked command in '/home/dhruv/ros2_sensor_ws/build/pointcloud_filter' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/dhruv/ros2_ws/install/point_cloud_filter:/home/dhruv/ros2_sensor_ws/install/time_sync_tools:/home/dhruv/ros2_sensor_ws/install/sensor_fusion_pkg:/opt/ros/humble /usr/bin/cmake --install /home/dhruv/ros2_sensor_ws/build/pointcloud_filter

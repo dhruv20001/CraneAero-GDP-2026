@@ -1,0 +1,156 @@
+[0.000000] (-) TimerEvent: {}
+[0.000179] (-) JobUnselected: {'identifier': 'passthrough_filter_cpp'}
+[0.000321] (pointcloud_filter) JobQueued: {'identifier': 'pointcloud_filter', 'dependencies': OrderedDict()}
+[0.000335] (time_sync_tools) JobQueued: {'identifier': 'time_sync_tools', 'dependencies': OrderedDict()}
+[0.000345] (pointcloud_filter) JobStarted: {'identifier': 'pointcloud_filter'}
+[0.003634] (time_sync_tools) JobStarted: {'identifier': 'time_sync_tools'}
+[0.007520] (pointcloud_filter) JobProgress: {'identifier': 'pointcloud_filter', 'progress': 'cmake'}
+[0.007801] (pointcloud_filter) JobProgress: {'identifier': 'pointcloud_filter', 'progress': 'build'}
+[0.008378] (pointcloud_filter) Command: {'cmd': ['/usr/bin/cmake', '--build', '/home/dhruv/ros2_sensor_ws/build/pointcloud_filter', '--', '-j16', '-l16'], 'cwd': '/home/dhruv/ros2_sensor_ws/build/pointcloud_filter', 'env': OrderedDict([('GJS_DEBUG_TOPICS', 'JS ERROR;JS LOG'), ('USER', 'dhruv'), ('XDG_SESSION_TYPE', 'wayland'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib'), ('HOME', '/home/dhruv'), ('OLDPWD', '/home/dhruv/ros2_sensor_ws'), ('DESKTOP_SESSION', 'ubuntu'), ('GIO_LAUNCHED_DESKTOP_FILE', '/usr/share/applications/terminator.desktop'), ('ROS_PYTHON_VERSION', '3'), ('GNOME_SHELL_SESSION_MODE', 'ubuntu'), ('GTK_MODULES', 'gail:atk-bridge'), ('MANAGERPID', '1274'), ('SYSTEMD_EXEC_PID', '1457'), ('DBUS_SESSION_BUS_ADDRESS', 'unix:path=/run/user/1000/bus'), ('COLORTERM', 'truecolor'), ('TERMINATOR_DBUS_NAME', 'net.tenshu.Terminator25ef4b219e3b005583550f2b0f9f990c3'), ('GIO_LAUNCHED_DESKTOP_FILE_PID', '21098'), ('IM_CONFIG_PHASE', '1'), ('WAYLAND_DISPLAY', 'wayland-0'), ('COLCON_PREFIX_PATH', '/home/dhruv/ros2_sensor_ws/install:/home/dhruv/ros2_ws/install'), ('ROS_DISTRO', 'humble'), ('LOGNAME', 'dhruv'), ('JOURNAL_STREAM', '8:6031'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('XDG_SESSION_CLASS', 'user'), ('USERNAME', 'dhruv'), ('TERM', 'xterm-256color'), ('GNOME_DESKTOP_SESSION_ID', 'this-is-deprecated'), ('ROS_LOCALHOST_ONLY', '0'), ('PATH', '/opt/ros/humble/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin'), ('SESSION_MANAGER', 'local/dhruv-Predator-PH315-54:@/tmp/.ICE-unix/1403,unix/dhruv-Predator-PH315-54:/tmp/.ICE-unix/1403'), ('INVOCATION_ID', 'e5c7fc0d1503477fb1f03cafb88fea5e'), ('XDG_MENU_PREFIX', 'gnome-'), ('GNOME_SETUP_DISPLAY', ':1'), ('XDG_RUNTIME_DIR', '/run/user/1000'), ('DISPLAY', ':0'), ('TERMINATOR_DBUS_PATH', '/net/tenshu/Terminator2'), ('LANG', 'en_US.UTF-8'), ('XDG_CURRENT_DESKTOP', 'ubuntu:GNOME'), ('IBUS_DISABLE_SNOOPER', '1'), ('XMODIFIERS', '@im=ibus'), ('XDG_SESSION_DESKTOP', 'ubuntu'), ('XAUTHORITY', '/run/user/1000/.mutter-Xwaylandauth.Y78IL3'), ('SSH_AGENT_LAUNCHER', 'gnome-keyring'), ('SSH_AUTH_SOCK', '/run/user/1000/keyring/ssh'), ('AMENT_PREFIX_PATH', '/home/dhruv/ros2_ws/install/rplidar_ros:/home/dhruv/ros2_ws/install/point_cloud_filter:/opt/ros/humble'), ('SHELL', '/bin/bash'), ('TERMINATOR_UUID', 'urn:uuid:08d81b58-981c-451a-bf22-1d7351121e8e'), ('QT_ACCESSIBILITY', '1'), ('GDMSESSION', 'ubuntu'), ('GJS_DEBUG_OUTPUT', 'stderr'), ('QT_IM_MODULE', 'ibus'), ('PWD', '/home/dhruv/ros2_sensor_ws/build/pointcloud_filter'), ('XDG_CONFIG_DIRS', '/etc/xdg/xdg-ubuntu:/etc/xdg'), ('XDG_DATA_DIRS', '/usr/share/ubuntu:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop'), ('PYTHONPATH', '/home/dhruv/ros2_ws/install/point_cloud_filter/lib/python3.10/site-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('COLCON', '1'), ('VTE_VERSION', '6800'), ('CMAKE_PREFIX_PATH', '/home/dhruv/ros2_ws/install/rplidar_ros:/home/dhruv/ros2_ws/install/point_cloud_filter:/opt/ros/humble')]), 'shell': False}
+[0.040459] (pointcloud_filter) StdoutLine: {'line': b'[ 25%] \x1b[32mBuilding CXX object CMakeFiles/passthrough_filter_node.dir/src/passthrough_filter_node.cpp.o\x1b[0m\n'}
+[0.040934] (pointcloud_filter) StdoutLine: {'line': b'[ 50%] \x1b[32mBuilding CXX object CMakeFiles/voxel_grid_filter_node.dir/src/voxel_grid_filter_node.cpp.o\x1b[0m\n'}
+[0.099947] (-) TimerEvent: {}
+[0.200235] (-) TimerEvent: {}
+[0.300515] (-) TimerEvent: {}
+[0.391187] (time_sync_tools) Command: {'cmd': ['/usr/bin/python3', '-W', 'ignore:setup.py install is deprecated', '-W', 'ignore:easy_install command is deprecated', 'setup.py', 'egg_info', '--egg-base', '../../build/time_sync_tools', 'build', '--build-base', '/home/dhruv/ros2_sensor_ws/build/time_sync_tools/build', 'install', '--record', '/home/dhruv/ros2_sensor_ws/build/time_sync_tools/install.log', '--single-version-externally-managed', 'install_data'], 'cwd': '/home/dhruv/ros2_sensor_ws/src/time_sync_tools', 'env': {'GJS_DEBUG_TOPICS': 'JS ERROR;JS LOG', 'USER': 'dhruv', 'XDG_SESSION_TYPE': 'wayland', 'SHLVL': '1', 'LD_LIBRARY_PATH': '/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib', 'HOME': '/home/dhruv', 'OLDPWD': '/home/dhruv/ros2_sensor_ws', 'DESKTOP_SESSION': 'ubuntu', 'GIO_LAUNCHED_DESKTOP_FILE': '/usr/share/applications/terminator.desktop', 'ROS_PYTHON_VERSION': '3', 'GNOME_SHELL_SESSION_MODE': 'ubuntu', 'GTK_MODULES': 'gail:atk-bridge', 'MANAGERPID': '1274', 'SYSTEMD_EXEC_PID': '1457', 'DBUS_SESSION_BUS_ADDRESS': 'unix:path=/run/user/1000/bus', 'COLORTERM': 'truecolor', 'TERMINATOR_DBUS_NAME': 'net.tenshu.Terminator25ef4b219e3b005583550f2b0f9f990c3', 'GIO_LAUNCHED_DESKTOP_FILE_PID': '21098', 'IM_CONFIG_PHASE': '1', 'WAYLAND_DISPLAY': 'wayland-0', 'COLCON_PREFIX_PATH': '/home/dhruv/ros2_sensor_ws/install:/home/dhruv/ros2_ws/install', 'ROS_DISTRO': 'humble', 'LOGNAME': 'dhruv', 'JOURNAL_STREAM': '8:6031', '_': '/usr/bin/colcon', 'ROS_VERSION': '2', 'XDG_SESSION_CLASS': 'user', 'USERNAME': 'dhruv', 'TERM': 'xterm-256color', 'GNOME_DESKTOP_SESSION_ID': 'this-is-deprecated', 'ROS_LOCALHOST_ONLY': '0', 'PATH': '/opt/ros/humble/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin', 'SESSION_MANAGER': 'local/dhruv-Predator-PH315-54:@/tmp/.ICE-unix/1403,unix/dhruv-Predator-PH315-54:/tmp/.ICE-unix/1403', 'INVOCATION_ID': 'e5c7fc0d1503477fb1f03cafb88fea5e', 'XDG_MENU_PREFIX': 'gnome-', 'GNOME_SETUP_DISPLAY': ':1', 'XDG_RUNTIME_DIR': '/run/user/1000', 'DISPLAY': ':0', 'TERMINATOR_DBUS_PATH': '/net/tenshu/Terminator2', 'LANG': 'en_US.UTF-8', 'XDG_CURRENT_DESKTOP': 'ubuntu:GNOME', 'IBUS_DISABLE_SNOOPER': '1', 'XMODIFIERS': '@im=ibus', 'XDG_SESSION_DESKTOP': 'ubuntu', 'XAUTHORITY': '/run/user/1000/.mutter-Xwaylandauth.Y78IL3', 'SSH_AGENT_LAUNCHER': 'gnome-keyring', 'SSH_AUTH_SOCK': '/run/user/1000/keyring/ssh', 'AMENT_PREFIX_PATH': '/home/dhruv/ros2_ws/install/rplidar_ros:/home/dhruv/ros2_ws/install/point_cloud_filter:/opt/ros/humble', 'SHELL': '/bin/bash', 'TERMINATOR_UUID': 'urn:uuid:08d81b58-981c-451a-bf22-1d7351121e8e', 'QT_ACCESSIBILITY': '1', 'GDMSESSION': 'ubuntu', 'GJS_DEBUG_OUTPUT': 'stderr', 'QT_IM_MODULE': 'ibus', 'PWD': '/home/dhruv/ros2_sensor_ws/build/time_sync_tools', 'XDG_CONFIG_DIRS': '/etc/xdg/xdg-ubuntu:/etc/xdg', 'XDG_DATA_DIRS': '/usr/share/ubuntu:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop', 'PYTHONPATH': '/home/dhruv/ros2_sensor_ws/build/time_sync_tools/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/dhruv/ros2_sensor_ws/install/time_sync_tools/lib/python3.10/site-packages:/home/dhruv/ros2_ws/install/point_cloud_filter/lib/python3.10/site-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages', 'COLCON': '1', 'VTE_VERSION': '6800', 'CMAKE_PREFIX_PATH': '/home/dhruv/ros2_ws/install/rplidar_ros'}, 'shell': False}
+[0.400595] (-) TimerEvent: {}
+[0.500843] (-) TimerEvent: {}
+[0.536485] (time_sync_tools) StdoutLine: {'line': b'running egg_info\n'}
+[0.536829] (time_sync_tools) StdoutLine: {'line': b'creating ../../build/time_sync_tools/time_sync_tools.egg-info\n'}
+[0.536945] (time_sync_tools) StdoutLine: {'line': b'writing ../../build/time_sync_tools/time_sync_tools.egg-info/PKG-INFO\n'}
+[0.537019] (time_sync_tools) StdoutLine: {'line': b'writing dependency_links to ../../build/time_sync_tools/time_sync_tools.egg-info/dependency_links.txt\n'}
+[0.537106] (time_sync_tools) StdoutLine: {'line': b'writing entry points to ../../build/time_sync_tools/time_sync_tools.egg-info/entry_points.txt\n'}
+[0.537144] (time_sync_tools) StdoutLine: {'line': b'writing requirements to ../../build/time_sync_tools/time_sync_tools.egg-info/requires.txt\n'}
+[0.537201] (time_sync_tools) StdoutLine: {'line': b'writing top-level names to ../../build/time_sync_tools/time_sync_tools.egg-info/top_level.txt\n'}
+[0.537297] (time_sync_tools) StdoutLine: {'line': b"writing manifest file '../../build/time_sync_tools/time_sync_tools.egg-info/SOURCES.txt'\n"}
+[0.538261] (time_sync_tools) StdoutLine: {'line': b"reading manifest file '../../build/time_sync_tools/time_sync_tools.egg-info/SOURCES.txt'\n"}
+[0.538708] (time_sync_tools) StdoutLine: {'line': b"writing manifest file '../../build/time_sync_tools/time_sync_tools.egg-info/SOURCES.txt'\n"}
+[0.538758] (time_sync_tools) StdoutLine: {'line': b'running build\n'}
+[0.538792] (time_sync_tools) StdoutLine: {'line': b'running build_py\n'}
+[0.538840] (time_sync_tools) StdoutLine: {'line': b'creating /home/dhruv/ros2_sensor_ws/build/time_sync_tools/build\n'}
+[0.538876] (time_sync_tools) StdoutLine: {'line': b'creating /home/dhruv/ros2_sensor_ws/build/time_sync_tools/build/lib\n'}
+[0.538926] (time_sync_tools) StdoutLine: {'line': b'creating /home/dhruv/ros2_sensor_ws/build/time_sync_tools/build/lib/time_sync_tools\n'}
+[0.538960] (time_sync_tools) StdoutLine: {'line': b'copying time_sync_tools/__init__.py -> /home/dhruv/ros2_sensor_ws/build/time_sync_tools/build/lib/time_sync_tools\n'}
+[0.539006] (time_sync_tools) StdoutLine: {'line': b'running install\n'}
+[0.539165] (time_sync_tools) StdoutLine: {'line': b'running install_lib\n'}
+[0.539581] (time_sync_tools) StdoutLine: {'line': b'creating /home/dhruv/ros2_sensor_ws/install/time_sync_tools/lib/python3.10/site-packages/time_sync_tools\n'}
+[0.539629] (time_sync_tools) StdoutLine: {'line': b'copying /home/dhruv/ros2_sensor_ws/build/time_sync_tools/build/lib/time_sync_tools/__init__.py -> /home/dhruv/ros2_sensor_ws/install/time_sync_tools/lib/python3.10/site-packages/time_sync_tools\n'}
+[0.539856] (time_sync_tools) StdoutLine: {'line': b'byte-compiling /home/dhruv/ros2_sensor_ws/install/time_sync_tools/lib/python3.10/site-packages/time_sync_tools/__init__.py to __init__.cpython-310.pyc\n'}
+[0.539980] (time_sync_tools) StdoutLine: {'line': b'running install_data\n'}
+[0.540031] (time_sync_tools) StdoutLine: {'line': b'creating /home/dhruv/ros2_sensor_ws/install/time_sync_tools/share/ament_index\n'}
+[0.540067] (time_sync_tools) StdoutLine: {'line': b'creating /home/dhruv/ros2_sensor_ws/install/time_sync_tools/share/ament_index/resource_index\n'}
+[0.540113] (time_sync_tools) StdoutLine: {'line': b'creating /home/dhruv/ros2_sensor_ws/install/time_sync_tools/share/ament_index/resource_index/packages\n'}
+[0.540171] (time_sync_tools) StdoutLine: {'line': b'copying resource/time_sync_tools -> /home/dhruv/ros2_sensor_ws/install/time_sync_tools/share/ament_index/resource_index/packages\n'}
+[0.540211] (time_sync_tools) StdoutLine: {'line': b'copying package.xml -> /home/dhruv/ros2_sensor_ws/install/time_sync_tools/share/time_sync_tools\n'}
+[0.540243] (time_sync_tools) StdoutLine: {'line': b'running install_egg_info\n'}
+[0.541271] (time_sync_tools) StdoutLine: {'line': b'Copying ../../build/time_sync_tools/time_sync_tools.egg-info to /home/dhruv/ros2_sensor_ws/install/time_sync_tools/lib/python3.10/site-packages/time_sync_tools-0.0.0-py3.10.egg-info\n'}
+[0.541694] (time_sync_tools) StdoutLine: {'line': b'running install_scripts\n'}
+[0.555667] (time_sync_tools) StdoutLine: {'line': b"writing list of installed files to '/home/dhruv/ros2_sensor_ws/build/time_sync_tools/install.log'\n"}
+[0.568693] (time_sync_tools) CommandEnded: {'returncode': 0}
+[0.574736] (time_sync_tools) JobEnded: {'identifier': 'time_sync_tools', 'rc': 0}
+[0.600980] (-) TimerEvent: {}
+[0.701287] (-) TimerEvent: {}
+[0.801650] (-) TimerEvent: {}
+[0.901936] (-) TimerEvent: {}
+[1.002217] (-) TimerEvent: {}
+[1.102551] (-) TimerEvent: {}
+[1.202823] (-) TimerEvent: {}
+[1.303160] (-) TimerEvent: {}
+[1.403417] (-) TimerEvent: {}
+[1.503738] (-) TimerEvent: {}
+[1.604071] (-) TimerEvent: {}
+[1.704337] (-) TimerEvent: {}
+[1.804660] (-) TimerEvent: {}
+[1.904941] (-) TimerEvent: {}
+[2.005271] (-) TimerEvent: {}
+[2.105557] (-) TimerEvent: {}
+[2.205841] (-) TimerEvent: {}
+[2.306182] (-) TimerEvent: {}
+[2.406431] (-) TimerEvent: {}
+[2.506702] (-) TimerEvent: {}
+[2.607024] (-) TimerEvent: {}
+[2.707339] (-) TimerEvent: {}
+[2.807629] (-) TimerEvent: {}
+[2.907966] (-) TimerEvent: {}
+[3.008323] (-) TimerEvent: {}
+[3.108659] (-) TimerEvent: {}
+[3.209009] (-) TimerEvent: {}
+[3.309361] (-) TimerEvent: {}
+[3.409708] (-) TimerEvent: {}
+[3.510058] (-) TimerEvent: {}
+[3.610408] (-) TimerEvent: {}
+[3.710739] (-) TimerEvent: {}
+[3.811014] (-) TimerEvent: {}
+[3.911359] (-) TimerEvent: {}
+[4.011686] (-) TimerEvent: {}
+[4.112017] (-) TimerEvent: {}
+[4.212360] (-) TimerEvent: {}
+[4.312722] (-) TimerEvent: {}
+[4.413064] (-) TimerEvent: {}
+[4.513416] (-) TimerEvent: {}
+[4.613760] (-) TimerEvent: {}
+[4.714099] (-) TimerEvent: {}
+[4.814452] (-) TimerEvent: {}
+[4.914801] (-) TimerEvent: {}
+[5.015146] (-) TimerEvent: {}
+[5.115471] (-) TimerEvent: {}
+[5.215788] (-) TimerEvent: {}
+[5.316106] (-) TimerEvent: {}
+[5.416418] (-) TimerEvent: {}
+[5.516746] (-) TimerEvent: {}
+[5.617064] (-) TimerEvent: {}
+[5.717330] (-) TimerEvent: {}
+[5.817608] (-) TimerEvent: {}
+[5.917909] (-) TimerEvent: {}
+[6.018242] (-) TimerEvent: {}
+[6.118555] (-) TimerEvent: {}
+[6.218857] (-) TimerEvent: {}
+[6.319188] (-) TimerEvent: {}
+[6.419502] (-) TimerEvent: {}
+[6.519828] (-) TimerEvent: {}
+[6.620145] (-) TimerEvent: {}
+[6.720494] (-) TimerEvent: {}
+[6.820815] (-) TimerEvent: {}
+[6.921178] (-) TimerEvent: {}
+[7.021500] (-) TimerEvent: {}
+[7.121776] (-) TimerEvent: {}
+[7.180052] (pointcloud_filter) StdoutLine: {'line': b'[ 75%] \x1b[32m\x1b[1mLinking CXX executable passthrough_filter_node\x1b[0m\n'}
+[7.221943] (-) TimerEvent: {}
+[7.322291] (-) TimerEvent: {}
+[7.422429] (pointcloud_filter) StdoutLine: {'line': b'[100%] \x1b[32m\x1b[1mLinking CXX executable voxel_grid_filter_node\x1b[0m\n'}
+[7.422647] (-) TimerEvent: {}
+[7.522893] (-) TimerEvent: {}
+[7.623225] (-) TimerEvent: {}
+[7.723492] (-) TimerEvent: {}
+[7.760251] (pointcloud_filter) StdoutLine: {'line': b'[100%] Built target passthrough_filter_node\n'}
+[7.823602] (-) TimerEvent: {}
+[7.923911] (-) TimerEvent: {}
+[7.998558] (pointcloud_filter) StdoutLine: {'line': b'[100%] Built target voxel_grid_filter_node\n'}
+[8.005162] (pointcloud_filter) CommandEnded: {'returncode': 0}
+[8.005601] (pointcloud_filter) JobProgress: {'identifier': 'pointcloud_filter', 'progress': 'install'}
+[8.010375] (pointcloud_filter) Command: {'cmd': ['/usr/bin/cmake', '--install', '/home/dhruv/ros2_sensor_ws/build/pointcloud_filter'], 'cwd': '/home/dhruv/ros2_sensor_ws/build/pointcloud_filter', 'env': OrderedDict([('GJS_DEBUG_TOPICS', 'JS ERROR;JS LOG'), ('USER', 'dhruv'), ('XDG_SESSION_TYPE', 'wayland'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib'), ('HOME', '/home/dhruv'), ('OLDPWD', '/home/dhruv/ros2_sensor_ws'), ('DESKTOP_SESSION', 'ubuntu'), ('GIO_LAUNCHED_DESKTOP_FILE', '/usr/share/applications/terminator.desktop'), ('ROS_PYTHON_VERSION', '3'), ('GNOME_SHELL_SESSION_MODE', 'ubuntu'), ('GTK_MODULES', 'gail:atk-bridge'), ('MANAGERPID', '1274'), ('SYSTEMD_EXEC_PID', '1457'), ('DBUS_SESSION_BUS_ADDRESS', 'unix:path=/run/user/1000/bus'), ('COLORTERM', 'truecolor'), ('TERMINATOR_DBUS_NAME', 'net.tenshu.Terminator25ef4b219e3b005583550f2b0f9f990c3'), ('GIO_LAUNCHED_DESKTOP_FILE_PID', '21098'), ('IM_CONFIG_PHASE', '1'), ('WAYLAND_DISPLAY', 'wayland-0'), ('COLCON_PREFIX_PATH', '/home/dhruv/ros2_sensor_ws/install:/home/dhruv/ros2_ws/install'), ('ROS_DISTRO', 'humble'), ('LOGNAME', 'dhruv'), ('JOURNAL_STREAM', '8:6031'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('XDG_SESSION_CLASS', 'user'), ('USERNAME', 'dhruv'), ('TERM', 'xterm-256color'), ('GNOME_DESKTOP_SESSION_ID', 'this-is-deprecated'), ('ROS_LOCALHOST_ONLY', '0'), ('PATH', '/opt/ros/humble/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin'), ('SESSION_MANAGER', 'local/dhruv-Predator-PH315-54:@/tmp/.ICE-unix/1403,unix/dhruv-Predator-PH315-54:/tmp/.ICE-unix/1403'), ('INVOCATION_ID', 'e5c7fc0d1503477fb1f03cafb88fea5e'), ('XDG_MENU_PREFIX', 'gnome-'), ('GNOME_SETUP_DISPLAY', ':1'), ('XDG_RUNTIME_DIR', '/run/user/1000'), ('DISPLAY', ':0'), ('TERMINATOR_DBUS_PATH', '/net/tenshu/Terminator2'), ('LANG', 'en_US.UTF-8'), ('XDG_CURRENT_DESKTOP', 'ubuntu:GNOME'), ('IBUS_DISABLE_SNOOPER', '1'), ('XMODIFIERS', '@im=ibus'), ('XDG_SESSION_DESKTOP', 'ubuntu'), ('XAUTHORITY', '/run/user/1000/.mutter-Xwaylandauth.Y78IL3'), ('SSH_AGENT_LAUNCHER', 'gnome-keyring'), ('SSH_AUTH_SOCK', '/run/user/1000/keyring/ssh'), ('AMENT_PREFIX_PATH', '/home/dhruv/ros2_ws/install/rplidar_ros:/home/dhruv/ros2_ws/install/point_cloud_filter:/opt/ros/humble'), ('SHELL', '/bin/bash'), ('TERMINATOR_UUID', 'urn:uuid:08d81b58-981c-451a-bf22-1d7351121e8e'), ('QT_ACCESSIBILITY', '1'), ('GDMSESSION', 'ubuntu'), ('GJS_DEBUG_OUTPUT', 'stderr'), ('QT_IM_MODULE', 'ibus'), ('PWD', '/home/dhruv/ros2_sensor_ws/build/pointcloud_filter'), ('XDG_CONFIG_DIRS', '/etc/xdg/xdg-ubuntu:/etc/xdg'), ('XDG_DATA_DIRS', '/usr/share/ubuntu:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop'), ('PYTHONPATH', '/home/dhruv/ros2_ws/install/point_cloud_filter/lib/python3.10/site-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('COLCON', '1'), ('VTE_VERSION', '6800'), ('CMAKE_PREFIX_PATH', '/home/dhruv/ros2_ws/install/rplidar_ros:/home/dhruv/ros2_ws/install/point_cloud_filter:/opt/ros/humble')]), 'shell': False}
+[8.014885] (pointcloud_filter) StdoutLine: {'line': b'-- Install configuration: ""\n'}
+[8.014993] (pointcloud_filter) StdoutLine: {'line': b'-- Installing: /home/dhruv/ros2_sensor_ws/install/pointcloud_filter/lib/pointcloud_filter/passthrough_filter_node\n'}
+[8.016921] (pointcloud_filter) StdoutLine: {'line': b'-- Set runtime path of "/home/dhruv/ros2_sensor_ws/install/pointcloud_filter/lib/pointcloud_filter/passthrough_filter_node" to ""\n'}
+[8.017005] (pointcloud_filter) StdoutLine: {'line': b'-- Up-to-date: /home/dhruv/ros2_sensor_ws/install/pointcloud_filter/lib/pointcloud_filter/passthrough_filter_node\n'}
+[8.017059] (pointcloud_filter) StdoutLine: {'line': b'-- Installing: /home/dhruv/ros2_sensor_ws/install/pointcloud_filter/lib/pointcloud_filter/voxel_grid_filter_node\n'}
+[8.018976] (pointcloud_filter) StdoutLine: {'line': b'-- Set runtime path of "/home/dhruv/ros2_sensor_ws/install/pointcloud_filter/lib/pointcloud_filter/voxel_grid_filter_node" to ""\n'}
+[8.019059] (pointcloud_filter) StdoutLine: {'line': b'-- Installing: /home/dhruv/ros2_sensor_ws/install/pointcloud_filter/share/ament_index/resource_index/package_run_dependencies/pointcloud_filter\n'}
+[8.019101] (pointcloud_filter) StdoutLine: {'line': b'-- Installing: /home/dhruv/ros2_sensor_ws/install/pointcloud_filter/share/ament_index/resource_index/parent_prefix_path/pointcloud_filter\n'}
+[8.019152] (pointcloud_filter) StdoutLine: {'line': b'-- Installing: /home/dhruv/ros2_sensor_ws/install/pointcloud_filter/share/pointcloud_filter/environment/ament_prefix_path.sh\n'}
+[8.019227] (pointcloud_filter) StdoutLine: {'line': b'-- Installing: /home/dhruv/ros2_sensor_ws/install/pointcloud_filter/share/pointcloud_filter/environment/ament_prefix_path.dsv\n'}
+[8.019298] (pointcloud_filter) StdoutLine: {'line': b'-- Installing: /home/dhruv/ros2_sensor_ws/install/pointcloud_filter/share/pointcloud_filter/environment/path.sh\n'}
+[8.019344] (pointcloud_filter) StdoutLine: {'line': b'-- Installing: /home/dhruv/ros2_sensor_ws/install/pointcloud_filter/share/pointcloud_filter/environment/path.dsv\n'}
+[8.019402] (pointcloud_filter) StdoutLine: {'line': b'-- Installing: /home/dhruv/ros2_sensor_ws/install/pointcloud_filter/share/pointcloud_filter/local_setup.bash\n'}
+[8.019465] (pointcloud_filter) StdoutLine: {'line': b'-- Installing: /home/dhruv/ros2_sensor_ws/install/pointcloud_filter/share/pointcloud_filter/local_setup.sh\n'}
+[8.019512] (pointcloud_filter) StdoutLine: {'line': b'-- Installing: /home/dhruv/ros2_sensor_ws/install/pointcloud_filter/share/pointcloud_filter/local_setup.zsh\n'}
+[8.019556] (pointcloud_filter) StdoutLine: {'line': b'-- Installing: /home/dhruv/ros2_sensor_ws/install/pointcloud_filter/share/pointcloud_filter/local_setup.dsv\n'}
+[8.019610] (pointcloud_filter) StdoutLine: {'line': b'-- Installing: /home/dhruv/ros2_sensor_ws/install/pointcloud_filter/share/pointcloud_filter/package.dsv\n'}
+[8.019694] (pointcloud_filter) StdoutLine: {'line': b'-- Installing: /home/dhruv/ros2_sensor_ws/install/pointcloud_filter/share/ament_index/resource_index/packages/pointcloud_filter\n'}
+[8.019765] (pointcloud_filter) StdoutLine: {'line': b'-- Installing: /home/dhruv/ros2_sensor_ws/install/pointcloud_filter/share/pointcloud_filter/cmake/pointcloud_filterConfig.cmake\n'}
+[8.019812] (pointcloud_filter) StdoutLine: {'line': b'-- Installing: /home/dhruv/ros2_sensor_ws/install/pointcloud_filter/share/pointcloud_filter/cmake/pointcloud_filterConfig-version.cmake\n'}
+[8.019867] (pointcloud_filter) StdoutLine: {'line': b'-- Installing: /home/dhruv/ros2_sensor_ws/install/pointcloud_filter/share/pointcloud_filter/package.xml\n'}
+[8.020890] (pointcloud_filter) CommandEnded: {'returncode': 0}
+[8.023985] (-) TimerEvent: {}
+[8.027905] (pointcloud_filter) JobEnded: {'identifier': 'pointcloud_filter', 'rc': 0}
+[8.028267] (-) EventReactorShutdown: {}

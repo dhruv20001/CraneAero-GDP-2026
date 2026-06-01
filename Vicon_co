@@ -1,0 +1,201 @@
+#!/usr/bin/env python3
+import math
+from typing import Optional
+
+import rclpy
+from rclpy.node import Node
+
+from geometry_msgs.msg import PoseStamped
+from mavros_msgs.msg import State
+from mavros_msgs.srv import CommandBool, SetMode, CommandTOL
+
+
+def yaw_to_quaternion(yaw_rad: float):
+    """Return quaternion for yaw-only rotation."""
+    from geometry_msgs.msg import Quaternion
+    q = Quaternion()
+    q.w = math.cos(yaw_rad / 2.0)
+    q.x = 0.0
+    q.y = 0.0
+    q.z = math.sin(yaw_rad / 2.0)
+    return q
+
+
+class ViconWaypointBridge(Node):
+    """
+    1) Subscribes to Vicon pose
+    2) Republishes it to /mavros/vision_pose/pose
+    3) Publishes a local waypoint to /mavros/setpoint_position/local
+
+    Assumptions:
+    - vicon pose topic is geometry_msgs/PoseStamped
+    - local waypoint is given in your ROS local frame (typically ENU/map-like)
+    - ArduPilot is driven through MAVROS in GUIDED mode
+    """
+
+    def __init__(self):
+        super().__init__("vicon_waypoint_bridge")
+
+        # ---- Parameters ----
+        self.declare_parameter("vicon_topic", "/vicon/drone/pose")
+        self.declare_parameter("vision_topic", "/mavros/vision_pose/pose")
+        self.declare_parameter("setpoint_topic", "/mavros/setpoint_position/local")
+
+        self.declare_parameter("target_x", 0.0)
+        self.declare_parameter("target_y", 0.0)
+        self.declare_parameter("target_z", 1.0)
+        self.declare_parameter("target_yaw_deg", 0.0)
+
+        self.declare_parameter("publish_rate_hz", 30.0)
+        self.declare_parameter("arm_and_takeoff", False)
+        self.declare_parameter("takeoff_altitude", 1.0)
+
+        self.vicon_topic = self.get_parameter("vicon_topic").value
+        self.vision_topic = self.get_parameter("vision_topic").value
+        self.setpoint_topic = self.get_parameter("setpoint_topic").value
+
+        self.target_x = float(self.get_parameter("target_x").value)
+        self.target_y = float(self.get_parameter("target_y").value)
+        self.target_z = float(self.get_parameter("target_z").value)
+        self.target_yaw_deg = float(self.get_parameter("target_yaw_deg").value)
+
+        self.publish_rate_hz = float(self.get_parameter("publish_rate_hz").value)
+        self.arm_and_takeoff = bool(self.get_parameter("arm_and_takeoff").value)
+        self.takeoff_altitude = float(self.get_parameter("takeoff_altitude").value)
+
+        # ---- State ----
+        self.latest_vicon_pose: Optional[PoseStamped] = None
+        self.current_state: Optional[State] = None
+        self.sent_guided = False
+        self.sent_arm = False
+        self.sent_takeoff = False
+        self.started_setpoints = False
+
+        # ---- Subs/Pubs ----
+        self.vicon_sub = self.create_subscription(
+            PoseStamped, self.vicon_topic, self.vicon_cb, 10
+        )
+        self.state_sub = self.create_subscription(
+            State, "/mavros/state", self.state_cb, 10
+        )
+
+        self.vision_pub = self.create_publisher(PoseStamped, self.vision_topic, 10)
+        self.setpoint_pub = self.create_publisher(PoseStamped, self.setpoint_topic, 10)
+
+        # ---- Services ----
+        self.arm_cli = self.create_client(CommandBool, "/mavros/cmd/arming")
+        self.mode_cli = self.create_client(SetMode, "/mavros/set_mode")
+        self.takeoff_cli = self.create_client(CommandTOL, "/mavros/cmd/takeoff")
+
+        period = 1.0 / self.publish_rate_hz
+        self.timer = self.create_timer(period, self.timer_cb)
+
+        self.get_logger().info(f"Listening to Vicon pose: {self.vicon_topic}")
+        self.get_logger().info(f"Republishing vision pose: {self.vision_topic}")
+        self.get_logger().info(f"Publishing local setpoints: {self.setpoint_topic}")
+        self.get_logger().info(
+            f"Target waypoint = ({self.target_x:.2f}, {self.target_y:.2f}, {self.target_z:.2f}), "
+            f"yaw = {self.target_yaw_deg:.1f} deg"
+        )
+
+    def vicon_cb(self, msg: PoseStamped):
+        self.latest_vicon_pose = msg
+
+    def state_cb(self, msg: State):
+        self.current_state = msg
+
+    def call_set_mode(self, mode: str):
+        if not self.mode_cli.wait_for_service(timeout_sec=0.1):
+            return
+        req = SetMode.Request()
+        req.base_mode = 0
+        req.custom_mode = mode
+        self.mode_cli.call_async(req)
+
+    def call_arm(self, arm: bool):
+        if not self.arm_cli.wait_for_service(timeout_sec=0.1):
+            return
+        req = CommandBool.Request()
+        req.value = arm
+        self.arm_cli.call_async(req)
+
+    def call_takeoff(self, altitude: float):
+        if not self.takeoff_cli.wait_for_service(timeout_sec=0.1):
+            return
+        req = CommandTOL.Request()
+        req.altitude = altitude
+        req.latitude = 0.0
+        req.longitude = 0.0
+        req.min_pitch = 0.0
+        req.yaw = 0.0
+        self.takeoff_cli.call_async(req)
+
+    def make_waypoint_msg(self) -> PoseStamped:
+        msg = PoseStamped()
+        msg.header.stamp = self.get_clock().now().to_msg()
+        msg.header.frame_id = "map"
+
+        msg.pose.position.x = self.target_x
+        msg.pose.position.y = self.target_y
+        msg.pose.position.z = self.target_z
+        msg.pose.orientation = yaw_to_quaternion(math.radians(self.target_yaw_deg))
+        return msg
+
+    def timer_cb(self):
+        # 1) Always feed ArduPilot the latest external pose if available
+        if self.latest_vicon_pose is not None:
+            vision_msg = PoseStamped()
+            vision_msg.header.stamp = self.get_clock().now().to_msg()
+            vision_msg.header.frame_id = self.latest_vicon_pose.header.frame_id or "map"
+            vision_msg.pose = self.latest_vicon_pose.pose
+            self.vision_pub.publish(vision_msg)
+
+        # 2) Publish local setpoint continuously
+        # MAVROS position targets should be streamed continuously during control.
+        waypoint_msg = self.make_waypoint_msg()
+        self.setpoint_pub.publish(waypoint_msg)
+        self.started_setpoints = True
+
+        # 3) Optional GUIDED + arm + takeoff sequence
+        if not self.arm_and_takeoff:
+            return
+
+        if self.current_state is None:
+            return
+
+        # Set GUIDED once setpoint streaming has started
+        if self.started_setpoints and not self.sent_guided:
+            self.get_logger().info("Requesting GUIDED mode...")
+            self.call_set_mode("GUIDED")
+            self.sent_guided = True
+            return
+
+        # Arm after GUIDED is requested
+        if self.current_state.mode == "GUIDED" and not self.current_state.armed and not self.sent_arm:
+            self.get_logger().info("Requesting arm...")
+            self.call_arm(True)
+            self.sent_arm = True
+            return
+
+        # Takeoff after arming
+        if self.current_state.armed and not self.sent_takeoff:
+            self.get_logger().info(f"Requesting takeoff to {self.takeoff_altitude:.2f} m...")
+            self.call_takeoff(self.takeoff_altitude)
+            self.sent_takeoff = True
+            return
+
+
+def main():
+    rclpy.init()
+    node = ViconWaypointBridge()
+    try:
+        rclpy.spin(node)
+    except KeyboardInterrupt:
+        pass
+    finally:
+        node.destroy_node()
+        rclpy.shutdown()
+
+
+if __name__ == "__main__":
+    main()

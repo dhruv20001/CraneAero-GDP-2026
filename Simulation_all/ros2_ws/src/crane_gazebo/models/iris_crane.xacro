@@ -1,0 +1,402 @@
+<?xml version="1.0"?>
+<robot name="iris_crane" xmlns:xacro="http://ros.org/wiki/xacro">
+
+  <!-- ============================================================
+       IRIS CRANE - Drone Iris avec :
+         - RealSense D435 FRONT  (avant, légèrement inclinée vers le bas)
+         - RealSense D435 DOWN   (nadir, looking down)
+         - RPLidar 360           (dessus, centré, statique)
+       Compatible ArduPilot + Gazebo Harmonic + ROS2
+  ============================================================ -->
+
+  <!-- Macros utilitaires -->
+  <xacro:macro name="box_inertia" params="m x y z">
+    <inertial>
+      <mass value="${m}"/>
+      <inertia
+        ixx="${m*(y*y+z*z)/12}" ixy="0" ixz="0"
+        iyy="${m*(x*x+z*z)/12}" iyz="0"
+        izz="${m*(x*x+y*y)/12}"/>
+    </inertial>
+  </xacro:macro>
+
+  <!-- ============================================================
+       INCLUDE DU MODÈLE IRIS DE BASE
+       Pointe vers le modèle fourni par ardupilot_gazebo
+  ============================================================ -->
+  <xacro:include filename="$(find ardupilot_gazebo)/models/iris_with_standoffs/model.xacro"/>
+
+  <!-- ============================================================
+       SUPPORT LIDAR (dessus du drone)
+       Petit cylindre de fixation entre le body et le lidar
+  ============================================================ -->
+  <link name="lidar_mount">
+    <visual>
+      <geometry>
+        <cylinder radius="0.015" length="0.04"/>
+      </geometry>
+      <material name="dark_gray">
+        <color rgba="0.2 0.2 0.2 1"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder radius="0.015" length="0.04"/>
+      </geometry>
+    </collision>
+    <xacro:box_inertia m="0.01" x="0.03" y="0.03" z="0.04"/>
+  </link>
+
+  <joint name="lidar_mount_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="lidar_mount"/>
+    <!-- Centré sur le dessus, au-dessus du body (z = +0.08 = moitié du body + hauteur mount) -->
+    <origin xyz="0 0 0.095" rpy="0 0 0"/>
+  </joint>
+
+  <!-- ============================================================
+       RPLidar 360 (corps)
+  ============================================================ -->
+  <link name="rplidar_link">
+    <visual>
+      <geometry>
+        <cylinder radius="0.038" length="0.04"/>
+      </geometry>
+      <material name="black">
+        <color rgba="0.1 0.1 0.1 1"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder radius="0.038" length="0.04"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="0.17"/>
+      <inertia ixx="0.0001" ixy="0" ixz="0"
+               iyy="0.0001" iyz="0"
+               izz="0.0002"/>
+    </inertial>
+  </link>
+
+  <joint name="rplidar_joint" type="fixed">
+    <parent link="lidar_mount"/>
+    <child link="rplidar_link"/>
+    <origin xyz="0 0 0.04" rpy="0 0 0"/>
+  </joint>
+
+  <!-- Sensor frame du lidar (point de mesure réel) -->
+  <link name="rplidar_scan_frame"/>
+  <joint name="rplidar_scan_joint" type="fixed">
+    <parent link="rplidar_link"/>
+    <child link="rplidar_scan_frame"/>
+    <origin xyz="0 0 0.02" rpy="0 0 0"/>
+  </joint>
+
+  <!-- ============================================================
+       SUPPORT CAMÉRA AVANT
+  ============================================================ -->
+  <link name="camera_front_mount">
+    <visual>
+      <geometry><box size="0.01 0.02 0.02"/></geometry>
+      <material name="dark_gray"><color rgba="0.2 0.2 0.2 1"/></material>
+    </visual>
+    <collision><geometry><box size="0.01 0.02 0.02"/></geometry></collision>
+    <xacro:box_inertia m="0.005" x="0.01" y="0.02" z="0.02"/>
+  </link>
+
+  <joint name="camera_front_mount_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="camera_front_mount"/>
+    <!-- Avant du drone, légèrement incliné vers le bas (-15°) -->
+    <origin xyz="0.12 0 0.01" rpy="0 0.261 0"/>
+  </joint>
+
+  <!-- ============================================================
+       RealSense D435 FRONT
+  ============================================================ -->
+  <link name="camera_front_link">
+    <visual>
+      <geometry><box size="0.025 0.09 0.025"/></geometry>
+      <material name="realsense_color">
+        <color rgba="0.15 0.15 0.15 1"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry><box size="0.025 0.09 0.025"/></geometry>
+    </collision>
+    <inertial>
+      <mass value="0.072"/>
+      <inertia ixx="0.00005" ixy="0" ixz="0"
+               iyy="0.00001" iyz="0"
+               izz="0.00005"/>
+    </inertial>
+  </link>
+
+  <joint name="camera_front_joint" type="fixed">
+    <parent link="camera_front_mount"/>
+    <child link="camera_front_link"/>
+    <origin xyz="0.013 0 0" rpy="0 0 0"/>
+  </joint>
+
+  <!-- Frame optique front RGB -->
+  <link name="camera_front_color_optical_frame"/>
+  <joint name="camera_front_color_optical_joint" type="fixed">
+    <parent link="camera_front_link"/>
+    <child link="camera_front_color_optical_frame"/>
+    <!-- Convention ROS : x=right, y=down, z=forward -->
+    <origin xyz="0 0 0" rpy="${-pi/2} 0 ${-pi/2}"/>
+  </joint>
+
+  <!-- Frame optique front Depth -->
+  <link name="camera_front_depth_optical_frame"/>
+  <joint name="camera_front_depth_optical_joint" type="fixed">
+    <parent link="camera_front_link"/>
+    <child link="camera_front_depth_optical_frame"/>
+    <origin xyz="0 -0.018 0" rpy="${-pi/2} 0 ${-pi/2}"/>
+  </joint>
+
+  <!-- ============================================================
+       SUPPORT CAMÉRA DOWN (nadir)
+  ============================================================ -->
+  <link name="camera_down_mount">
+    <visual>
+      <geometry><box size="0.02 0.02 0.01"/></geometry>
+      <material name="dark_gray"><color rgba="0.2 0.2 0.2 1"/></material>
+    </visual>
+    <collision><geometry><box size="0.02 0.02 0.01"/></geometry></collision>
+    <xacro:box_inertia m="0.005" x="0.02" y="0.02" z="0.01"/>
+  </link>
+
+  <joint name="camera_down_mount_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="camera_down_mount"/>
+    <!-- Centré sous le body, regardant vers le bas -->
+    <origin xyz="0 0 -0.055" rpy="0 ${pi/2} 0"/>
+  </joint>
+
+  <!-- ============================================================
+       RealSense D435 DOWN
+  ============================================================ -->
+  <link name="camera_down_link">
+    <visual>
+      <geometry><box size="0.025 0.09 0.025"/></geometry>
+      <material name="realsense_color">
+        <color rgba="0.15 0.15 0.15 1"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry><box size="0.025 0.09 0.025"/></geometry>
+    </collision>
+    <inertial>
+      <mass value="0.072"/>
+      <inertia ixx="0.00005" ixy="0" ixz="0"
+               iyy="0.00001" iyz="0"
+               izz="0.00005"/>
+    </inertial>
+  </link>
+
+  <joint name="camera_down_joint" type="fixed">
+    <parent link="camera_down_mount"/>
+    <child link="camera_down_link"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+  </joint>
+
+  <!-- Frame optique down RGB -->
+  <link name="camera_down_color_optical_frame"/>
+  <joint name="camera_down_color_optical_joint" type="fixed">
+    <parent link="camera_down_link"/>
+    <child link="camera_down_color_optical_frame"/>
+    <origin xyz="0 0 0" rpy="${-pi/2} 0 ${-pi/2}"/>
+  </joint>
+
+  <!-- Frame optique down Depth -->
+  <link name="camera_down_depth_optical_frame"/>
+  <joint name="camera_down_depth_optical_joint" type="fixed">
+    <parent link="camera_down_link"/>
+    <child link="camera_down_depth_optical_frame"/>
+    <origin xyz="0 -0.018 0" rpy="${-pi/2} 0 ${-pi/2}"/>
+  </joint>
+
+  <!-- ============================================================
+       PLUGINS GAZEBO HARMONIC (SDFormat inclus dans le URDF via Gazebo tags)
+  ============================================================ -->
+
+  <!-- === RPLidar 360 Plugin === -->
+  <gazebo reference="rplidar_scan_frame">
+    <sensor name="rplidar_sensor" type="gpu_lidar">
+      <topic>/rplidar/scan</topic>
+      <update_rate>10</update_rate>
+      <ray>
+        <scan>
+          <horizontal>
+            <samples>720</samples>
+            <resolution>1</resolution>
+            <min_angle>-3.14159</min_angle>
+            <max_angle>3.14159</max_angle>
+          </horizontal>
+          <vertical>
+            <samples>1</samples>
+            <min_angle>0</min_angle>
+            <max_angle>0</max_angle>
+          </vertical>
+        </scan>
+        <range>
+          <min>0.15</min>
+          <max>12.0</max>
+          <resolution>0.01</resolution>
+        </range>
+        <noise>
+          <type>gaussian</type>
+          <mean>0</mean>
+          <stddev>0.01</stddev>
+        </noise>
+      </ray>
+      <gz_frame_id>rplidar_scan_frame</gz_frame_id>
+    </sensor>
+  </gazebo>
+
+  <!-- === RealSense D435 FRONT - RGB Camera === -->
+  <gazebo reference="camera_front_color_optical_frame">
+    <sensor name="camera_front_rgb" type="camera">
+      <topic>/camera_front/color/image_raw</topic>
+      <update_rate>30</update_rate>
+      <camera>
+        <horizontal_fov>1.2217</horizontal_fov>  <!-- ~70° -->
+        <image>
+          <width>640</width>
+          <height>480</height>
+          <format>RGB_INT8</format>
+        </image>
+        <clip>
+          <near>0.1</near>
+          <far>100</far>
+        </clip>
+        <noise>
+          <type>gaussian</type>
+          <mean>0</mean>
+          <stddev>0.007</stddev>
+        </noise>
+      </camera>
+      <gz_frame_id>camera_front_color_optical_frame</gz_frame_id>
+    </sensor>
+  </gazebo>
+
+  <!-- === RealSense D435 FRONT - Depth Camera === -->
+  <gazebo reference="camera_front_depth_optical_frame">
+    <sensor name="camera_front_depth" type="depth_camera">
+      <topic>/camera_front/depth/image_rect_raw</topic>
+      <update_rate>30</update_rate>
+      <camera>
+        <horizontal_fov>1.5009</horizontal_fov>  <!-- ~86° fov depth D435 -->
+        <image>
+          <width>640</width>
+          <height>480</height>
+          <format>R_FLOAT32</format>
+        </image>
+        <clip>
+          <near>0.1</near>
+          <far>10.0</far>
+        </clip>
+        <noise>
+          <type>gaussian</type>
+          <mean>0</mean>
+          <stddev>0.01</stddev>
+        </noise>
+        <lens>
+          <intrinsics>
+            <fx>615.0</fx>
+            <fy>615.0</fy>
+            <cx>320.0</cx>
+            <cy>240.0</cy>
+            <s>0</s>
+          </intrinsics>
+        </lens>
+      </camera>
+      <!-- Pointcloud généré depuis le depth -->
+      <plugin filename="libgazebo_ros_depth_camera.so" name="camera_front_depth_plugin">
+        <ros>
+          <namespace>/camera_front</namespace>
+        </ros>
+        <camera_name>depth</camera_name>
+        <frame_name>camera_front_depth_optical_frame</frame_name>
+        <hack_baseline>0.07</hack_baseline>
+        <distortion_k1>0</distortion_k1>
+        <distortion_k2>0</distortion_k2>
+        <distortion_k3>0</distortion_k3>
+        <distortion_t1>0</distortion_t1>
+        <distortion_t2>0</distortion_t2>
+      </plugin>
+      <gz_frame_id>camera_front_depth_optical_frame</gz_frame_id>
+    </sensor>
+  </gazebo>
+
+  <!-- === RealSense D435 DOWN - RGB Camera === -->
+  <gazebo reference="camera_down_color_optical_frame">
+    <sensor name="camera_down_rgb" type="camera">
+      <topic>/camera_down/color/image_raw</topic>
+      <update_rate>30</update_rate>
+      <camera>
+        <horizontal_fov>1.2217</horizontal_fov>
+        <image>
+          <width>640</width>
+          <height>480</height>
+          <format>RGB_INT8</format>
+        </image>
+        <clip>
+          <near>0.1</near>
+          <far>100</far>
+        </clip>
+        <noise>
+          <type>gaussian</type>
+          <mean>0</mean>
+          <stddev>0.007</stddev>
+        </noise>
+      </camera>
+      <gz_frame_id>camera_down_color_optical_frame</gz_frame_id>
+    </sensor>
+  </gazebo>
+
+  <!-- === RealSense D435 DOWN - Depth Camera === -->
+  <gazebo reference="camera_down_depth_optical_frame">
+    <sensor name="camera_down_depth" type="depth_camera">
+      <topic>/camera_down/depth/image_rect_raw</topic>
+      <update_rate>30</update_rate>
+      <camera>
+        <horizontal_fov>1.5009</horizontal_fov>
+        <image>
+          <width>640</width>
+          <height>480</height>
+          <format>R_FLOAT32</format>
+        </image>
+        <clip>
+          <near>0.1</near>
+          <far>10.0</far>
+        </clip>
+        <noise>
+          <type>gaussian</type>
+          <mean>0</mean>
+          <stddev>0.01</stddev>
+        </noise>
+        <lens>
+          <intrinsics>
+            <fx>615.0</fx>
+            <fy>615.0</fy>
+            <cx>320.0</cx>
+            <cy>240.0</cy>
+            <s>0</s>
+          </intrinsics>
+        </lens>
+      </camera>
+      <gz_frame_id>camera_down_depth_optical_frame</gz_frame_id>
+    </sensor>
+  </gazebo>
+
+  <!-- === Bridge Gazebo → ROS2 (GzBridge intégré) === -->
+  <gazebo>
+    <plugin filename="gz_ros2_control-system" name="gz_ros2_control::GazeboSimROS2ControlPlugin">
+      <parameters>$(find iris_crane_description)/config/iris_crane_controllers.yaml</parameters>
+    </plugin>
+  </gazebo>
+
+</robot>

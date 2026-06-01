@@ -1,0 +1,198 @@
+# Intel RealSense D435I – PointCloud Filters (ROS2 Humble, ARM/NEON)
+
+from : https://github.com/realsenseai/realsense-ros
+
+Tested with:
+- Intel RealSense D435I
+- ROS2 Humble
+- realsense2_camera driver
+- ARM (NEON build, e.g. Jetson)
+
+---
+
+## ⚠ Important for ARM / NEON Users
+
+On ARM platforms, the correct parameter name is:
+
+    pointcloud__neon_.enable
+
+NOT:
+
+    pointcloud.enable
+
+If the launch argument does not activate it, enable it after startup:
+
+    ros2 param set /camera/camera pointcloud__neon_.enable true
+
+---
+
+# Minimal Working Setup
+
+Launch:
+
+    ros2 launch realsense2_camera rs_launch.py \
+        align_depth.enable:=true \
+        pointcloud__neon_.enable:=true
+
+If pointcloud still does not publish:
+
+    ros2 param set /camera/camera pointcloud__neon_.enable true
+
+Check:
+
+    ros2 topic list | grep points
+
+---
+
+# Remove 2m Distance Cutoff
+
+Check current clipping:
+
+    ros2 param get /camera/camera clip_distance
+
+Disable clipping:
+
+    ros2 param set /camera/camera clip_distance -1.0
+
+Or increase max distance:
+
+    ros2 param set /camera/camera clip_distance 5.0
+
+Default D435I range:
+~0.2m to ~10m (depends on lighting & texture)
+
+---
+
+# PointCloud Filters
+
+## 1️⃣ Spatial Filter (Reduce Spatial Noise)
+
+Smooths neighboring pixels to reduce local noise.
+
+Enable:
+
+    ros2 param set /camera/camera spatial_filter.enable true
+
+Tune:
+
+    ros2 param set /camera/camera spatial_filter.filter_magnitude 2
+    ros2 param set /camera/camera spatial_filter.filter_smooth_alpha 0.5
+    ros2 param set /camera/camera spatial_filter.filter_smooth_delta 20
+
+Tuning Notes:
+- filter_magnitude: 1–5 (higher = smoother, less detail)
+- filter_smooth_alpha: 0.4–0.8 (higher = more smoothing)
+- filter_smooth_delta: 10–50 (edge preservation)
+
+Recommended balanced value:
+    filter_magnitude = 2
+
+---
+
+## 2️⃣ Temporal Filter (Reduce Flickering)
+
+Stabilizes depth between consecutive frames.
+
+Enable:
+
+    ros2 param set /camera/camera temporal_filter.enable true
+
+Tune:
+
+    ros2 param set /camera/camera temporal_filter.filter_smooth_alpha 0.4
+    ros2 param set /camera/camera temporal_filter.filter_smooth_delta 20
+
+Best used when camera is static.
+
+Higher alpha = more smoothing but more latency.
+
+---
+
+## 3️⃣ Decimation Filter (Reduce Resolution)
+
+Reduces point density for better performance.
+
+Enable:
+
+    ros2 param set /camera/camera decimation_filter.enable true
+
+Tune:
+
+    ros2 param set /camera/camera decimation_filter.filter_magnitude 8
+
+Magnitude effect:
+- 2 → half resolution
+- 4 → quarter resolution
+
+Use for embedded systems or SLAM speed optimization.
+
+---
+
+## 4️⃣ Hole Filling Filter
+
+Fills missing depth pixels (useful for smoother surfaces).
+
+Enable:
+
+    ros2 param set /camera/camera hole_filling_filter.enable true
+
+Optional tuning:
+
+    ros2 param set /camera/camera hole_filling_filter.holes_fill 1
+
+Modes:
+- 0 = disabled
+- 1 = fill from nearest
+- 2 = fill from farthest
+
+---
+
+## 5️⃣ Laser Power (Improves Depth Quality)
+
+Increase IR projector power:
+
+    ros2 param set /camera/camera depth_module.laser_power 360
+
+Max value for D435I: 360
+
+Higher value = better depth at longer distances (more power consumption).
+
+---
+
+# Recommended Balanced Profile
+
+    ros2 param set /camera/camera align_depth.enable true
+    ros2 param set /camera/camera pointcloud__neon_.enable true
+    ros2 param set /camera/camera spatial_filter.enable true
+    ros2 param set /camera/camera temporal_filter.enable true
+    ros2 param set /camera/camera hole_filling_filter.enable true
+    ros2 param set /camera/camera clip_distance -1.0
+
+---
+
+# Performance Profile (Jetson / ARM)
+
+    ros2 param set /camera/camera pointcloud__neon_.enable true
+    ros2 param set /camera/camera decimation_filter.enable true
+    ros2 param set /camera/camera decimation_filter.filter_magnitude 2
+    ros2 param set /camera/camera temporal_filter.enable true
+
+---
+
+# Debug Commands
+
+Check pointcloud frame:
+
+    ros2 topic echo /camera/camera/depth/color/points --once
+
+Check frequency:
+
+    ros2 topic hz /camera/camera/depth/color/points
+
+List parameters:
+
+    ros2 param list /camera/camera
+
+---
+
+End of file.

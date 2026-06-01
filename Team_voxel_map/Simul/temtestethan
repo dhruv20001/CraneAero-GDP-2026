@@ -1,0 +1,732 @@
+sudo apt-get install -y ros-humble-rosbag2 ros-humble-rosbag2-storage-default-plugins
+
+cd ~/
+wget https://nvidia-isaac-ros.github.io/v/release-3.2/_static/rosbag/nvblox_realsense_sample.bag
+
+sudo apt-get install -y ros-humble-nvblox-performance-measurement
+
+sudo apt-cache search nvblox | grep sample
+sudo apt-cache search nvblox | grep bag
+
+source /opt/ros/humble/setup.bash
+export ISAAC_ROS_WS=/mnt/nova_ssd/workspaces/isaac_ros-dev/
+source ${ISAAC_ROS_WS}/install/setup.bash
+
+ros2 bag info --help
+
+cd ~
+wget https://drive.google.com/uc?id=1GKNBqSGvB7TJWG3lHFPTLuB1BWFPKM3c -O nvblox_sample.bag
+
+cat ${ISAAC_ROS_WS}/src/isaac_ros_nvblox/nvblox_examples/nvblox_examples_bringup/launch/fuser_example.launch.py
+
+duckling@duckling:~$ cd ~
+wget https://drive.google.com/uc?id=1GKNBqSGvB7TJWG3lHFPTLuB1BWFPKM3c -O nvblox_sample.bag
+--2026-02-20 14:03:51--  https://drive.google.com/uc?id=1GKNBqSGvB7TJWG3lHFPTLuB1BWFPKM3c
+Resolving drive.google.com (drive.google.com)... 142.250.129.102, 142.250.129.100, 142.250.129.138, ...
+Connecting to drive.google.com (drive.google.com)|142.250.129.102|:443... connected.
+HTTP request sent, awaiting response... 303 See Other
+Location: https://drive.usercontent.google.com/download?id=1GKNBqSGvB7TJWG3lHFPTLuB1BWFPKM3c [following]
+--2026-02-20 14:03:52--  https://drive.usercontent.google.com/download?id=1GKNBqSGvB7TJWG3lHFPTLuB1BWFPKM3c
+Resolving drive.usercontent.google.com (drive.usercontent.google.com)... 142.251.29.132, 2a00:1450:4009:c17::84
+Connecting to drive.usercontent.google.com (drive.usercontent.google.com)|142.251.29.132|:443... connected.
+HTTP request sent, awaiting response... 404 Not Found
+2026-02-20 14:03:52 ERROR 404: Not Found.
+
+duckling@duckling:~$ 
+
+
+
+duckling@duckling:/mnt/nova_ssd/workspaces/isaac_ros-dev/src$ ros2 launch nvblox_examples_bringup realsense_example.launch.py
+[INFO] [launch]: All log files can be found below /home/duckling/.ros/log/2026-02-20-13-32-56-033665-duckling-55698
+[INFO] [launch]: Default logging verbosity is set to INFO
+Using container type: component_container_mt, with arguments: ['--ros-args', '--log-level', <launch.substitutions.launch_configuration.LaunchConfiguration object at 0xffff8589fa60>]
+Using container type: component_container_mt, with arguments: ['--ros-args', '--log-level', 'info']
+Using container type: component_container_mt, with arguments: ['--ros-args', '--log-level', 'info']
+[INFO] [launch.user]: Starting realsense with name: camera0, running splitter: True
+[INFO] [launch.user]: Adding nodes [ /nvblox_node ] to container nvblox_container.
+[INFO] [launch.user]: Starting nvblox with the 'realsense' camera in 'static' mode.
+[INFO] [launch.user]: Adding nodes [ /camera0/, /camera0/realsense_splitter_node ] to container nvblox_container.
+[INFO] [rviz2-1]: process started with pid [55709]
+[INFO] [component_container_mt-2]: process started with pid [55711]
+[component_container_mt-2] [INFO] [1771594376.621915128] [nvblox_container]: Load Library: /mnt/nova_ssd/workspaces/isaac_ros-dev/src/install/nvblox_ros/lib/libnvblox_ros_lib.so
+[component_container_mt-2] [INFO] [1771594376.710150569] [nvblox_container]: Found class: rclcpp_components::NodeFactoryTemplate<nvblox::NvbloxNode>
+[component_container_mt-2] [INFO] [1771594376.710297441] [nvblox_container]: Instantiate class: rclcpp_components::NodeFactoryTemplate<nvblox::NvbloxNode>
+[component_container_mt-2] [INFO] [1771594376.822560885] [nvblox_node]: Create nvblox cuda stream with type: kBlocking
+[component_container_mt-2] WARNING: Logging before InitGoogleLogging() is written to STDERR
+[component_container_mt-2] I0220 13:32:56.854995 55722 block_memory_pool_impl.h:65] Expanding the memory pool with 2048 blocks. Number of allocated blocks: 2048
+[component_container_mt-2] I0220 13:32:56.894249 55722 gpu_hash_interface_impl.cuh:83] Creating a GPUHashImpl with requested capacity of 4096 blocks. Real capacity: 4096
+[component_container_mt-2] I0220 13:32:56.901587 55722 layer_cake_impl.h:32] Adding Layer with type: N6nvblox15VoxelBlockLayerINS_9TsdfVoxelEEE, voxel_size: 0.05, and memory_type: kDevice to LayerCake.
+[component_container_mt-2] I0220 13:32:56.919719 55722 block_memory_pool_impl.h:65] Expanding the memory pool with 2048 blocks. Number of allocated blocks: 2048
+[component_container_mt-2] I0220 13:32:56.942804 55722 gpu_hash_interface_impl.cuh:83] Creating a GPUHashImpl with requested capacity of 4096 blocks. Real capacity: 4096
+[component_container_mt-2] I0220 13:32:56.948787 55722 layer_cake_impl.h:32] Adding Layer with type: N6nvblox15VoxelBlockLayerINS_10ColorVoxelEEE, voxel_size: 0.05, and memory_type: kDevice to LayerCake.
+[component_container_mt-2] I0220 13:32:56.969993 55722 block_memory_pool_impl.h:65] Expanding the memory pool with 2048 blocks. Number of allocated blocks: 2048
+[component_container_mt-2] I0220 13:32:56.980703 55722 gpu_hash_interface_impl.cuh:83] Creating a GPUHashImpl with requested capacity of 4096 blocks. Real capacity: 4096
+[component_container_mt-2] I0220 13:32:56.980970 55722 layer_cake_impl.h:32] Adding Layer with type: N6nvblox15VoxelBlockLayerINS_14FreespaceVoxelEEE, voxel_size: 0.05, and memory_type: kDevice to LayerCake.
+[component_container_mt-2] I0220 13:32:56.997478 55722 block_memory_pool_impl.h:65] Expanding the memory pool with 2048 blocks. Number of allocated blocks: 2048
+[component_container_mt-2] I0220 13:32:57.004679 55722 gpu_hash_interface_impl.cuh:83] Creating a GPUHashImpl with requested capacity of 4096 blocks. Real capacity: 4096
+[component_container_mt-2] I0220 13:32:57.013240 55722 layer_cake_impl.h:32] Adding Layer with type: N6nvblox15VoxelBlockLayerINS_14OccupancyVoxelEEE, voxel_size: 0.05, and memory_type: kDevice to LayerCake.
+[component_container_mt-2] I0220 13:32:57.044579 55722 block_memory_pool_impl.h:65] Expanding the memory pool with 2048 blocks. Number of allocated blocks: 2048
+[component_container_mt-2] I0220 13:32:57.053494 55722 gpu_hash_interface_impl.cuh:83] Creating a GPUHashImpl with requested capacity of 4096 blocks. Real capacity: 4096
+[component_container_mt-2] I0220 13:32:57.053714 55722 layer_cake_impl.h:32] Adding Layer with type: N6nvblox15VoxelBlockLayerINS_9EsdfVoxelEEE, voxel_size: 0.05, and memory_type: kDevice to LayerCake.
+[component_container_mt-2] I0220 13:32:57.054178 55722 block_memory_pool_impl.h:65] Expanding the memory pool with 2048 blocks. Number of allocated blocks: 2048
+[component_container_mt-2] I0220 13:32:57.056324 55722 gpu_hash_interface_impl.cuh:83] Creating a GPUHashImpl with requested capacity of 4096 blocks. Real capacity: 4096
+[component_container_mt-2] I0220 13:32:57.056522 55722 layer_cake_impl.h:32] Adding Layer with type: N6nvblox10BlockLayerINS_9MeshBlockEEE, voxel_size: 0.05, and memory_type: kDevice to LayerCake.
+[component_container_mt-2] I0220 13:32:57.056578 55722 layer_cake_streamer_impl.h:79] Adding Streamer with type: N6nvblox25LayerStreamerOldestBlocksINS_15VoxelBlockLayerINS_9TsdfVoxelEEEEE to LayerCake.
+[component_container_mt-2] I0220 13:32:57.056593 55722 layer_cake_streamer_impl.h:79] Adding Streamer with type: N6nvblox25LayerStreamerOldestBlocksINS_15VoxelBlockLayerINS_10ColorVoxelEEEEE to LayerCake.
+[component_container_mt-2] I0220 13:32:57.056615 55722 layer_cake_streamer_impl.h:79] Adding Streamer with type: N6nvblox25LayerStreamerOldestBlocksINS_15VoxelBlockLayerINS_14FreespaceVoxelEEEEE to LayerCake.
+[component_container_mt-2] I0220 13:32:57.056630 55722 layer_cake_streamer_impl.h:79] Adding Streamer with type: N6nvblox25LayerStreamerOldestBlocksINS_15VoxelBlockLayerINS_14OccupancyVoxelEEEEE to LayerCake.
+[component_container_mt-2] I0220 13:32:57.056640 55722 layer_cake_streamer_impl.h:79] Adding Streamer with type: N6nvblox25LayerStreamerOldestBlocksINS_15VoxelBlockLayerINS_9EsdfVoxelEEEEE to LayerCake.
+[component_container_mt-2] I0220 13:32:57.056655 55722 layer_cake_streamer_impl.h:79] Adding Streamer with type: N6nvblox25LayerStreamerOldestBlocksINS_10BlockLayerINS_9MeshBlockEEEEE to LayerCake.
+[component_container_mt-2] I0220 13:32:57.075035 55722 block_memory_pool_impl.h:65] Expanding the memory pool with 2048 blocks. Number of allocated blocks: 2048
+[component_container_mt-2] I0220 13:32:57.086526 55722 gpu_hash_interface_impl.cuh:83] Creating a GPUHashImpl with requested capacity of 4096 blocks. Real capacity: 4096
+[component_container_mt-2] I0220 13:32:57.086712 55722 layer_cake_impl.h:32] Adding Layer with type: N6nvblox15VoxelBlockLayerINS_9TsdfVoxelEEE, voxel_size: 0.05, and memory_type: kDevice to LayerCake.
+[component_container_mt-2] I0220 13:32:57.104151 55722 block_memory_pool_impl.h:65] Expanding the memory pool with 2048 blocks. Number of allocated blocks: 2048
+[component_container_mt-2] I0220 13:32:57.125123 55722 gpu_hash_interface_impl.cuh:83] Creating a GPUHashImpl with requested capacity of 4096 blocks. Real capacity: 4096
+[component_container_mt-2] I0220 13:32:57.128091 55722 layer_cake_impl.h:32] Adding Layer with type: N6nvblox15VoxelBlockLayerINS_10ColorVoxelEEE, voxel_size: 0.05, and memory_type: kDevice to LayerCake.
+[component_container_mt-2] I0220 13:32:57.156417 55722 block_memory_pool_impl.h:65] Expanding the memory pool with 2048 blocks. Number of allocated blocks: 2048
+[component_container_mt-2] I0220 13:32:57.161548 55722 gpu_hash_interface_impl.cuh:83] Creating a GPUHashImpl with requested capacity of 4096 blocks. Real capacity: 4096
+[component_container_mt-2] I0220 13:32:57.162022 55722 layer_cake_impl.h:32] Adding Layer with type: N6nvblox15VoxelBlockLayerINS_14FreespaceVoxelEEE, voxel_size: 0.05, and memory_type: kDevice to LayerCake.
+[component_container_mt-2] I0220 13:32:57.174674 55722 block_memory_pool_impl.h:65] Expanding the memory pool with 2048 blocks. Number of allocated blocks: 2048
+[component_container_mt-2] I0220 13:32:57.188977 55722 gpu_hash_interface_impl.cuh:83] Creating a GPUHashImpl with requested capacity of 4096 blocks. Real capacity: 4096
+[component_container_mt-2] I0220 13:32:57.189510 55722 layer_cake_impl.h:32] Adding Layer with type: N6nvblox15VoxelBlockLayerINS_14OccupancyVoxelEEE, voxel_size: 0.05, and memory_type: kDevice to LayerCake.
+[component_container_mt-2] I0220 13:32:57.220186 55722 block_memory_pool_impl.h:65] Expanding the memory pool with 2048 blocks. Number of allocated blocks: 2048
+[component_container_mt-2] I0220 13:32:57.223699 55722 gpu_hash_interface_impl.cuh:83] Creating a GPUHashImpl with requested capacity of 4096 blocks. Real capacity: 4096
+[component_container_mt-2] I0220 13:32:57.225018 55722 layer_cake_impl.h:32] Adding Layer with type: N6nvblox15VoxelBlockLayerINS_9EsdfVoxelEEE, voxel_size: 0.05, and memory_type: kDevice to LayerCake.
+[component_container_mt-2] I0220 13:32:57.226130 55722 block_memory_pool_impl.h:65] Expanding the memory pool with 2048 blocks. Number of allocated blocks: 2048
+[component_container_mt-2] I0220 13:32:57.230192 55722 gpu_hash_interface_impl.cuh:83] Creating a GPUHashImpl with requested capacity of 4096 blocks. Real capacity: 4096
+[component_container_mt-2] I0220 13:32:57.231376 55722 layer_cake_impl.h:32] Adding Layer with type: N6nvblox10BlockLayerINS_9MeshBlockEEE, voxel_size: 0.05, and memory_type: kDevice to LayerCake.
+[component_container_mt-2] I0220 13:32:57.232010 55722 layer_cake_streamer_impl.h:79] Adding Streamer with type: N6nvblox25LayerStreamerOldestBlocksINS_15VoxelBlockLayerINS_9TsdfVoxelEEEEE to LayerCake.
+[component_container_mt-2] I0220 13:32:57.232527 55722 layer_cake_streamer_impl.h:79] Adding Streamer with type: N6nvblox25LayerStreamerOldestBlocksINS_15VoxelBlockLayerINS_10ColorVoxelEEEEE to LayerCake.
+[component_container_mt-2] I0220 13:32:57.232990 55722 layer_cake_streamer_impl.h:79] Adding Streamer with type: N6nvblox25LayerStreamerOldestBlocksINS_15VoxelBlockLayerINS_14FreespaceVoxelEEEEE to LayerCake.
+[component_container_mt-2] I0220 13:32:57.233435 55722 layer_cake_streamer_impl.h:79] Adding Streamer with type: N6nvblox25LayerStreamerOldestBlocksINS_15VoxelBlockLayerINS_14OccupancyVoxelEEEEE to LayerCake.
+[component_container_mt-2] I0220 13:32:57.233877 55722 layer_cake_streamer_impl.h:79] Adding Streamer with type: N6nvblox25LayerStreamerOldestBlocksINS_15VoxelBlockLayerINS_9EsdfVoxelEEEEE to LayerCake.
+[component_container_mt-2] I0220 13:32:57.234318 55722 layer_cake_streamer_impl.h:79] Adding Streamer with type: N6nvblox25LayerStreamerOldestBlocksINS_10BlockLayerINS_9MeshBlockEEEEE to LayerCake.
+[component_container_mt-2] [INFO] [1771594377.244699428] [nvblox_node]: Initialize Mapper:
+[component_container_mt-2] [INFO] [1771594377.244853530] [nvblox_node]: static_mapper.do_depth_preprocessing: 0
+[component_container_mt-2] [INFO] [1771594377.244892399] [nvblox_node]: static_mapper.depth_preprocessing_num_dilations: 3
+[component_container_mt-2] [INFO] [1771594377.244942913] [nvblox_node]: static_mapper.esdf_slice_min_height: -0.1
+[component_container_mt-2] [INFO] [1771594377.244962780] [nvblox_node]: static_mapper.esdf_slice_max_height: 0.3
+[component_container_mt-2] [INFO] [1771594377.244978584] [nvblox_node]: static_mapper.esdf_slice_height: 0
+[component_container_mt-2] [INFO] [1771594377.244992884] [nvblox_node]: static_mapper.exclude_last_view_from_decay: 1
+[component_container_mt-2] [INFO] [1771594377.245007536] [nvblox_node]: static_mapper.projective_integrator_max_integration_distance_m: 5
+[component_container_mt-2] [INFO] [1771594377.245037256] [nvblox_node]: static_mapper.lidar_projective_integrator_max_integration_distance_m: 10
+[component_container_mt-2] [INFO] [1771594377.245053987] [nvblox_node]: static_mapper.projective_integrator_truncation_distance_vox: 4
+[component_container_mt-2] [INFO] [1771594377.245079292] [nvblox_node]: static_mapper.projective_integrator_weighting_mode: inverse_square_tsdf_distance_penalty
+[component_container_mt-2] [INFO] [1771594377.245101782] [nvblox_node]: static_mapper.projective_integrator_max_weight: 5
+[component_container_mt-2] [INFO] [1771594377.245117042] [nvblox_node]: static_mapper.projective_tsdf_integrator_invalid_depth_decay_factor: -1
+[component_container_mt-2] [INFO] [1771594377.245132142] [nvblox_node]: static_mapper.free_region_occupancy_probability: 0.45
+[component_container_mt-2] [INFO] [1771594377.245146666] [nvblox_node]: static_mapper.occupied_region_occupancy_probability: 0.55
+[component_container_mt-2] [INFO] [1771594377.245174242] [nvblox_node]: static_mapper.unobserved_region_occupancy_probability: 0.5
+[component_container_mt-2] [INFO] [1771594377.245190174] [nvblox_node]: static_mapper.occupied_region_half_width_m: 0.1
+[component_container_mt-2] [INFO] [1771594377.245205018] [nvblox_node]: static_mapper.raycast_subsampling_factor: 4
+[component_container_mt-2] [INFO] [1771594377.245219734] [nvblox_node]: static_mapper.workspace_bounds_type: unbounded
+[component_container_mt-2] [INFO] [1771594377.245240624] [nvblox_node]: static_mapper.workspace_bounds_min_height_m: -0.5
+[component_container_mt-2] [INFO] [1771594377.245256108] [nvblox_node]: static_mapper.workspace_bounds_max_height_m: 2
+[component_container_mt-2] [INFO] [1771594377.245269640] [nvblox_node]: static_mapper.workspace_bounds_min_corner_x_m: 0
+[component_container_mt-2] [INFO] [1771594377.245282533] [nvblox_node]: static_mapper.workspace_bounds_max_corner_x_m: 0
+[component_container_mt-2] [INFO] [1771594377.245303839] [nvblox_node]: static_mapper.workspace_bounds_min_corner_y_m: 0
+[component_container_mt-2] [INFO] [1771594377.245318523] [nvblox_node]: static_mapper.workspace_bounds_max_corner_y_m: 0
+[component_container_mt-2] [INFO] [1771594377.245332503] [nvblox_node]: static_mapper.esdf_integrator_min_weight: 0.1
+[component_container_mt-2] [INFO] [1771594377.245345651] [nvblox_node]: static_mapper.esdf_integrator_max_site_distance_vox: 2
+[component_container_mt-2] [INFO] [1771594377.245358224] [nvblox_node]: static_mapper.esdf_integrator_max_distance_m: 2
+[component_container_mt-2] [INFO] [1771594377.245371692] [nvblox_node]: static_mapper.mesh_integrator_min_weight: 0.1
+[component_container_mt-2] [INFO] [1771594377.245384073] [nvblox_node]: static_mapper.mesh_integrator_weld_vertices: 1
+[component_container_mt-2] [INFO] [1771594377.245397061] [nvblox_node]: static_mapper.decay_integrator_deallocate_decayed_blocks: 1
+[component_container_mt-2] [INFO] [1771594377.245417600] [nvblox_node]: static_mapper.tsdf_decay_factor: 0.95
+[component_container_mt-2] [INFO] [1771594377.245435547] [nvblox_node]: static_mapper.tsdf_decayed_weight_threshold: 0.001
+[component_container_mt-2] [INFO] [1771594377.245449847] [nvblox_node]: static_mapper.tsdf_set_free_distance_on_decayed: 0
+[component_container_mt-2] [INFO] [1771594377.245462835] [nvblox_node]: static_mapper.tsdf_decayed_free_distance_vox: 4
+[component_container_mt-2] [INFO] [1771594377.245476368] [nvblox_node]: static_mapper.free_region_decay_probability: 0.55
+[component_container_mt-2] [INFO] [1771594377.245489388] [nvblox_node]: static_mapper.occupied_region_decay_probability: 0.4
+[component_container_mt-2] [INFO] [1771594377.245501833] [nvblox_node]: static_mapper.occupancy_decay_to_free: 0
+[component_container_mt-2] [INFO] [1771594377.245625735] [nvblox_node]: static_mapper.max_tsdf_distance_for_occupancy_m: 0.15
+[component_container_mt-2] [INFO] [1771594377.245668443] [nvblox_node]: static_mapper.max_unobserved_to_keep_consecutive_occupancy_ms: 200
+[component_container_mt-2] [INFO] [1771594377.245687286] [nvblox_node]: static_mapper.min_duration_since_occupied_for_freespace_ms: 1000
+[component_container_mt-2] [INFO] [1771594377.245700594] [nvblox_node]: static_mapper.min_consecutive_occupancy_duration_for_reset_ms: 2000
+[component_container_mt-2] [INFO] [1771594377.245713871] [nvblox_node]: static_mapper.check_neighborhood: 1
+[component_container_mt-2] [INFO] [1771594377.245725611] [nvblox_node]: Initialize Mapper:
+[component_container_mt-2] [INFO] [1771594377.245739943] [nvblox_node]: dynamic_mapper.do_depth_preprocessing: 0
+[component_container_mt-2] [INFO] [1771594377.245752868] [nvblox_node]: dynamic_mapper.depth_preprocessing_num_dilations: 4
+[component_container_mt-2] [INFO] [1771594377.245767648] [nvblox_node]: dynamic_mapper.esdf_slice_min_height: -0.1
+[component_container_mt-2] [INFO] [1771594377.245789274] [nvblox_node]: dynamic_mapper.esdf_slice_max_height: 0.3
+[component_container_mt-2] [INFO] [1771594377.245804630] [nvblox_node]: dynamic_mapper.esdf_slice_height: 0
+[component_container_mt-2] [INFO] [1771594377.245817874] [nvblox_node]: dynamic_mapper.exclude_last_view_from_decay: 0
+[component_container_mt-2] [INFO] [1771594377.245831055] [nvblox_node]: dynamic_mapper.projective_integrator_max_integration_distance_m: 7
+[component_container_mt-2] [INFO] [1771594377.245845355] [nvblox_node]: dynamic_mapper.lidar_projective_integrator_max_integration_distance_m: 10
+[component_container_mt-2] [INFO] [1771594377.245859527] [nvblox_node]: dynamic_mapper.projective_integrator_truncation_distance_vox: 4
+[component_container_mt-2] [INFO] [1771594377.245872835] [nvblox_node]: dynamic_mapper.projective_integrator_weighting_mode: kInverseSquareWeight
+[component_container_mt-2] [WARN] [1771594377.245885888] [nvblox_node]: Requested weighting function: "kInverseSquareWeight" not recognized. Defaulting to: kInverseSquareWeight
+[component_container_mt-2] [INFO] [1771594377.245909529] [nvblox_node]: dynamic_mapper.projective_integrator_max_weight: 5
+[component_container_mt-2] [INFO] [1771594377.245924661] [nvblox_node]: dynamic_mapper.projective_tsdf_integrator_invalid_depth_decay_factor: -1
+[component_container_mt-2] [INFO] [1771594377.245938705] [nvblox_node]: dynamic_mapper.free_region_occupancy_probability: 0.3
+[component_container_mt-2] [INFO] [1771594377.245951918] [nvblox_node]: dynamic_mapper.occupied_region_occupancy_probability: 0.7
+[component_container_mt-2] [INFO] [1771594377.245964746] [nvblox_node]: dynamic_mapper.unobserved_region_occupancy_probability: 0.5
+[component_container_mt-2] [INFO] [1771594377.245977383] [nvblox_node]: dynamic_mapper.occupied_region_half_width_m: 0.1
+[component_container_mt-2] [INFO] [1771594377.245990019] [nvblox_node]: dynamic_mapper.raycast_subsampling_factor: 4
+[component_container_mt-2] [INFO] [1771594377.246002528] [nvblox_node]: dynamic_mapper.workspace_bounds_type: kUnbounded
+[component_container_mt-2] [WARN] [1771594377.246021690] [nvblox_node]: Requested workspace bounds type: "kUnbounded" not recognized. Defaulting to: kUnbounded
+[component_container_mt-2] [INFO] [1771594377.246040373] [nvblox_node]: dynamic_mapper.workspace_bounds_min_height_m: 0
+[component_container_mt-2] [INFO] [1771594377.246055153] [nvblox_node]: dynamic_mapper.workspace_bounds_max_height_m: 1
+[component_container_mt-2] [INFO] [1771594377.246068590] [nvblox_node]: dynamic_mapper.workspace_bounds_min_corner_x_m: 0
+[component_container_mt-2] [INFO] [1771594377.246088264] [nvblox_node]: dynamic_mapper.workspace_bounds_max_corner_x_m: 0
+[component_container_mt-2] [INFO] [1771594377.246103108] [nvblox_node]: dynamic_mapper.workspace_bounds_min_corner_y_m: 2
+[component_container_mt-2] [INFO] [1771594377.246115681] [nvblox_node]: dynamic_mapper.workspace_bounds_max_corner_y_m: 2
+[component_container_mt-2] [INFO] [1771594377.246129789] [nvblox_node]: dynamic_mapper.esdf_integrator_min_weight: 0.0001
+[component_container_mt-2] [INFO] [1771594377.246143481] [nvblox_node]: dynamic_mapper.esdf_integrator_max_site_distance_vox: 1
+[component_container_mt-2] [INFO] [1771594377.246155670] [nvblox_node]: dynamic_mapper.esdf_integrator_max_distance_m: 2
+[component_container_mt-2] [INFO] [1771594377.246168370] [nvblox_node]: dynamic_mapper.mesh_integrator_min_weight: 0.0001
+[component_container_mt-2] [INFO] [1771594377.246180943] [nvblox_node]: dynamic_mapper.mesh_integrator_weld_vertices: 1
+[component_container_mt-2] [INFO] [1771594377.246199722] [nvblox_node]: dynamic_mapper.decay_integrator_deallocate_decayed_blocks: 1
+[component_container_mt-2] [INFO] [1771594377.246215014] [nvblox_node]: dynamic_mapper.tsdf_decay_factor: 0.95
+[component_container_mt-2] [INFO] [1771594377.246229250] [nvblox_node]: dynamic_mapper.tsdf_decayed_weight_threshold: 0.001
+[component_container_mt-2] [INFO] [1771594377.246242238] [nvblox_node]: dynamic_mapper.tsdf_set_free_distance_on_decayed: 0
+[component_container_mt-2] [INFO] [1771594377.246280372] [nvblox_node]: dynamic_mapper.tsdf_decayed_free_distance_vox: 4
+[component_container_mt-2] [INFO] [1771594377.246298927] [nvblox_node]: dynamic_mapper.free_region_decay_probability: 0.55
+[component_container_mt-2] [INFO] [1771594377.246312235] [nvblox_node]: dynamic_mapper.occupied_region_decay_probability: 0.4
+[component_container_mt-2] [INFO] [1771594377.246324680] [nvblox_node]: dynamic_mapper.occupancy_decay_to_free: 0
+[component_container_mt-2] [INFO] [1771594377.246345762] [nvblox_node]: dynamic_mapper.max_tsdf_distance_for_occupancy_m: 0.15
+[component_container_mt-2] [INFO] [1771594377.246360510] [nvblox_node]: dynamic_mapper.max_unobserved_to_keep_consecutive_occupancy_ms: 200
+[component_container_mt-2] [INFO] [1771594377.246373626] [nvblox_node]: dynamic_mapper.min_duration_since_occupied_for_freespace_ms: 1000
+[component_container_mt-2] [INFO] [1771594377.246385847] [nvblox_node]: dynamic_mapper.min_consecutive_occupancy_duration_for_reset_ms: 2000
+[component_container_mt-2] [INFO] [1771594377.246398483] [nvblox_node]: dynamic_mapper.check_neighborhood: 1
+[component_container_mt-2] [INFO] [1771594377.246414415] [nvblox_node]: Initialize MultiMapper:
+[component_container_mt-2] [INFO] [1771594377.246433514] [nvblox_node]: multi_mapper.connected_mask_component_size_threshold: 2000
+[component_container_mt-2] [INFO] [1771594377.246447462] [nvblox_node]: multi_mapper.remove_small_connected_components: 1
+[component_container_mt-2] [INFO] [1771594377.246648527] [nvblox_node]: NvbloxNode::subscribeToTopics()
+[component_container_mt-2] [INFO] [1771594377.246979892] [nvblox_node]: Subscribing input topics with QoS: SENSOR_DATA
+[component_container_mt-2] [INFO] [1771594377.252621645] [NitrosContext]: [NitrosContext] Loading extension: gxf/lib/std/libgxf_std.so
+[component_container_mt-2] [INFO] [1771594377.254745608] [NitrosContext]: [NitrosContext] Loading extension: gxf/lib/libgxf_isaac_gxf_helpers.so
+[component_container_mt-2] [INFO] [1771594377.260735970] [NitrosContext]: [NitrosContext] Loading extension: gxf/lib/libgxf_isaac_sight.so
+[component_container_mt-2] [INFO] [1771594377.267808436] [NitrosContext]: [NitrosContext] Loading extension: gxf/lib/libgxf_isaac_atlas.so
+[component_container_mt-2] 2026-02-20 13:32:57.285 WARN  external/com_nvidia_gxf/gxf/std/program.cpp@538: No GXF scheduler specified.
+[component_container_mt-2] [INFO] [1771594377.286006339] [NitrosContext]: [NitrosContext] Loading extension: gxf/lib/multimedia/libgxf_multimedia.so
+[component_container_mt-2] [INFO] [1771594377.292815420] [nvblox_node.ManagedNitrosSubscriber]: Starting Managed Nitros Subscriber
+[component_container_mt-2] [INFO] [1771594377.296038507] [nvblox_node.ManagedNitrosSubscriber]: Starting Managed Nitros Subscriber
+[component_container_mt-2] [INFO] [1771594377.297372254] [nvblox_node]: NvbloxNode::setupTimers()
+[component_container_mt-2] [INFO] [1771594377.297503258] [nvblox_node]: NvbloxNode::advertiseTopics()
+[component_container_mt-2] [INFO] [1771594377.303021877] [nvblox_node]: NvbloxNode::advertiseServices()
+[component_container_mt-2] [INFO] [1771594377.306529078] [nvblox_node]: Started up nvblox node in frame odom and voxel size 0.05
+[component_container_mt-2] [INFO] [1771594377.306598915] [nvblox_node]: Mapping type: kStaticTsdf
+[component_container_mt-2] [INFO] [1771594377.307951888] [nvblox_node]: nvblox parameters:
+[component_container_mt-2] nvblox_node
+[component_container_mt-2]     cuda_stream_type: kBlocking
+[component_container_mt-2]     global_frame: odom
+[component_container_mt-2]     voxel_size: 0.050000
+[component_container_mt-2]     max_back_projection_distance: 7.000000
+[component_container_mt-2]     layer_visualization_min_tsdf_weight: 0.100000
+[component_container_mt-2]     layer_visualization_exclusion_height_m: 2.000000
+[component_container_mt-2]     layer_visualization_exclusion_radius_m: 7.000000
+[component_container_mt-2]     layer_streamer_bandwidth_limit_mbps: -1.000000
+[component_container_mt-2]     distance_map_unknown_value_optimistic: 1000.000000
+[component_container_mt-2]     distance_map_unknown_value_pessimistic: -1000.000000
+[component_container_mt-2]     esdf_mode: 2d
+[component_container_mt-2]     mapping_type: static_tsdf
+[component_container_mt-2]     pose_frame: base_link
+[INFO] [launch_ros.actions.load_composable_nodes]: Loaded node '/nvblox_node' in container 'nvblox_container'
+[component_container_mt-2]     map_clearing_frame_id: camera0_link
+[component_container_mt-2]     after_shutdown_map_save_path: 
+[component_container_mt-2]     esdf_slice_bounds_visualization_attachment_frame_id: camera0_link
+[component_container_mt-2]     workspace_height_bounds_visualization_attachment_frame_id: base_link
+[component_container_mt-2]     publish_esdf_distance_slice: 1
+[component_container_mt-2]     use_color: 1
+[component_container_mt-2]     use_depth: 1
+[component_container_mt-2]     use_segmentation: 0
+[component_container_mt-2]     use_lidar: 0
+[component_container_mt-2]     use_non_equal_vertical_fov_lidar_params: 0
+[component_container_mt-2]     print_timings_to_console: 0
+[component_container_mt-2]     print_rates_to_console: 0
+[component_container_mt-2]     print_queue_drops_to_console: 0
+[component_container_mt-2]     print_delays_to_console: 0
+[component_container_mt-2]     layer_visualization_undo_gamma_correction: 0
+[component_container_mt-2]     output_pessimistic_distance_map: 1
+[component_container_mt-2]     num_cameras: 1
+[component_container_mt-2]     lidar_width: 1800
+[component_container_mt-2]     lidar_height: 31
+[component_container_mt-2]     tick_period_ms: 10
+[component_container_mt-2]     print_statistics_on_console_period_ms: 10000
+[component_container_mt-2]     maximum_input_queue_length: 10
+[component_container_mt-2]     back_projection_subsampling: 1
+[component_container_mt-2]     lidar_vertical_fov_rad: 0.523599
+[component_container_mt-2]     lidar_min_valid_range_m: 0.100000
+[component_container_mt-2]     lidar_max_valid_range_m: 50.000000
+[component_container_mt-2]     min_angle_below_zero_elevation_rad: 0.349066
+[component_container_mt-2]     max_angle_above_zero_elevation_rad: 0.261799
+[component_container_mt-2]     esdf_slice_bounds_visualization_side_length: 10.000000
+[component_container_mt-2]     workspace_height_bounds_visualization_side_length: 10.000000
+[component_container_mt-2]     integrate_depth_rate_hz: 40.000000
+[component_container_mt-2]     integrate_color_rate_hz: 5.000000
+[component_container_mt-2]     integrate_lidar_rate_hz: 40.000000
+[component_container_mt-2]     update_mesh_rate_hz: 5.000000
+[component_container_mt-2]     update_esdf_rate_hz: 10.000000
+[component_container_mt-2]     publish_layer_rate_hz: 5.000000
+[component_container_mt-2]     publish_debug_vis_rate_hz: 2.000000
+[component_container_mt-2]     decay_tsdf_rate_hz: 5.000000
+[component_container_mt-2]     decay_dynamic_occupancy_rate_hz: 10.000000
+[component_container_mt-2]     clear_map_outside_radius_rate_hz: 1.000000
+[component_container_mt-2]     map_clearing_radius_m: 7.000000
+[component_container_mt-2]     esdf_and_gradients_unobserved_value: -1000.000000
+[component_container_mt-2]     multi_mapper
+[component_container_mt-2]         connected_mask_component_size_threshold: 2000
+[component_container_mt-2]         background_mapper
+[component_container_mt-2]             voxel_size_m: 0.050000
+[component_container_mt-2]             memory_type: kDevice
+[component_container_mt-2]             projective_layer_type: kTsdf
+[component_container_mt-2]             esdf_mode: kUnset
+[component_container_mt-2]             do_depth_preprocessing: 0
+[component_container_mt-2]             depth_preprocessing_num_dilations: 3
+[component_container_mt-2]             exclude_last_view_from_decay: 1
+[component_container_mt-2]             camera_tsdf_integrator
+[component_container_mt-2]                 max_weight:: 5.000000
+[component_container_mt-2]                 marked_unobserved_voxels_distance_m:: -1.000000
+[component_container_mt-2]                 marked_unobserved_voxels_weight:: 0.100000
+[component_container_mt-2]                 weighting_function_type:: kInverseSquareTsdfDistancePenalty
+[component_container_mt-2]                 invalid_depth_decay_factor:: -1.000000
+[component_container_mt-2]                 projective_integrator
+[component_container_mt-2]                     lidar_linear_interpolation_max_allowable_difference_vox:: 2.000000
+[component_container_mt-2]                     lidar_nearest_interpolation_max_allowable_dist_to_ray_vox:: 0.500000
+[component_container_mt-2]                     truncation_distance_vox:: 4.000000
+[component_container_mt-2]                     max_integration_distance_m:: 5.000000
+[component_container_mt-2]                     view_calculator
+[component_container_mt-2]                         raycast_subsampling_factor: 4
+[component_container_mt-2]                         workspace_bounds_type: kUnbounded
+[component_container_mt-2]                         workspace_bounds_min_height_m: -0.500000
+[component_container_mt-2]                         workspace_bounds_max_height_m: 2.000000
+[component_container_mt-2]                         workspace_bounds_min_corner_x_m: 0.000000
+[component_container_mt-2]                         workspace_bounds_max_corner_x_m: 0.000000
+[component_container_mt-2]                         workspace_bounds_min_corner_y_m: 0.000000
+[component_container_mt-2]                         workspace_bounds_max_corner_y_m: 0.000000
+[component_container_mt-2]             lidar_tsdf_integrator
+[component_container_mt-2]                 max_weight:: 5.000000
+[component_container_mt-2]                 marked_unobserved_voxels_distance_m:: -1.000000
+[component_container_mt-2]                 marked_unobserved_voxels_weight:: 0.100000
+[component_container_mt-2]                 weighting_function_type:: kInverseSquareWeight
+[component_container_mt-2]                 invalid_depth_decay_factor:: -1.000000
+[component_container_mt-2]                 projective_integrator
+[component_container_mt-2]                     lidar_linear_interpolation_max_allowable_difference_vox:: 2.000000
+[component_container_mt-2]                     lidar_nearest_interpolation_max_allowable_dist_to_ray_vox:: 0.500000
+[component_container_mt-2]                     truncation_distance_vox:: 4.000000
+[component_container_mt-2]                     max_integration_distance_m:: 10.000000
+[component_container_mt-2]                     view_calculator
+[component_container_mt-2]                         raycast_subsampling_factor: 4
+[component_container_mt-2]                         workspace_bounds_type: kUnbounded
+[component_container_mt-2]                         workspace_bounds_min_height_m: 0.000000
+[component_container_mt-2]                         workspace_bounds_max_height_m: 1.000000
+[component_container_mt-2]                         workspace_bounds_min_corner_x_m: 0.000000
+[component_container_mt-2]                         workspace_bounds_max_corner_x_m: 0.000000
+[component_container_mt-2]                         workspace_bounds_min_corner_y_m: 2.000000
+[component_container_mt-2]                         workspace_bounds_max_corner_y_m: 2.000000
+[component_container_mt-2]             projective_color_integrator
+[component_container_mt-2]                 sphere_tracing_ray_subsampling_factor:: 4
+[component_container_mt-2]                 max_weight:: 5.000000
+[component_container_mt-2]                 weighting_function_type:: kInverseSquareTsdfDistancePenalty
+[component_container_mt-2]                 projective_integrator
+[component_container_mt-2]                     lidar_linear_interpolation_max_allowable_difference_vox:: 2.000000
+[component_container_mt-2]                     lidar_nearest_interpolation_max_allowable_dist_to_ray_vox:: 0.500000
+[component_container_mt-2]                     truncation_distance_vox:: 4.000000
+[component_container_mt-2]                     max_integration_distance_m:: 5.000000
+[component_container_mt-2]                     view_calculator
+[component_container_mt-2]                         raycast_subsampling_factor: 4
+[component_container_mt-2]                         workspace_bounds_type: kUnbounded
+[component_container_mt-2]                         workspace_bounds_min_height_m: 0.000000
+[component_container_mt-2]                         workspace_bounds_max_height_m: 1.000000
+[component_container_mt-2]                         workspace_bounds_min_corner_x_m: 0.000000
+[component_container_mt-2]                         workspace_bounds_max_corner_x_m: 0.000000
+[component_container_mt-2]                         workspace_bounds_min_corner_y_m: 2.000000
+[component_container_mt-2]                         workspace_bounds_max_corner_y_m: 2.000000
+[component_container_mt-2]                 view_calculator
+[component_container_mt-2]                     raycast_subsampling_factor: 4
+[component_container_mt-2]                     workspace_bounds_type: kUnbounded
+[component_container_mt-2]                     workspace_bounds_min_height_m: -0.500000
+[component_container_mt-2]                     workspace_bounds_max_height_m: 2.000000
+[component_container_mt-2]                     workspace_bounds_min_corner_x_m: 0.000000
+[component_container_mt-2]                     workspace_bounds_max_corner_x_m: 0.000000
+[component_container_mt-2]                     workspace_bounds_min_corner_y_m: 0.000000
+[component_container_mt-2]                     workspace_bounds_max_corner_y_m: 0.000000
+[component_container_mt-2]             camera_occupancy_integrator
+[component_container_mt-2]                 free_region_log_odds:: -0.200671
+[component_container_mt-2]                 occupied_region_log_odds:: 0.200671
+[component_container_mt-2]                 unobserved_region_log_odds:: 0.000000
+[component_container_mt-2]                 occupied_region_half_width_m:: 0.100000
+[component_container_mt-2]                 projective_integrator
+[component_container_mt-2]                     lidar_linear_interpolation_max_allowable_difference_vox:: 2.000000
+[component_container_mt-2]                     lidar_nearest_interpolation_max_allowable_dist_to_ray_vox:: 0.500000
+[component_container_mt-2]                     truncation_distance_vox:: 4.000000
+[component_container_mt-2]                     max_integration_distance_m:: 5.000000
+[component_container_mt-2]                     view_calculator
+[component_container_mt-2]                         raycast_subsampling_factor: 4
+[component_container_mt-2]                         workspace_bounds_type: kUnbounded
+[component_container_mt-2]                         workspace_bounds_min_height_m: 0.000000
+[component_container_mt-2]                         workspace_bounds_max_height_m: 1.000000
+[component_container_mt-2]                         workspace_bounds_min_corner_x_m: 0.000000
+[component_container_mt-2]                         workspace_bounds_max_corner_x_m: 0.000000
+[component_container_mt-2]                         workspace_bounds_min_corner_y_m: 2.000000
+[component_container_mt-2]                         workspace_bounds_max_corner_y_m: 2.000000
+[component_container_mt-2]             lidar_occupancy_integrator
+[component_container_mt-2]                 free_region_log_odds:: -0.200671
+[component_container_mt-2]                 occupied_region_log_odds:: 0.200671
+[component_container_mt-2]                 unobserved_region_log_odds:: 0.000000
+[component_container_mt-2]                 occupied_region_half_width_m:: 0.100000
+[component_container_mt-2]                 projective_integrator
+[component_container_mt-2]                     lidar_linear_interpolation_max_allowable_difference_vox:: 2.000000
+[component_container_mt-2]                     lidar_nearest_interpolation_max_allowable_dist_to_ray_vox:: 0.500000
+[component_container_mt-2]                     truncation_distance_vox:: 4.000000
+[component_container_mt-2]                     max_integration_distance_m:: 10.000000
+[component_container_mt-2]                     view_calculator
+[component_container_mt-2]                         raycast_subsampling_factor: 4
+[component_container_mt-2]                         workspace_bounds_type: kUnbounded
+[component_container_mt-2]                         workspace_bounds_min_height_m: 0.000000
+[component_container_mt-2]                         workspace_bounds_max_height_m: 1.000000
+[component_container_mt-2]                         workspace_bounds_min_corner_x_m: 0.000000
+[component_container_mt-2]                         workspace_bounds_max_corner_x_m: 0.000000
+[component_container_mt-2]                         workspace_bounds_min_corner_y_m: 2.000000
+[component_container_mt-2]                         workspace_bounds_max_corner_y_m: 2.000000
+[component_container_mt-2]             esdf_integrator
+[component_container_mt-2]                 max_esdf_distance_m:: 2.000000
+[component_container_mt-2]                 max_tsdf_site_distance_vox:: 2.000000
+[component_container_mt-2]                 tsdf_min_weight:: 0.100000
+[component_container_mt-2]                 occupied_threshold_log_odds:: 0.000000
+[component_container_mt-2]                 esdf_slice_min_height:: -0.100000
+[component_container_mt-2]                 esdf_slice_max_height:: 0.300000
+[component_container_mt-2]                 esdf_slice_height:: 0.000000
+[component_container_mt-2]                 slice_height_above_plane_m:: 0.000000
+[component_container_mt-2]                 slice_height_thickness_m:: 0.100000
+[component_container_mt-2]             mesh_integrator
+[component_container_mt-2]                 min_weight:: 0.100000
+[component_container_mt-2]                 cutoff_distance_vox:: 5.000000
+[component_container_mt-2]                 weld_vertices:: 1
+[component_container_mt-2]             occupancy_decay_integrator
+[component_container_mt-2]                 free_space_decay_log_odds:: 0.200671
+[component_container_mt-2]                 occupied_space_decay_log_odds:: -0.405465
+[component_container_mt-2]                 decay_to_log_odds_:: 0.000000
+[component_container_mt-2]                 decay_integrator
+[component_container_mt-2]                     deallocate_decayed_blocks:: 1
+[component_container_mt-2]             tsdf_decay_integrator
+[component_container_mt-2]                 decay_factor:: 0.950000
+[component_container_mt-2]                 decayed_weight_theshold:: 0.001000
+[component_container_mt-2]                 set_free_distance_on_decayed:: 0
+[component_container_mt-2]                 free_distance_vox:: 4.000000
+[component_container_mt-2]                 decay_integrator
+[component_container_mt-2]                     deallocate_decayed_blocks:: 1
+[component_container_mt-2]             freespace_integrator
+[component_container_mt-2]                 max_tsdf_distance_for_occupancy_m:: 0.150000
+[component_container_mt-2]                 max_unobserved_to_keep_consecutive_occupancy_ms:: 200
+[component_container_mt-2]                 min_duration_since_occupied_for_freespace_ms:: 1000
+[component_container_mt-2]                 min_consecutive_occupancy_duration_for_reset_ms:: 2000
+[component_container_mt-2]                 check_neighborhood:: 1
+[component_container_mt-2]         foreground_mapper
+[component_container_mt-2]             voxel_size_m: 0.050000
+[component_container_mt-2]             memory_type: kDevice
+[component_container_mt-2]             projective_layer_type: kNone
+[component_container_mt-2]             esdf_mode: kUnset
+[component_container_mt-2]             do_depth_preprocessing: 0
+[component_container_mt-2]             depth_preprocessing_num_dilations: 4
+[component_container_mt-2]             exclude_last_view_from_decay: 0
+[component_container_mt-2]             camera_tsdf_integrator
+[component_container_mt-2]                 max_weight:: 5.000000
+[component_container_mt-2]                 marked_unobserved_voxels_distance_m:: -1.000000
+[component_container_mt-2]                 marked_unobserved_voxels_weight:: 0.100000
+[component_container_mt-2]                 weighting_function_type:: kInverseSquareWeight
+[component_container_mt-2]                 invalid_depth_decay_factor:: -1.000000
+[component_container_mt-2]                 projective_integrator
+[component_container_mt-2]                     lidar_linear_interpolation_max_allowable_difference_vox:: 2.000000
+[component_container_mt-2]                     lidar_nearest_interpolation_max_allowable_dist_to_ray_vox:: 0.500000
+[component_container_mt-2]                     truncation_distance_vox:: 4.000000
+[component_container_mt-2]                     max_integration_distance_m:: 7.000000
+[component_container_mt-2]                     view_calculator
+[component_container_mt-2]                         raycast_subsampling_factor: 4
+[component_container_mt-2]                         workspace_bounds_type: kUnbounded
+[component_container_mt-2]                         workspace_bounds_min_height_m: 0.000000
+[component_container_mt-2]                         workspace_bounds_max_height_m: 1.000000
+[component_container_mt-2]                         workspace_bounds_min_corner_x_m: 0.000000
+[component_container_mt-2]                         workspace_bounds_max_corner_x_m: 0.000000
+[component_container_mt-2]                         workspace_bounds_min_corner_y_m: 2.000000
+[component_container_mt-2]                         workspace_bounds_max_corner_y_m: 2.000000
+[component_container_mt-2]             lidar_tsdf_integrator
+[component_container_mt-2]                 max_weight:: 5.000000
+[component_container_mt-2]                 marked_unobserved_voxels_distance_m:: -1.000000
+[component_container_mt-2]                 marked_unobserved_voxels_weight:: 0.100000
+[component_container_mt-2]                 weighting_function_type:: kInverseSquareWeight
+[component_container_mt-2]                 invalid_depth_decay_factor:: -1.000000
+[component_container_mt-2]                 projective_integrator
+[component_container_mt-2]                     lidar_linear_interpolation_max_allowable_difference_vox:: 2.000000
+[component_container_mt-2]                     lidar_nearest_interpolation_max_allowable_dist_to_ray_vox:: 0.500000
+[component_container_mt-2]                     truncation_distance_vox:: 4.000000
+[component_container_mt-2]                     max_integration_distance_m:: 10.000000
+[component_container_mt-2]                     view_calculator
+[component_container_mt-2]                         raycast_subsampling_factor: 4
+[component_container_mt-2]                         workspace_bounds_type: kUnbounded
+[component_container_mt-2]                         workspace_bounds_min_height_m: 0.000000
+[component_container_mt-2]                         workspace_bounds_max_height_m: 1.000000
+[component_container_mt-2]                         workspace_bounds_min_corner_x_m: 0.000000
+[component_container_mt-2]                         workspace_bounds_max_corner_x_m: 0.000000
+[component_container_mt-2]                         workspace_bounds_min_corner_y_m: 2.000000
+[component_container_mt-2]                         workspace_bounds_max_corner_y_m: 2.000000
+[component_container_mt-2]             projective_color_integrator
+[component_container_mt-2]                 sphere_tracing_ray_subsampling_factor:: 4
+[component_container_mt-2]                 max_weight:: 5.000000
+[component_container_mt-2]                 weighting_function_type:: kInverseSquareWeight
+[component_container_mt-2]                 projective_integrator
+[component_container_mt-2]                     lidar_linear_interpolation_max_allowable_difference_vox:: 2.000000
+[component_container_mt-2]                     lidar_nearest_interpolation_max_allowable_dist_to_ray_vox:: 0.500000
+[component_container_mt-2]                     truncation_distance_vox:: 4.000000
+[component_container_mt-2]                     max_integration_distance_m:: 7.000000
+[component_container_mt-2]                     view_calculator
+[component_container_mt-2]                         raycast_subsampling_factor: 4
+[component_container_mt-2]                         workspace_bounds_type: kUnbounded
+[component_container_mt-2]                         workspace_bounds_min_height_m: 0.000000
+[component_container_mt-2]                         workspace_bounds_max_height_m: 1.000000
+[component_container_mt-2]                         workspace_bounds_min_corner_x_m: 0.000000
+[component_container_mt-2]                         workspace_bounds_max_corner_x_m: 0.000000
+[component_container_mt-2]                         workspace_bounds_min_corner_y_m: 2.000000
+[component_container_mt-2]                         workspace_bounds_max_corner_y_m: 2.000000
+[component_container_mt-2]                 view_calculator
+[component_container_mt-2]                     raycast_subsampling_factor: 4
+[component_container_mt-2]                     workspace_bounds_type: kUnbounded
+[component_container_mt-2]                     workspace_bounds_min_height_m: 0.000000
+[component_container_mt-2]                     workspace_bounds_max_height_m: 1.000000
+[component_container_mt-2]                     workspace_bounds_min_corner_x_m: 0.000000
+[component_container_mt-2]                     workspace_bounds_max_corner_x_m: 0.000000
+[component_container_mt-2]                     workspace_bounds_min_corner_y_m: 2.000000
+[component_container_mt-2]                     workspace_bounds_max_corner_y_m: 2.000000
+[component_container_mt-2]             camera_occupancy_integrator
+[component_container_mt-2]                 free_region_log_odds:: -0.847298
+[component_container_mt-2]                 occupied_region_log_odds:: 0.847298
+[component_container_mt-2]                 unobserved_region_log_odds:: 0.000000
+[component_container_mt-2]                 occupied_region_half_width_m:: 0.100000
+[component_container_mt-2]                 projective_integrator
+[component_container_mt-2]                     lidar_linear_interpolation_max_allowable_difference_vox:: 2.000000
+[component_container_mt-2]                     lidar_nearest_interpolation_max_allowable_dist_to_ray_vox:: 0.500000
+[component_container_mt-2]                     truncation_distance_vox:: 4.000000
+[component_container_mt-2]                     max_integration_distance_m:: 7.000000
+[component_container_mt-2]                     view_calculator
+[component_container_mt-2]                         raycast_subsampling_factor: 4
+[component_container_mt-2]                         workspace_bounds_type: kUnbounded
+[component_container_mt-2]                         workspace_bounds_min_height_m: 0.000000
+[component_container_mt-2]                         workspace_bounds_max_height_m: 1.000000
+[component_container_mt-2]                         workspace_bounds_min_corner_x_m: 0.000000
+[component_container_mt-2]                         workspace_bounds_max_corner_x_m: 0.000000
+[component_container_mt-2]                         workspace_bounds_min_corner_y_m: 2.000000
+[component_container_mt-2]                         workspace_bounds_max_corner_y_m: 2.000000
+[component_container_mt-2]             lidar_occupancy_integrator
+[component_container_mt-2]                 free_region_log_odds:: -0.847298
+[component_container_mt-2]                 occupied_region_log_odds:: 0.847298
+[component_container_mt-2]                 unobserved_region_log_odds:: 0.000000
+[component_container_mt-2]                 occupied_region_half_width_m:: 0.100000
+[component_container_mt-2]                 projective_integrator
+[component_container_mt-2]                     lidar_linear_interpolation_max_allowable_difference_vox:: 2.000000
+[component_container_mt-2]                     lidar_nearest_interpolation_max_allowable_dist_to_ray_vox:: 0.500000
+[component_container_mt-2]                     truncation_distance_vox:: 4.000000
+[component_container_mt-2]                     max_integration_distance_m:: 10.000000
+[component_container_mt-2]                     view_calculator
+[component_container_mt-2]                         raycast_subsampling_factor: 4
+[component_container_mt-2]                         workspace_bounds_type: kUnbounded
+[component_container_mt-2]                         workspace_bounds_min_height_m: 0.000000
+[component_container_mt-2]                         workspace_bounds_max_height_m: 1.000000
+[component_container_mt-2]                         workspace_bounds_min_corner_x_m: 0.000000
+[component_container_mt-2]                         workspace_bounds_max_corner_x_m: 0.000000
+[component_container_mt-2]                         workspace_bounds_min_corner_y_m: 2.000000
+[component_container_mt-2]                         workspace_bounds_max_corner_y_m: 2.000000
+[component_container_mt-2]             esdf_integrator
+[component_container_mt-2]                 max_esdf_distance_m:: 2.000000
+[component_container_mt-2]                 max_tsdf_site_distance_vox:: 1.000000
+[component_container_mt-2]                 tsdf_min_weight:: 0.000100
+[component_container_mt-2]                 occupied_threshold_log_odds:: 0.000000
+[component_container_mt-2]                 esdf_slice_min_height:: -0.100000
+[component_container_mt-2]                 esdf_slice_max_height:: 0.300000
+[component_container_mt-2]                 esdf_slice_height:: 0.000000
+[component_container_mt-2]                 slice_height_above_plane_m:: 0.000000
+[component_container_mt-2]                 slice_height_thickness_m:: 0.100000
+[component_container_mt-2]             mesh_integrator
+[component_container_mt-2]                 min_weight:: 0.000100
+[component_container_mt-2]                 cutoff_distance_vox:: 5.000000
+[component_container_mt-2]                 weld_vertices:: 1
+[component_container_mt-2]             occupancy_decay_integrator
+[component_container_mt-2]                 free_space_decay_log_odds:: 0.200671
+[component_container_mt-2]                 occupied_space_decay_log_odds:: -0.405465
+[component_container_mt-2]                 decay_to_log_odds_:: 0.000000
+[component_container_mt-2]                 decay_integrator
+[component_container_mt-2]                     deallocate_decayed_blocks:: 1
+[component_container_mt-2]             tsdf_decay_integrator
+[component_container_mt-2]                 decay_factor:: 0.950000
+[component_container_mt-2]                 decayed_weight_theshold:: 0.001000
+[component_container_mt-2]                 set_free_distance_on_decayed:: 0
+[component_container_mt-2]                 free_distance_vox:: 4.000000
+[component_container_mt-2]                 decay_integrator
+[component_container_mt-2]                     deallocate_decayed_blocks:: 1
+[component_container_mt-2]             freespace_integrator
+[component_container_mt-2]                 max_tsdf_distance_for_occupancy_m:: 0.150000
+[component_container_mt-2]                 max_unobserved_to_keep_consecutive_occupancy_ms:: 200
+[component_container_mt-2]                 min_duration_since_occupied_for_freespace_ms:: 1000
+[component_container_mt-2]                 min_consecutive_occupancy_duration_for_reset_ms:: 2000
+[component_container_mt-2]                 check_neighborhood:: 1
+[component_container_mt-2]         image_masker
+[component_container_mt-2]             occlusion_threshold_m:: 0.250000
+[component_container_mt-2]         ground_plane_estimator
+[component_container_mt-2]             ground_points_candidates_min_z_m:: -0.100000
+[component_container_mt-2]             ground_points_candidates_max_z_m:: 0.150000
+[component_container_mt-2]             ransac_plane_fitter
+[component_container_mt-2]                 num_ransac_iterations:: 1000
+[component_container_mt-2]                 ransac_distance_threshold_m:: 0.200000
+[component_container_mt-2]             tsdf_zero_crossings_extractor
+[component_container_mt-2]                 min_tsdf_weight:: 0.100000
+[component_container_mt-2]                 max_crossings:: 360000
+[component_container_mt-2] 
+[component_container_mt-2] [INFO] [1771594377.310397300] [nvblox_container]: Load Library: /opt/ros/humble/lib/librealsense2_camera.so
+[component_container_mt-2] [INFO] [1771594377.311675286] [nvblox_node]: Tried to clear map outside of radius but couldn't look up frame: camera0_link
+[INFO] [launch.user]: Starting cuVSLAM with base_frame: camera0_link
+[INFO] [launch.user]: Adding nodes [ /visual_slam_node ] to container nvblox_container.
+[component_container_mt-2] [INFO] [1771594377.443598245] [nvblox_node]: Lookup transform failed for frame camera0_link. Layer pointclouds not published
+[component_container_mt-2] [INFO] [1771594377.494605670] [nvblox_container]: Found class: rclcpp_components::NodeFactoryTemplate<realsense2_camera::RealSenseNodeFactory>
+[component_container_mt-2] [INFO] [1771594377.495889927] [nvblox_container]: Instantiate class: rclcpp_components::NodeFactoryTemplate<realsense2_camera::RealSenseNodeFactory>
+[component_container_mt-2] [INFO] [1771594377.518715620] [camera0.camera]: RealSense ROS v4.56.4
+[component_container_mt-2] [INFO] [1771594377.520045305] [camera0.camera]: Built with LibRealSense v2.56.4
+[component_container_mt-2] [INFO] [1771594377.520521047] [camera0.camera]: Running with LibRealSense v2.56.4
+[INFO] [launch_ros.actions.load_composable_nodes]: Loaded node '/camera0/camera' in container 'nvblox_container'
+[component_container_mt-2] [INFO] [1771594377.525352141] [nvblox_container]: Load Library: /mnt/nova_ssd/workspaces/isaac_ros-dev/src/install/isaac_ros_visual_slam/lib/libvisual_slam_node.so
+[rviz2-1] [INFO] [1771594377.532941042] [rviz2]: Stereo is NOT SUPPORTED
+[rviz2-1] [INFO] [1771594377.534044548] [rviz2]: OpenGl version: 4.6 (GLSL 4.6)
+[component_container_mt-2]  20/02 13:32:57,578 WARNING [281471688370400] (ds-motion-common.cpp:452) No HID info provided, IMU is disabled
+[component_container_mt-2] [INFO] [1771594377.581940824] [camera0.camera]: Device with serial number 317422071600 was found.
+[component_container_mt-2] 
+[component_container_mt-2] [INFO] [1771594377.582095982] [nvblox_container]: Found class: rclcpp_components::NodeFactoryTemplate<nvidia::isaac_ros::visual_slam::VisualSlamNode>
+[component_container_mt-2] [INFO] [1771594377.582126405] [camera0.camera]: Device with physical ID /sys/devices/platform/bus@0/3610000.usb/usb2/2-1/2-1.3/2-1.3:1.0/video4linux/video2 was found.
+[component_container_mt-2] [INFO] [1771594377.582213454] [camera0.camera]: Device with name Intel RealSense D435I was found.
+[component_container_mt-2] [INFO] [1771594377.582568141] [camera0.camera]: Device with port number 2-1.3 was found.
+[component_container_mt-2] [INFO] [1771594377.582594469] [camera0.camera]: Device USB type: 3.2
+[component_container_mt-2] [INFO] [1771594377.582727169] [camera0.camera]: getParameters...
+[component_container_mt-2] [INFO] [1771594377.582927946] [nvblox_container]: Instantiate class: rclcpp_components::NodeFactoryTemplate<nvidia::isaac_ros::visual_slam::VisualSlamNode>
+[component_container_mt-2] [WARN] [1771594377.585088571] [camera0.camera]: For the 'unite_imu_method' param update to take effect, re-enable either gyro or accel stream.
+[component_container_mt-2] [INFO] [1771594377.585154473] [camera0.camera]: JSON file is not provided
+[component_container_mt-2] [INFO] [1771594377.585180610] [camera0.camera]: Device Name: Intel RealSense D435I
+[component_container_mt-2] [INFO] [1771594377.585197853] [camera0.camera]: Device Serial No: 317422071600
+[component_container_mt-2] [INFO] [1771594377.585237459] [camera0.camera]: Device physical port: /sys/devices/platform/bus@0/3610000.usb/usb2/2-1/2-1.3/2-1.3:1.0/video4linux/video2
+[component_container_mt-2] [INFO] [1771594377.585271945] [camera0.camera]: Device FW version: 5.15.1.55
+[component_container_mt-2] [INFO] [1771594377.585288837] [camera0.camera]: Device Product ID: 0x0B3A
+[component_container_mt-2] [INFO] [1771594377.585321692] [camera0.camera]: Sync Mode: Off
+[rviz2-1] [INFO] [1771594377.591150849] [rviz2]: Stereo is NOT SUPPORTED
+[component_container_mt-2] [INFO] [1771594377.599829628] [visual_slam_node.ManagedNitrosSubscriber]: Starting Managed Nitros Subscriber
+[component_container_mt-2] [INFO] [1771594377.602261251] [visual_slam_node.ManagedNitrosSubscriber]: Starting Managed Nitros Subscriber
+[component_container_mt-2] [INFO] [1771594377.619498104] [visual_slam_node]: cuVSLAM version: 12.6
+[component_container_mt-2] [INFO] [1771594377.658181124] [visual_slam_node]: Time taken by CUVSLAM_WarmUpGPU(): 0.038570
+[INFO] [launch_ros.actions.load_composable_nodes]: Loaded node '/visual_slam_node' in container 'nvblox_container'
+[component_container_mt-2] [ERROR] [1771594377.661224420] [nvblox_container]: Could not find requested resource in ament index
+[ERROR] [launch_ros.actions.load_composable_nodes]: Failed to load node 'realsense_splitter_node' of type 'nvblox::RealsenseSplitterNode' in container 'nvblox_container': Could not find requested resource in ament index
+[component_container_mt-2]  20/02 13:32:57,761 ERROR [281471688370400] (rs.cpp:256) [rs2_set_option( options:0xffff3c027ad0, option:Emitter On Off, value:1 ) Invalid Value] hwmon command 0x7b( 17 0 0 0 ) failed (response -9= No expected user action)
+[component_container_mt-2] [WARN] [1771594377.762126455] [camera0.camera]: Failed to set value to sensor: depth_module.emitter_on_off = 0[0, 1]
+[component_container_mt-2] hwmon command 0x7b( 17 0 0 0 ) failed (response -9= No expected user action)
+[component_container_mt-2] [WARN] [1771594377.787062067] [camera0.camera]: re-enable the stream for the change to take effect.
+[component_container_mt-2] [WARN] [1771594377.787895823] [camera0.camera]: re-enable the stream for the change to take effect.
+[component_container_mt-2] [WARN] [1771594377.808194752] [camera0.camera]: Could not set param: rgb_camera.power_line_frequency with 3 Range: [0, 2]: parameter 'rgb_camera.power_line_frequency' could not be set: Parameter {rgb_camera.power_line_frequency} doesn't comply with integer range.
+[component_container_mt-2] [WARN] [1771594377.822196362] [camera0.camera]: re-enable the stream for the change to take effect.
+[component_container_mt-2] [WARN] [1771594377.822573283] [camera0.camera]: re-enable the stream for the change to take effect.
+[component_container_mt-2] [INFO] [1771594377.845287455] [camera0.camera]: Stopping Sensor: Depth Module
+[component_container_mt-2] [INFO] [1771594377.845472652] [camera0.camera]: Stopping Sensor: RGB Camera
+[component_container_mt-2] [INFO] [1771594377.862251199] [camera0.camera]: Starting Sensor: Depth Module
+[component_container_mt-2] [INFO] [1771594377.888787045] [camera0.camera]: Open profile: stream_type: Infra(1), Format: Y8, Width: 848, Height: 480, FPS: 30
+[component_container_mt-2] [INFO] [1771594377.888943579] [camera0.camera]: Open profile: stream_type: Infra(2), Format: Y8, Width: 848, Height: 480, FPS: 30
+[component_container_mt-2] [INFO] [1771594377.888971891] [camera0.camera]: Open profile: stream_type: Depth(0), Format: Z16, Width: 848, Height: 480, FPS: 30
+[component_container_mt-2] [INFO] [1771594377.895394390] [camera0.camera]: Starting Sensor: RGB Camera
+[rviz2-1] [INFO] [1771594377.918180990] [rviz2]: Stereo is NOT SUPPORTED
+[component_container_mt-2] [INFO] [1771594377.936407973] [camera0.camera]: Open profile: stream_type: Color(0), Format: RGB8, Width: 1280, Height: 720, FPS: 30
+[rviz2-1] [INFO] [1771594377.937364160] [rviz2]: Stereo is NOT SUPPORTED
+[component_container_mt-2] [INFO] [1771594377.946283608] [camera0.camera]: RealSense Node Is Up!
+[component_container_mt-2] [INFO] [1771594378.317596969] [nvblox_node]: Tried to clear map outside of radius but couldn't look up frame: camera0_link
+[component_container_mt-2] [INFO] [1771594378.477407693] [nvblox_node]: Lookup transform failed for frame camera0_link. Layer pointclouds not published
+[component_container_mt-2] [INFO] [1771594379.327346950] [nvblox_node]: Tried to clear map outside of radius but couldn't look up frame: camera0_link
+[component_container_mt-2] [INFO] [1771594379.497246456] [nvblox_node]: Lookup transform failed for frame camera0_link. Layer pointclouds not published
+[component_container_mt-2] [INFO] [1771594380.338336887] [nvblox_node]: Tried to clear map outside of radius but couldn't look up frame: camera0_link
+[component_container_mt-2] [INFO] [1771594380.536929900] [nvblox_node]: Lookup transform failed for frame camera0_link. Layer pointclouds not published
+[component_container_mt-2] [INFO] [1771594381.346813647] [nvblox_node]: Tried to clear map outside of radius but couldn't look up frame: camera0_link
+[component_container_mt-2] [INFO] [1771594381.577005542] [nvblox_node]: Lookup transform failed for frame camera0_link. Layer pointclouds not published
+[component_container_mt-2] [INFO] [1771594382.356574082] [nvblox_node]: Tried to clear map outside of radius but couldn't look up frame: camera0_link
+[component_container_mt-2] [INFO] [1771594382.597110828] [nvblox_node]: Lookup transform failed for frame camera0_link. Layer pointclouds not published
+[component_container_mt-2] [INFO] [1771594383.366283721] [nvblox_node]: Tried to clear map outside of radius but couldn't look up frame: camera0_link
+[component_container_mt-2] [INFO] [1771594383.646638458] [nvblox_node]: Lookup transform failed for frame camera0_link. Layer pointclouds not published
+[component_container_mt-2] [INFO] [1771594384.375760479] [nvblox_node]: Tried to clear map outside of radius but couldn't look up frame: camera0_link
+[component_container_mt-2] [INFO] [1771594384.685686985] [nvblox_node]: Lookup transform failed for frame camera0_link. Layer pointclouds not published
+[component_container_mt-2] [INFO] [1771594385.385526140] [nvblox_node]: Tried to clear map outside of radius but couldn't look up frame: camera0_link
+[component_container_mt-2] [INFO] [1771594385.715415474] [nvblox_node]: Lookup transform failed for frame camera0_link. Layer pointclouds not published
+[component_container_mt-2] [INFO] [1771594386.395699880] [nvblox_node]: Tried to clear map outside of radius but couldn't look up frame: camera0_link
+[component_container_mt-2] [INFO] [1771594386.725684053] [nvblox_node]: Lookup transform failed for frame camera0_link. Layer pointclouds not published
+[component_container_mt-2] [INFO] [1771594387.405018955] [nvblox_node]: Tried to clear map outside of radius but couldn't look up frame: camera0_link
+[component_container_mt-2] [INFO] [1771594387.765032912] [nvblox_node]: Lookup transform failed for frame camera0_link. Layer pointclouds not published
+[rviz2-1] [INFO] [1771594388.022596731] [rviz]: Message Filter dropping message: frame 'odom' at time 1771594386.825 for reason 'discarding message because the queue is full'
+[component_container_mt-2] [INFO] [1771594388.414682304] [nvblox_node]: Tried to clear map outside of radius but couldn't look up frame: camera0_link
+[component_container_mt-2] [INFO] [1771594388.804721505] [nvblox_node]: Lookup transform failed for frame camera0_link. Layer pointclouds not published
+[component_container_mt-2] [INFO] [1771594389.425218073] [nvblox_node]: Tried to clear map outside of radius but couldn't look up frame: camera0_link
+[component_container_mt-2] [INFO] [1771594389.834219094] [nvblox_node]: Lookup transform failed for frame camera0_link. Layer pointclouds not published
+[component_container_mt-2] [INFO] [1771594390.434209543] [nvblox_node]: Tried to clear map outside of radius but couldn't look up frame: camera0_link
+[rviz2-1] [INFO] [1771594390.550657540] [rviz]: Message Filter dropping message: frame 'odom' at time 1771594389.374 for reason 'discarding message because the queue is full'
+[component_container_mt-2] [INFO] [1771594390.864742239] [nvblox_node]: Lookup transform failed for frame camera0_link. Layer pointclouds not published
+[component_container_mt-2] [INFO] [1771594391.444077223] [nvblox_node]: Tried to clear map outside of radius but couldn't look up frame: camera0_link
+[component_container_mt-2] [INFO] [1771594391.913677384] [nvblox_node]: Lookup transform failed for frame camera0_link. Layer pointclouds not published
+[component_container_mt-2] [INFO] [1771594392.453518897] [nvblox_node]: Tried to clear map outside of radius but couldn't look up frame: camera0_link
+[component_container_mt-2] [INFO] [1771594392.953412830] [nvblox_node]: Lookup transform failed for frame camera0_link. Layer pointclouds not published
+[rviz2-1] [INFO] [1771594393.110007727] [rviz]: Message Filter dropping message: frame 'odom' at time 1771594391.934 for reason 'discarding message because the queue is full'
+[component_container_mt-2] [INFO] [1771594393.463820033] [nvblox_node]: Tried to clear map outside of radius but couldn't look up frame: camera0_link
+[component_container_mt-2] [INFO] [1771594393.993152116] [nvblox_node]: Lookup transform failed for frame camera0_link. Layer pointclouds not published
+[component_container_mt-2] [INFO] [1771594394.474928047] [nvblox_node]: Tried to clear map outside of radius but couldn't look up frame: camera0_link
+[component_container_mt-2] [INFO] [1771594395.013673859] [nvblox_node]: Lookup transform failed for frame camera0_link. Layer pointclouds not published
+[component_container_mt-2] [INFO] [1771594395.483087207] [nvblox_node]: Tried to clear map outside of radius but couldn't look up frame: camera0_link
+[rviz2-1] [INFO] [1771594395.670570475] [rviz]: Message Filter dropping message: frame 'odom' at time 1771594394.483 for reason 'discarding message because the queue is full'
+[component_container_mt-2] [INFO] [1771594396.052497805] [nvblox_node]: Lookup transform failed for frame camera0_link. Layer pointclouds not published
+[component_container_mt-2] [INFO] [1771594396.492598352] [nvblox_node]: Tried to clear map outside of radius but couldn't look up frame: camera0_link
+[component_container_mt-2] [INFO] [1771594397.092353324] [nvblox_node]: Lookup transform failed for frame camera0_link. Layer pointclouds not published
+[component_container_mt-2] [INFO] [1771594397.507055542] [nvblox_node]: Tried to clear map outside of radius but couldn't look up frame: camera0_link
+[component_container_mt-2] [INFO] [1771594398.122492951] [nvblox_node]: Lookup transform failed for frame camera0_link. Layer pointclouds not published
+[rviz2-1] [INFO] [1771594398.262298804] [rviz]: Message Filter dropping message: frame 'odom' at time 1771594397.068 for reason 'discarding message because the queue is full'
+[component_container_mt-2] [INFO] [1771594398.511797216] [nvblox_node]: Tried to clear map outside of radius but couldn't look up frame: camera0_link
+[component_container_mt-2] [INFO] [1771594399.171760429] [nvblox_node]: Lookup transform failed for frame camera0_link. Layer pointclouds not published
+[component_container_mt-2] [INFO] [1771594399.511811607] [nvblox_node]: Tried to clear map outside of radius but couldn't look up frame: camera0_link
+[component_container_mt-2] [INFO] [1771594400.204385557] [nvblox_node]: Lookup transform failed for frame camera0_link. Layer pointclouds not published
+[component_container_mt-2] [INFO] [1771594400.521265502] [nvblox_node]: Tried to clear map outside of radius but couldn't look up frame: camera0_link
+[rviz2-1] [INFO] [1771594400.822070095] [rviz]: Message Filter dropping message: frame 'odom' at time 1771594399.612 for reason 'discarding message because the queue is full'
+[component_container_mt-2] [INFO] [1771594401.234673303] [nvblox_node]: Lookup transform failed for frame camera0_link. Layer pointclouds not published
+[component_container_mt-2] [INFO] [1771594401.531314064] [nvblox_node]: Tried to clear map outside of radius but couldn't look up frame: camera0_link
+[component_container_mt-2] [INFO] [1771594402.271903807] [nvblox_node]: Lookup transform failed for frame camera0_link. Layer pointclouds not published
+[component_container_mt-2] [INFO] [1771594402.541216709] [nvblox_node]: Tried to clear map outside of radius but couldn't look up frame: camera0_link
+[component_container_mt-2] [INFO] [1771594403.310931085] [nvblox_node]: Lookup transform failed for frame camera0_link. Layer pointclouds not published
+[rviz2-1] [INFO] [1771594403.388087773] [rviz]: Message Filter dropping message: frame 'odom' at time 1771594402.205 for reason 'discarding message because the queue is full'
+[component_container_mt-2] [INFO] [1771594403.550379951] [nvblox_node]: Tried to clear map outside of radius but couldn't look up frame: camera0_link
+[component_container_mt-2] [INFO] [1771594404.340439221] [nvblox_node]: Lookup transform failed for frame camera0_link. Layer pointclouds not published
+[component_container_mt-2] [INFO] [1771594404.560403915] [nvblox_node]: Tried to clear map outside of radius but couldn't look up frame: camera0_link
+[component_container_mt-2] [INFO] [1771594405.379842752] [nvblox_node]: Lookup transform failed for frame camera0_link. Layer pointclouds not published
+[component_container_mt-2] [INFO] [1771594405.570716003] [nvblox_node]: Tried to clear map outside of radius but couldn't look up frame: camera0_link
+[rviz2-1] [INFO] [1771594405.910675719] [rviz]: Message Filter dropping message: frame 'odom' at time 1771594404.720 for reason 'discarding message because the queue is full'
+[component_container_mt-2] [INFO] [1771594406.403056726] [nvblox_node]: Lookup transform failed for frame camera0_link. Layer pointclouds not published
+[component_container_mt-2] [INFO] [1771594406.578450385] [nvblox_node]: Tried to clear map outside of radius but couldn't look up frame: camera0_link
+[component_container_mt-2] [INFO] [1771594407.440840247] [nvblox_node]: Lookup transform failed for frame camera0_link. Layer pointclouds not published
+[component_container_mt-2] [INFO] [1771594407.579421912] [nvblox_node]: Tried to clear map outside of radius but couldn't look up frame: camera0_link
+[rviz2-1] [INFO] [1771594408.438311625] [rviz]: Message Filter dropping message: frame 'odom' at time 1771594407.249 for reason 'discarding message because the queue is full'
+[component_container_mt-2] [INFO] [1771594408.473779863] [nvblox_node]: Lookup transform failed for frame camera0_link. Layer pointclouds not published
+[component_container_mt-2] [INFO] [1771594408.589034026] [nvblox_node]: Tried to clear map outside of radius but couldn't look up frame: camera0_link
+[component_container_mt-2] [INFO] [1771594409.508823853] [nvblox_node]: Lookup transform failed for frame camera0_link. Layer pointclouds not published
+[component_container_mt-2] [INFO] [1771594409.598770527] [nvblox_node]: Tried to clear map outside of radius but couldn't look up frame: camera0_link
+[component_container_mt-2] [INFO] [1771594410.540156333] [nvblox_node]: Lookup transform failed for frame camera0_link. Layer pointclouds not published
+[component_container_mt-2] [INFO] [1771594410.609053955] [nvblox_node]: Tried to clear map outside of radius but couldn't look up frame: camera0_link
+[rviz2-1] [INFO] [1771594410.966777117] [rviz]: Message Filter dropping message: frame 'odom' at time 1771594409.789 for reason 'discarding message because the queue is full'
+[component_container_mt-2] [INFO] [1771594411.558158497] [nvblox_node]: Lookup transform failed for frame camera0_link. Layer pointclouds not published
+[component_container_mt-2] [INFO] [1771594411.613598549] [nvblox_node]: Tried to clear map outside of radius but couldn't look up frame: camera0_link
+[component_container_mt-2] [INFO] [1771594412.578403134] [nvblox_node]: Lookup transform failed for frame camera0_link. Layer pointclouds not published
+[component_container_mt-2] [INFO] [1771594412.617936415] [nvblox_node]: Tried to clear map outside of radius but couldn't look up frame: camera0_link
+[rviz2-1] [INFO] [1771594413.527086280] [rviz]: Message Filter dropping message: frame 'odom' at time 1771594412.368 for reason 'discarding message because the queue is full'
+[component_container_mt-2] [INFO] [1771594413.597747990] [nvblox_node]: Lookup transform failed for frame camera0_link. Layer pointclouds not published
+[component_container_mt-2] [INFO] [1771594413.627612222] [nvblox_node]: Tried to clear map outside of radius but couldn't look up frame: camera0_link
+[component_container_mt-2] [INFO] [1771594414.627180857] [nvblox_node]: Lookup transform failed for frame camera0_link. Layer pointclouds not published
+[component_container_mt-2] [INFO] [1771594414.637458288] [nvblox_node]: Tried to clear map outside of radius but couldn't look up frame: camera0_link
+[component_container_mt-2] [INFO] [1771594415.647309096] [nvblox_node]: Tried to clear map outside of radius but couldn't look up frame: camera0_link
+[component_container_mt-2] [INFO] [1771594415.648056751] [nvblox_node]: Lookup transform failed for frame camera0_link. Layer pointclouds not published
+[rviz2-1] [INFO] [1771594416.119027193] [rviz]: Message Filter dropping message: frame 'odom' at time 1771594414.910 for reason 'discarding message because the queue is full'
+[component_container_mt-2] [INFO] [1771594416.656843275] [nvblox_node]: Tried to clear map outside of radius but couldn't look up frame: camera0_link
+[component_container_mt-2] [INFO] [1771594416.686699672] [nvblox_node]: Lookup transform failed for frame camera0_link. Layer pointclouds not published
+[component_container_mt-2] [INFO] [1771594417.666310902] [nvblox_node]: Tried to clear map outside of radius but couldn't look up frame: camera0_link
+[component_container_mt-2] [INFO] [1771594417.736292140] [nvblox_node]: Lookup transform failed for frame camera0_link. Layer pointclouds not published
+[component_container_mt-2] [INFO] [1771594418.676469073] [nvblox_node]: Tried to clear map outside of radius but couldn't look up frame: camera0_link
+[rviz2-1] [INFO] [1771594418.694684335] [rviz]: Message Filter dropping message: frame 'odom' at time 1771594417.487 for reason 'discarding message because the queue is full'
+[component_container_mt-2] [INFO] [1771594418.765993099] [nvblox_node]: Lookup transform failed for frame camera0_link. Layer pointclouds not published
+[component_container_mt-2] [INFO] [1771594419.685732878] [nvblox_node]: Tried to clear map outside of radius but couldn't look up frame: camera0_link
+[component_container_mt-2] [INFO] [1771594419.795677952] [nvblox_node]: Lookup transform failed for frame camera0_link. Layer pointclouds not published
+^Z
+[3]+  Stopped                 ros2 launch nvblox_examples_bringup realsense_example.launch.py
+duckling@duckling:/mnt/nova_ssd/workspaces/isaac_ros-dev/src$ 
+

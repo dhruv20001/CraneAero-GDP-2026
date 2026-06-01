@@ -1,0 +1,215 @@
+# ROS 2 Topic Sharing Between PC and Jetson with Zenoh
+
+This setup shares **all ROS 2 topics** between a **PC** and a **Jetson** over Wi-Fi using **Zenoh**.
+
+## Network Setup
+
+- Jetson hotspot IP: `10.42.0.1`
+- PC Wi-Fi IP: `10.42.0.100`
+
+The PC also had an Ethernet connection, which likely caused standard DDS/ROS 2 networking issues.  
+Zenoh was used to force communication through the correct Wi-Fi path.
+
+---
+run the connection node(on the jetson):
+  ros2 run rmw_zenoh_cpp rmw_zenohd
+
+
+
+## Install
+
+Run on **both devices**:
+
+```bash
+sudo apt update
+sudo apt install ros-humble-rmw-zenoh-cpp
+````
+
+---
+
+## Jetson Configuration
+
+### `~/.bashrc`
+
+```bash
+source /opt/ros/humble/setup.bash
+export ROS_DOMAIN_ID=42
+export RMW_IMPLEMENTATION=rmw_zenoh_cpp
+export ZENOH_ROUTER_CONFIG_URI=$HOME/.zenoh/router.json5
+export ZENOH_SESSION_CONFIG_URI=$HOME/.zenoh/session_jetson.json5
+```
+
+### `~/.zenoh/router.json5`
+
+```json5
+{
+  listen: {
+    endpoints: [
+      "tcp/10.42.0.1:7447"
+    ]
+  }
+}
+```
+
+### `~/.zenoh/session_jetson.json5`
+
+```json5
+{
+  mode: "client",
+  connect: {
+    endpoints: [
+      "tcp/10.42.0.1:7447"
+    ]
+  }
+}
+```
+
+---
+
+## PC Configuration
+
+### `~/.bashrc`
+
+```bash
+source /opt/ros/humble/setup.bash
+export ROS_DOMAIN_ID=42
+export RMW_IMPLEMENTATION=rmw_zenoh_cpp
+export ZENOH_SESSION_CONFIG_URI=$HOME/.zenoh/session_pc.json5
+```
+
+### `~/.zenoh/session_pc.json5`
+
+```json5
+{
+  mode: "client",
+  connect: {
+    endpoints: [
+      "tcp/10.42.0.1:7447#bind=10.42.0.100:0"
+    ]
+  }
+}
+```
+
+`#bind=10.42.0.100:0` forces the PC to use its Wi-Fi IP instead of the Ethernet interface.
+
+---
+
+## Launch
+
+### 1. On the Jetson, start the Zenoh router
+
+```bash
+source ~/.bashrc
+ros2 run rmw_zenoh_cpp rmw_zenohd
+```
+
+### 2. On both devices, stop old ROS 2 daemons if needed
+
+```bash
+pkill -9 -f ros
+ros2 daemon stop
+```
+
+### 3. Launch ROS 2 nodes normally
+
+Example test:
+
+#### On the PC
+
+```bash
+source ~/.bashrc
+ros2 run demo_nodes_cpp talker
+```
+
+#### On the Jetson
+
+```bash
+source ~/.bashrc
+ros2 run demo_nodes_cpp listener
+```
+
+---
+
+## Quick Checks
+
+### Verify IP route on the PC
+
+```bash
+ip route get 10.42.0.1
+```
+
+Expected:
+
+* source IP = `10.42.0.100`
+* route goes through Wi-Fi, not Ethernet
+
+### Check topics
+
+```bash
+ros2 topic list
+```
+
+### Echo a topic
+
+```bash
+ros2 topic echo /chatter
+```
+
+---
+
+## Commands Used
+
+```bash
+sudo apt install ros-humble-rmw-zenoh-cpp
+```
+
+Installs Zenoh support for ROS 2 Humble.
+
+```bash
+source ~/.bashrc
+```
+
+Reloads the environment variables.
+
+```bash
+ros2 run rmw_zenoh_cpp rmw_zenohd
+```
+
+Starts the Zenoh router on the Jetson.
+
+```bash
+pkill -9 -f ros
+ros2 daemon stop
+```
+
+Stops old ROS 2 daemons/processes after changing middleware.
+
+```bash
+ip route get 10.42.0.1
+```
+
+Checks which interface/IP the PC uses to reach the Jetson.
+
+```bash
+ros2 run demo_nodes_cpp talker
+```
+
+Starts a test publisher.
+
+```bash
+ros2 run demo_nodes_cpp listener
+```
+
+Starts a test subscriber.
+
+```bash
+ros2 topic list
+```
+
+Lists visible ROS 2 topics.
+
+```bash
+ros2 topic echo /topic_name
+```
+
+Reads a topic.

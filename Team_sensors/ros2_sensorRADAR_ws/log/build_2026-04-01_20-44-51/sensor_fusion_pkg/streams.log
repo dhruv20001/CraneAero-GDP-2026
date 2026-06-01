@@ -1,0 +1,24 @@
+[0.394s] Invoking command in '/home/dhruv/ros2_sensorRADAR_ws/build/sensor_fusion_pkg': PYTHONPATH=/home/dhruv/ros2_sensorRADAR_ws/build/sensor_fusion_pkg/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/dhruv/ros2_sensorRADAR_ws/install/sensor_fusion_pkg/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/dhruv/ros2_sensorRADAR_ws/build/sensor_fusion_pkg/build --no-deps symlink_data
+[0.558s] running develop
+[0.671s] running egg_info
+[0.671s] creating sensor_fusion_pkg.egg-info
+[0.671s] writing sensor_fusion_pkg.egg-info/PKG-INFO
+[0.671s] writing dependency_links to sensor_fusion_pkg.egg-info/dependency_links.txt
+[0.671s] writing entry points to sensor_fusion_pkg.egg-info/entry_points.txt
+[0.671s] writing requirements to sensor_fusion_pkg.egg-info/requires.txt
+[0.671s] writing top-level names to sensor_fusion_pkg.egg-info/top_level.txt
+[0.671s] writing manifest file 'sensor_fusion_pkg.egg-info/SOURCES.txt'
+[0.673s] reading manifest file 'sensor_fusion_pkg.egg-info/SOURCES.txt'
+[0.673s] writing manifest file 'sensor_fusion_pkg.egg-info/SOURCES.txt'
+[0.674s] running build_ext
+[0.674s] Creating /home/dhruv/ros2_sensorRADAR_ws/install/sensor_fusion_pkg/lib/python3.10/site-packages/sensor-fusion-pkg.egg-link (link to .)
+[0.675s] Installing fusion script to /home/dhruv/ros2_sensorRADAR_ws/install/sensor_fusion_pkg/lib/sensor_fusion_pkg
+[0.675s] 
+[0.675s] Installed /home/dhruv/ros2_sensorRADAR_ws/build/sensor_fusion_pkg
+[0.675s] running symlink_data
+[0.675s] creating /home/dhruv/ros2_sensorRADAR_ws/install/sensor_fusion_pkg/share/ament_index
+[0.675s] creating /home/dhruv/ros2_sensorRADAR_ws/install/sensor_fusion_pkg/share/ament_index/resource_index
+[0.675s] creating /home/dhruv/ros2_sensorRADAR_ws/install/sensor_fusion_pkg/share/ament_index/resource_index/packages
+[0.675s] symbolically linking /home/dhruv/ros2_sensorRADAR_ws/build/sensor_fusion_pkg/resource/sensor_fusion_pkg -> /home/dhruv/ros2_sensorRADAR_ws/install/sensor_fusion_pkg/share/ament_index/resource_index/packages
+[0.675s] symbolically linking /home/dhruv/ros2_sensorRADAR_ws/build/sensor_fusion_pkg/package.xml -> /home/dhruv/ros2_sensorRADAR_ws/install/sensor_fusion_pkg/share/sensor_fusion_pkg
+[0.696s] Invoked command in '/home/dhruv/ros2_sensorRADAR_ws/build/sensor_fusion_pkg' returned '0': PYTHONPATH=/home/dhruv/ros2_sensorRADAR_ws/build/sensor_fusion_pkg/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/dhruv/ros2_sensorRADAR_ws/install/sensor_fusion_pkg/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/dhruv/ros2_sensorRADAR_ws/build/sensor_fusion_pkg/build --no-deps symlink_data

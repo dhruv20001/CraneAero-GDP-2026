@@ -1,0 +1,39 @@
+running egg_info
+writing ../../build/sensor_fusion_pkg/sensor_fusion_pkg.egg-info/PKG-INFO
+writing dependency_links to ../../build/sensor_fusion_pkg/sensor_fusion_pkg.egg-info/dependency_links.txt
+writing entry points to ../../build/sensor_fusion_pkg/sensor_fusion_pkg.egg-info/entry_points.txt
+writing requirements to ../../build/sensor_fusion_pkg/sensor_fusion_pkg.egg-info/requires.txt
+writing top-level names to ../../build/sensor_fusion_pkg/sensor_fusion_pkg.egg-info/top_level.txt
+reading manifest file '../../build/sensor_fusion_pkg/sensor_fusion_pkg.egg-info/SOURCES.txt'
+writing manifest file '../../build/sensor_fusion_pkg/sensor_fusion_pkg.egg-info/SOURCES.txt'
+running build
+running build_py
+running install
+running install_lib
+creating /home/dhruv/ros2_sensor_ws/install/sensor_fusion_pkg/lib/python3.10/site-packages/sensor_fusion_pkg
+copying /home/dhruv/ros2_sensor_ws/build/sensor_fusion_pkg/build/lib/sensor_fusion_pkg/fusion.py -> /home/dhruv/ros2_sensor_ws/install/sensor_fusion_pkg/lib/python3.10/site-packages/sensor_fusion_pkg
+copying /home/dhruv/ros2_sensor_ws/build/sensor_fusion_pkg/build/lib/sensor_fusion_pkg/__init__.py -> /home/dhruv/ros2_sensor_ws/install/sensor_fusion_pkg/lib/python3.10/site-packages/sensor_fusion_pkg
+copying /home/dhruv/ros2_sensor_ws/build/sensor_fusion_pkg/build/lib/sensor_fusion_pkg/time_sync_monitor.py -> /home/dhruv/ros2_sensor_ws/install/sensor_fusion_pkg/lib/python3.10/site-packages/sensor_fusion_pkg
+copying /home/dhruv/ros2_sensor_ws/build/sensor_fusion_pkg/build/lib/sensor_fusion_pkg/lidar_to_pointcloud.py -> /home/dhruv/ros2_sensor_ws/install/sensor_fusion_pkg/lib/python3.10/site-packages/sensor_fusion_pkg
+copying /home/dhruv/ros2_sensor_ws/build/sensor_fusion_pkg/build/lib/sensor_fusion_pkg/voxel_filter.py -> /home/dhruv/ros2_sensor_ws/install/sensor_fusion_pkg/lib/python3.10/site-packages/sensor_fusion_pkg
+byte-compiling /home/dhruv/ros2_sensor_ws/install/sensor_fusion_pkg/lib/python3.10/site-packages/sensor_fusion_pkg/fusion.py to fusion.cpython-310.pyc
+byte-compiling /home/dhruv/ros2_sensor_ws/install/sensor_fusion_pkg/lib/python3.10/site-packages/sensor_fusion_pkg/__init__.py to __init__.cpython-310.pyc
+byte-compiling /home/dhruv/ros2_sensor_ws/install/sensor_fusion_pkg/lib/python3.10/site-packages/sensor_fusion_pkg/time_sync_monitor.py to time_sync_monitor.cpython-310.pyc
+byte-compiling /home/dhruv/ros2_sensor_ws/install/sensor_fusion_pkg/lib/python3.10/site-packages/sensor_fusion_pkg/lidar_to_pointcloud.py to lidar_to_pointcloud.cpython-310.pyc
+byte-compiling /home/dhruv/ros2_sensor_ws/install/sensor_fusion_pkg/lib/python3.10/site-packages/sensor_fusion_pkg/voxel_filter.py to voxel_filter.cpython-310.pyc
+running install_data
+creating /home/dhruv/ros2_sensor_ws/install/sensor_fusion_pkg/share/ament_index
+creating /home/dhruv/ros2_sensor_ws/install/sensor_fusion_pkg/share/ament_index/resource_index
+creating /home/dhruv/ros2_sensor_ws/install/sensor_fusion_pkg/share/ament_index/resource_index/packages
+copying resource/sensor_fusion_pkg -> /home/dhruv/ros2_sensor_ws/install/sensor_fusion_pkg/share/ament_index/resource_index/packages
+copying package.xml -> /home/dhruv/ros2_sensor_ws/install/sensor_fusion_pkg/share/sensor_fusion_pkg
+creating /home/dhruv/ros2_sensor_ws/install/sensor_fusion_pkg/share/sensor_fusion_pkg/launch
+copying launch/complete_pipeline.launch.py -> /home/dhruv/ros2_sensor_ws/install/sensor_fusion_pkg/share/sensor_fusion_pkg/launch
+running install_egg_info
+Copying ../../build/sensor_fusion_pkg/sensor_fusion_pkg.egg-info to /home/dhruv/ros2_sensor_ws/install/sensor_fusion_pkg/lib/python3.10/site-packages/sensor_fusion_pkg-0.0.0-py3.10.egg-info
+running install_scripts
+Installing fusion script to /home/dhruv/ros2_sensor_ws/install/sensor_fusion_pkg/lib/sensor_fusion_pkg
+Installing lidar_to_pointcloud script to /home/dhruv/ros2_sensor_ws/install/sensor_fusion_pkg/lib/sensor_fusion_pkg
+Installing time_sync_monitor script to /home/dhruv/ros2_sensor_ws/install/sensor_fusion_pkg/lib/sensor_fusion_pkg
+Installing voxel_filter script to /home/dhruv/ros2_sensor_ws/install/sensor_fusion_pkg/lib/sensor_fusion_pkg
+writing list of installed files to '/home/dhruv/ros2_sensor_ws/build/sensor_fusion_pkg/install.log'

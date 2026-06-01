@@ -1,0 +1,111 @@
+import rclpy
+from rclpy.node import Node
+from sensor_msgs.msg import LaserScan
+from geometry_msgs.msg import Twist, TwistStamped
+import math
+
+
+class CollisionShield(Node):
+
+    def __init__(self):
+        super().__init__('collision_shield')
+
+        self.safety_radius = 1.5      # meters
+        self.stop_radius = 0.5       # emergency stop
+
+        self.scan = None
+        self.desired_cmd = Twist()
+
+        # Subscribe to LiDAR
+        self.create_subscription(
+            LaserScan,
+            '/world/goaero_mission3/model/iris_depth_lidar/model/lidar/link/link/sensor/lidar/scan',
+            self.scan_callback,
+            10)
+
+        # Subscribe to desired velocity
+        self.create_subscription(
+            Twist,
+            '/desired_cmd_vel',
+            self.cmd_callback,
+            10)
+
+        #Publisher
+        self.pub = self.create_publisher(
+            TwistStamped,
+            '/mavros/setpoint_velocity/cmd_vel',
+            10)
+
+        self.timer = self.create_timer(0.05, self.control_loop)
+
+    def scan_callback(self, msg):
+        self.scan = msg
+
+    def cmd_callback(self, msg):
+        self.desired_cmd = msg
+
+    def get_forward_min_distance(self):
+        if self.scan is None:
+            return None
+
+        ranges = self.scan.ranges
+        angle_min = self.scan.angle_min
+        angle_increment = self.scan.angle_increment
+
+        forward_distances = []
+
+        for i, r in enumerate(ranges):
+            angle = angle_min + i * angle_increment
+
+            # Only check ±30 degrees forward
+            if abs(angle) < math.radians(30):
+                if not math.isinf(r) and not math.isnan(r):
+                    forward_distances.append(r)
+
+        if len(forward_distances) == 0:
+            return None
+
+        return min(forward_distances)
+
+    def control_loop(self):
+
+        if self.scan is None:
+            return
+
+        min_dist = self.get_forward_min_distance()
+        if min_dist is None:
+            return
+
+        safe_cmd = Twist()
+        safe_cmd.linear.x = self.desired_cmd.linear.x
+        safe_cmd.linear.y = self.desired_cmd.linear.y
+        safe_cmd.linear.z = self.desired_cmd.linear.z
+        safe_cmd.angular.z = self.desired_cmd.angular.z
+
+        if min_dist < self.stop_radius:
+            self.get_logger().warn("EMERGENCY STOP")
+            safe_cmd.linear.x = 0.0
+            safe_cmd.linear.y = 0.0
+
+        elif min_dist < self.safety_radius:
+            scale = min_dist / self.safety_radius
+            self.get_logger().info(f"Scaling velocity: {scale:.2f}")
+            safe_cmd.linear.x *= scale
+            safe_cmd.linear.y *= scale
+
+        stamped = TwistStamped()
+        stamped.header.stamp = self.get_clock().now().to_msg()
+        stamped.twist = cmd
+        self.pub.publish(stamped)
+
+
+def main(args=None):
+    rclpy.init(args=args)
+    node = CollisionShield()
+    rclpy.spin(node)
+    node.destroy_node()
+    rclpy.shutdown()
+
+
+if __name__ == '__main__':
+    main()

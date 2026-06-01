@@ -1,0 +1,113 @@
+import rclpy
+from rclpy.node import Node
+from sensor_msgs.msg import PointCloud2
+from geometry_msgs.msg import Twist, TwistStamped
+import sensor_msgs_py.point_cloud2 as pc2
+import math
+
+
+class CollisionShield3D(Node):
+
+    def __init__(self):
+        super().__init__('collision_shield_3d')
+
+        self.safety_radius = 2.0
+        self.stop_radius = 0.7
+
+        self.cloud = None
+        self.desired_cmd = Twist()
+
+        # Subscribe to point cloud
+        self.create_subscription(
+            PointCloud2,
+            '/camera/depth/points',   # adjust to your topic
+            self.cloud_callback,
+            10)
+
+        # Subscribe to desired velocity
+        self.create_subscription(
+            Twist,
+            '/desired_cmd_vel',
+            self.cmd_callback,
+            10)
+
+        self.pub = self.create_publisher(
+            TwistStamped,
+            '/mavros/setpoint_velocity/cmd_vel',
+            10)
+
+        self.timer = self.create_timer(0.05, self.control_loop)
+
+    def cloud_callback(self, msg):
+        self.cloud = msg
+
+    def cmd_callback(self, msg):
+        self.desired_cmd = msg
+
+    def get_forward_min_distance(self):
+        if self.cloud is None:
+            return None
+
+        min_dist = float('inf')
+
+        for point in pc2.read_points(self.cloud,
+                                     field_names=("x", "y", "z"),
+                                     skip_nans=True):
+
+            x, y, z = point
+
+            # Forward volume filter
+            if x > 0 and abs(y) < 1.5 and abs(z) < 1.0:
+
+                dist = math.sqrt(x*x + y*y + z*z)
+
+                if dist < min_dist:
+                    min_dist = dist
+
+        if min_dist == float('inf'):
+            return None
+
+        return min_dist
+
+    def control_loop(self):
+
+        min_dist = self.get_forward_min_distance()
+        if min_dist is None:
+            return
+
+        safe_cmd = Twist()
+        safe_cmd.linear.x = self.desired_cmd.linear.x
+        safe_cmd.linear.y = self.desired_cmd.linear.y
+        safe_cmd.linear.z = self.desired_cmd.linear.z
+        safe_cmd.angular.z = self.desired_cmd.angular.z
+
+        if min_dist < self.stop_radius:
+            self.get_logger().warn("EMERGENCY STOP")
+            safe_cmd.linear.x = 0.0
+            safe_cmd.linear.y = 0.0
+            safe_cmd.linear.z = 0.0
+
+        elif min_dist < self.safety_radius:
+            scale = min_dist / self.safety_radius
+            safe_cmd.linear.x *= scale
+            safe_cmd.linear.y *= scale
+            safe_cmd.linear.z *= scale
+
+        stamped = TwistStamped()
+        stamped.header.stamp = self.get_clock().now().to_msg()
+        stamped.header.frame_id = "base_link"
+        stamped.twist = safe_cmd
+
+        self.pub.publish(stamped)
+
+
+def main(args=None):
+    rclpy.init(args=args)
+    node = CollisionShield3D()
+    rclpy.spin(node)
+    node.destroy_node()
+    rclpy.shutdown()
+
+
+if __name__ == '__main__':
+    main()

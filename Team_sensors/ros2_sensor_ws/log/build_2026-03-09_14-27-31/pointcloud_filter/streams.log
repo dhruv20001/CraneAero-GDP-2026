@@ -1,0 +1,103 @@
+[0.008s] Invoking command in '/home/dhruv/ros2_sensor_ws/build/pointcloud_filter': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/dhruv/ros2_ws/install/point_cloud_filter:/home/dhruv/ros2_sensor_ws/install/time_sync_tools:/home/dhruv/ros2_sensor_ws/install/sensor_fusion_pkg:/home/dhruv/ros2_sensor_ws/install/pointcloud_filter:/opt/ros/humble /usr/bin/cmake /home/dhruv/ros2_sensor_ws/src/pointcloud_filter -DCMAKE_INSTALL_PREFIX=/home/dhruv/ros2_sensor_ws/install/pointcloud_filter
+[0.055s] -- The C compiler identification is GNU 11.4.0
+[0.089s] -- The CXX compiler identification is GNU 11.4.0
+[0.093s] -- Detecting C compiler ABI info
+[0.134s] -- Detecting C compiler ABI info - done
+[0.138s] -- Check for working C compiler: /usr/bin/cc - skipped
+[0.138s] -- Detecting C compile features
+[0.139s] -- Detecting C compile features - done
+[0.141s] -- Detecting CXX compiler ABI info
+[0.189s] -- Detecting CXX compiler ABI info - done
+[0.194s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[0.194s] -- Detecting CXX compile features
+[0.194s] -- Detecting CXX compile features - done
+[0.196s] -- Found ament_cmake: 1.3.12 (/opt/ros/humble/share/ament_cmake/cmake)
+[0.283s] -- Found Python3: /usr/bin/python3 (found version "3.10.12") found components: Interpreter 
+[0.333s] -- Found rclcpp: 16.0.17 (/opt/ros/humble/share/rclcpp/cmake)
+[0.356s] -- Found rosidl_generator_c: 3.1.8 (/opt/ros/humble/share/rosidl_generator_c/cmake)
+[0.359s] -- Found rosidl_adapter: 3.1.8 (/opt/ros/humble/share/rosidl_adapter/cmake)
+[0.363s] -- Found rosidl_generator_cpp: 3.1.8 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)
+[0.370s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[0.379s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[0.403s] -- Found rmw_implementation_cmake: 6.1.2 (/opt/ros/humble/share/rmw_implementation_cmake/cmake)
+[0.404s] -- Found rmw_fastrtps_cpp: 6.2.9 (/opt/ros/humble/share/rmw_fastrtps_cpp/cmake)
+[0.451s] -- Found OpenSSL: /usr/lib/x86_64-linux-gnu/libcrypto.so (found version "3.0.2")  
+[0.467s] -- Found FastRTPS: /opt/ros/humble/include  
+[0.490s] -- Using RMW implementation 'rmw_fastrtps_cpp' as default
+[0.495s] -- Looking for pthread.h
+[0.545s] -- Looking for pthread.h - found
+[0.545s] -- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+[0.610s] -- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+[0.610s] -- Found Threads: TRUE  
+[0.642s] -- Found sensor_msgs: 4.9.0 (/opt/ros/humble/share/sensor_msgs/cmake)
+[0.660s] -- Found pcl_conversions: 2.4.5 (/opt/ros/humble/share/pcl_conversions/cmake)
+[0.682s] -- Checking for module 'eigen3'
+[0.689s] --   Found eigen3, version 3.4.0
+[0.705s] -- Found Eigen: /usr/include/eigen3 (Required is at least version "3.1") 
+[0.705s] -- Eigen found (include: /usr/include/eigen3, version: 3.4.0)
+[0.725s] -- Checking for module 'flann'
+[0.732s] --   Found flann, version 1.9.1
+[0.753s] -- Found FLANN: /usr/lib/x86_64-linux-gnu/libflann_cpp.so  
+[0.753s] -- FLANN found (include: /usr/include, lib: /usr/lib/x86_64-linux-gnu/libflann_cpp.so)
+[1.350s] -- Checking for module 'libusb-1.0'
+[1.357s] --   Found libusb-1.0, version 1.0.25
+[1.376s] -- Found libusb: /usr/lib/x86_64-linux-gnu/libusb-1.0.so  
+[1.377s] -- OpenNI found (version: 1.5.4.0, include: /usr/include/ni, lib: /usr/lib/libOpenNI.so;libusb::libusb)
+[1.406s] -- OpenNI2 found (version: 2.2.0.33, include: /usr/include/openni2, lib: /usr/lib/x86_64-linux-gnu/libOpenNI2.so;libusb::libusb)
+[1.493s] -- Eigen found (include: /usr/include/eigen3, version: 3.4.0)
+[1.496s] -- OpenNI found (version: 1.5.4.0, include: /usr/include/ni, lib: /usr/lib/libOpenNI.so;libusb::libusb)
+[1.500s] -- OpenNI2 found (version: 2.2.0.33, include: /usr/include/openni2, lib: /usr/lib/x86_64-linux-gnu/libOpenNI2.so;libusb::libusb)
+[1.582s] -- Found Qhull version 8.0.2
+[1.666s] -- OpenNI found (version: 1.5.4.0, include: /usr/include/ni, lib: /usr/lib/libOpenNI.so;libusb::libusb)
+[1.747s] -- Found PCL_COMMON: /usr/lib/x86_64-linux-gnu/libpcl_common.so  
+[1.747s] -- Found PCL_KDTREE: /usr/lib/x86_64-linux-gnu/libpcl_kdtree.so  
+[1.748s] -- Found PCL_OCTREE: /usr/lib/x86_64-linux-gnu/libpcl_octree.so  
+[1.748s] -- Found PCL_SEARCH: /usr/lib/x86_64-linux-gnu/libpcl_search.so  
+[1.749s] -- Found PCL_SAMPLE_CONSENSUS: /usr/lib/x86_64-linux-gnu/libpcl_sample_consensus.so  
+[1.749s] -- Found PCL_FILTERS: /usr/lib/x86_64-linux-gnu/libpcl_filters.so  
+[1.750s] -- Found PCL_2D: /usr/include/pcl-1.12  
+[1.750s] -- Found PCL_GEOMETRY: /usr/include/pcl-1.12  
+[1.750s] -- Found PCL_IO: /usr/lib/x86_64-linux-gnu/libpcl_io.so  
+[1.751s] -- Found PCL_FEATURES: /usr/lib/x86_64-linux-gnu/libpcl_features.so  
+[1.751s] -- Found PCL_ML: /usr/lib/x86_64-linux-gnu/libpcl_ml.so  
+[1.752s] -- Found PCL_SEGMENTATION: /usr/lib/x86_64-linux-gnu/libpcl_segmentation.so  
+[1.753s] -- Found PCL_VISUALIZATION: /usr/lib/x86_64-linux-gnu/libpcl_visualization.so  
+[1.753s] -- Found PCL_SURFACE: /usr/lib/x86_64-linux-gnu/libpcl_surface.so  
+[1.754s] -- Found PCL_REGISTRATION: /usr/lib/x86_64-linux-gnu/libpcl_registration.so  
+[1.754s] -- Found PCL_KEYPOINTS: /usr/lib/x86_64-linux-gnu/libpcl_keypoints.so  
+[1.755s] -- Found PCL_TRACKING: /usr/lib/x86_64-linux-gnu/libpcl_tracking.so  
+[1.756s] -- Found PCL_RECOGNITION: /usr/lib/x86_64-linux-gnu/libpcl_recognition.so  
+[1.756s] -- Found PCL_STEREO: /usr/lib/x86_64-linux-gnu/libpcl_stereo.so  
+[1.757s] -- Found PCL_APPS: /usr/lib/x86_64-linux-gnu/libpcl_apps.so  
+[1.757s] -- Found PCL_IN_HAND_SCANNER: /usr/include/pcl-1.12  
+[1.757s] -- Found PCL_MODELER: /usr/include/pcl-1.12  
+[1.757s] -- Found PCL_POINT_CLOUD_EDITOR: /usr/include/pcl-1.12  
+[1.758s] -- Found PCL_OUTOFCORE: /usr/lib/x86_64-linux-gnu/libpcl_outofcore.so  
+[1.759s] -- Found PCL_PEOPLE: /usr/lib/x86_64-linux-gnu/libpcl_people.so  
+[1.760s] -- Found pcl_ros: 2.4.5 (/opt/ros/humble/share/pcl_ros/cmake)
+[1.779s] -- Found eigen3_cmake_module: 0.1.1 (/opt/ros/humble/share/eigen3_cmake_module/cmake)
+[1.780s] -- Found Eigen3: TRUE (found version "3.4.0") 
+[1.780s] -- Ensuring Eigen3 include directory is part of orocos-kdl CMake target
+[1.831s] [33mCMake Warning (dev) at CMakeLists.txt:14 (find_package):
+[1.831s]   Policy CMP0074 is not set: find_package uses <PackageName>_ROOT variables.
+[1.831s]   Run "cmake --help-policy CMP0074" for policy details.  Use the cmake_policy
+[1.831s]   command to set the policy and suppress this warning.
+[1.831s] 
+[1.831s]   CMake variable PCL_ROOT is set to:
+[1.831s] 
+[1.831s]     /usr
+[1.831s] 
+[1.831s]   For compatibility, CMake is ignoring the variable.
+[1.832s] This warning is for project developers.  Use -Wno-dev to suppress it.
+[1.832s] [0m
+[1.846s] -- Found ament_lint_auto: 0.12.14 (/opt/ros/humble/share/ament_lint_auto/cmake)
+[1.890s] -- Added test 'cppcheck' to perform static code analysis on C / C++ code
+[1.890s] -- Configured cppcheck include dirs: /home/dhruv/ros2_sensor_ws/src/pointcloud_filter/include
+[1.890s] -- Configured cppcheck exclude dirs and/or files: 
+[1.891s] -- Added test 'lint_cmake' to check CMake code style
+[1.891s] -- Added test 'uncrustify' to check C / C++ code style
+[1.891s] -- Configured uncrustify additional arguments: 
+[1.891s] -- Added test 'xmllint' to check XML markup files
+[1.892s] -- Configuring done
+[1.920s] -- Generating done
+[1.928s] -- Build files have been written to: /home/dhruv/ros2_sensor_ws/build/pointcloud_filter

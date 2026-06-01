@@ -1,0 +1,16 @@
+running develop
+running egg_info
+writing time_sync_tools.egg-info/PKG-INFO
+writing dependency_links to time_sync_tools.egg-info/dependency_links.txt
+writing entry points to time_sync_tools.egg-info/entry_points.txt
+writing requirements to time_sync_tools.egg-info/requires.txt
+writing top-level names to time_sync_tools.egg-info/top_level.txt
+reading manifest file 'time_sync_tools.egg-info/SOURCES.txt'
+writing manifest file 'time_sync_tools.egg-info/SOURCES.txt'
+running build_ext
+Creating /home/dhruv/ros2_sensor_ws/install/time_sync_tools/lib/python3.10/site-packages/time-sync-tools.egg-link (link to .)
+
+Installed /home/dhruv/ros2_sensor_ws/build/time_sync_tools
+running symlink_data
+symbolically linking /home/dhruv/ros2_sensor_ws/build/time_sync_tools/resource/time_sync_tools -> /home/dhruv/ros2_sensor_ws/install/time_sync_tools/share/ament_index/resource_index/packages
+symbolically linking /home/dhruv/ros2_sensor_ws/build/time_sync_tools/package.xml -> /home/dhruv/ros2_sensor_ws/install/time_sync_tools/share/time_sync_tools

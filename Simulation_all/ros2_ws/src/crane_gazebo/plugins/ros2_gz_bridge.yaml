@@ -1,0 +1,145 @@
+# ============================================================
+# ros2_gz_bridge.yaml
+# Bridge Gazebo Harmonic <-> ROS2 pour iris_crane
+#
+# Usage :
+#   ros2 run ros_gz_bridge parameter_bridge --ros-args \
+#     -p config_file:=$(ros2 pkg prefix iris_crane_description)/share/iris_crane_description/config/ros2_gz_bridge.yaml
+#
+# Ou via launch file (recommandé) :
+#   ros_gz_bridge avec config_file parameter
+# ============================================================
+
+# -----------------------------------------------
+# RPLidar 360 - LaserScan
+# -----------------------------------------------
+- ros_topic_name: "/rplidar/scan"
+  gz_topic_name: "/rplidar/scan"
+  ros_type_name: "sensor_msgs/msg/LaserScan"
+  gz_type_name: "gz.msgs.LaserScan"
+  direction: GZ_TO_ROS
+
+# -----------------------------------------------
+# RealSense D435 FRONT
+# -----------------------------------------------
+
+# RGB Image
+- ros_topic_name: "/camera_front/color/image_raw"
+  gz_topic_name: "/camera_front/color/image_raw"
+  ros_type_name: "sensor_msgs/msg/Image"
+  gz_type_name: "gz.msgs.Image"
+  direction: GZ_TO_ROS
+
+# RGB Camera Info
+- ros_topic_name: "/camera_front/color/camera_info"
+  gz_topic_name: "/camera_front/color/camera_info"
+  ros_type_name: "sensor_msgs/msg/CameraInfo"
+  gz_type_name: "gz.msgs.CameraInfo"
+  direction: GZ_TO_ROS
+
+# Depth Image
+- ros_topic_name: "/camera_front/depth/image_rect_raw"
+  gz_topic_name: "/camera_front/depth/image_rect_raw"
+  ros_type_name: "sensor_msgs/msg/Image"
+  gz_type_name: "gz.msgs.Image"
+  direction: GZ_TO_ROS
+
+# Depth Camera Info
+- ros_topic_name: "/camera_front/depth/camera_info"
+  gz_topic_name: "/camera_front/depth/camera_info"
+  ros_type_name: "sensor_msgs/msg/CameraInfo"
+  gz_type_name: "gz.msgs.CameraInfo"
+  direction: GZ_TO_ROS
+
+# Pointcloud (généré par le plugin depth_image_proc ou gz)
+- ros_topic_name: "/camera_front/depth/points"
+  gz_topic_name: "/camera_front/depth/points"
+  ros_type_name: "sensor_msgs/msg/PointCloud2"
+  gz_type_name: "gz.msgs.PointCloudPacked"
+  direction: GZ_TO_ROS
+
+# -----------------------------------------------
+# RealSense D435 DOWN (nadir)
+# -----------------------------------------------
+
+# RGB Image
+- ros_topic_name: "/camera_down/color/image_raw"
+  gz_topic_name: "/camera_down/color/image_raw"
+  ros_type_name: "sensor_msgs/msg/Image"
+  gz_type_name: "gz.msgs.Image"
+  direction: GZ_TO_ROS
+
+# RGB Camera Info
+- ros_topic_name: "/camera_down/color/camera_info"
+  gz_topic_name: "/camera_down/color/camera_info"
+  ros_type_name: "sensor_msgs/msg/CameraInfo"
+  gz_type_name: "gz.msgs.CameraInfo"
+  direction: GZ_TO_ROS
+
+# Depth Image
+- ros_topic_name: "/camera_down/depth/image_rect_raw"
+  gz_topic_name: "/camera_down/depth/image_rect_raw"
+  ros_type_name: "sensor_msgs/msg/Image"
+  gz_type_name: "gz.msgs.Image"
+  direction: GZ_TO_ROS
+
+# Depth Camera Info
+- ros_topic_name: "/camera_down/depth/camera_info"
+  gz_topic_name: "/camera_down/depth/camera_info"
+  ros_type_name: "sensor_msgs/msg/CameraInfo"
+  gz_type_name: "gz.msgs.CameraInfo"
+  direction: GZ_TO_ROS
+
+# Pointcloud
+- ros_topic_name: "/camera_down/depth/points"
+  gz_topic_name: "/camera_down/depth/points"
+  ros_type_name: "sensor_msgs/msg/PointCloud2"
+  gz_type_name: "gz.msgs.PointCloudPacked"
+  direction: GZ_TO_ROS
+
+# -----------------------------------------------
+# ArduPilot / IMU / Pose (déjà bridgés par ardupilot_gazebo
+# mais listés ici pour référence)
+# -----------------------------------------------
+
+# IMU
+- ros_topic_name: "/imu/data"
+  gz_topic_name: "/imu/data"
+  ros_type_name: "sensor_msgs/msg/Imu"
+  gz_type_name: "gz.msgs.IMU"
+  direction: GZ_TO_ROS
+
+# Altimètre / barométrique
+- ros_topic_name: "/air_pressure"
+  gz_topic_name: "/air_pressure"
+  ros_type_name: "sensor_msgs/msg/FluidPressure"
+  gz_type_name: "gz.msgs.FluidPressure"
+  direction: GZ_TO_ROS
+
+# GPS
+- ros_topic_name: "/navsat"
+  gz_topic_name: "/navsat"
+  ros_type_name: "sensor_msgs/msg/NavSatFix"
+  gz_type_name: "gz.msgs.NavSat"
+  direction: GZ_TO_ROS
+
+# Pose du drone (ground truth)
+- ros_topic_name: "/model/iris_crane/pose"
+  gz_topic_name: "/model/iris_crane/pose"
+  ros_type_name: "geometry_msgs/msg/PoseArray"
+  gz_type_name: "gz.msgs.Pose_V"
+  direction: GZ_TO_ROS
+
+# Odométrie
+- ros_topic_name: "/model/iris_crane/odometry"
+  gz_topic_name: "/model/iris_crane/odometry"
+  ros_type_name: "nav_msgs/msg/Odometry"
+  gz_type_name: "gz.msgs.Odometry"
+  direction: GZ_TO_ROS
+
+# TF (transformations)
+- ros_topic_name: "/tf"
+  gz_topic_name: "/model/iris_crane/tf"
+  ros_type_name: "tf2_msgs/msg/TFMessage"
+  gz_type_name: "gz.msgs.Pose_V"
+  direction: GZ_TO_ROS

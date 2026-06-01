@@ -1,0 +1,45 @@
+***************************************************************
+**************************************************************
+check your system weither is ARM or AMD use pakage accordingly 
+extract floder which include 
+uname -m
+lscpu
+if [[ $(uname -m) == "x86_64" ]]; then echo "AMD/Intel (x86_64)"; else echo "ARM architecture"; fi
+
+************************************************************************
+**************************************************************************
+
+step 1
+sudo apt install /home/omkar/Downloads/pdk/pdk-base_clean/eCAL-5.12.1-Linux.deb
+
+
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+change home /omkar/download to where your file is extracted
+and same for below file  
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
+
+step 2 
+sudo apt install /home/omkar/Downloads/pdk/pdk-base_clean/codemeter-lite_7.40.4990.500_amd64.deb
+
+step 3 
+sudo apt install /home/omkar/Downloads/pdk/pdk-base_clean/pdk-base_1.1.0-5fcdd66_amd64.deb
+
+step 4
+sudo apt install /home/omkar/Downloads/pdk/pdk-base_clean/pdk-mon_1.1.0-5fcdd66_jammy-amd64.deb
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+****************************************************************************************************************************************
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+step 5
+
+cd /opt/pdk/bin/
+
+
+step 6
+
+ls
+
+step 7
+

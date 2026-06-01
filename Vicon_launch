@@ -1,0 +1,837 @@
+Below is a **complete ROS 2 Python package** for your use case:
+
+* subscribe to Vicon pose
+* republish it to MAVROS as external vision
+* publish a local waypoint continuously
+* optionally switch to `GUIDED`, arm, and take off
+
+After the package files, I explain the code in detail.
+
+---
+
+# Package structure
+
+```text
+vicon_waypoint_bridge/
+├── package.xml
+├── setup.py
+├── setup.cfg
+├── resource/
+│   └── vicon_waypoint_bridge
+├── launch/
+│   └── vicon_waypoint_bridge.launch.py
+└── vicon_waypoint_bridge/
+    ├── __init__.py
+    └── bridge_node.py
+```
+
+---
+
+# 1. `package.xml`
+
+```xml
+<?xml version="1.0"?>
+<package format="3">
+  <name>vicon_waypoint_bridge</name>
+  <version>0.0.1</version>
+  <description>Bridge Vicon pose to MAVROS vision pose and publish local waypoints for ArduPilot.</description>
+
+  <maintainer email="you@example.com">Your Name</maintainer>
+  <license>MIT</license>
+
+  <buildtool_depend>ament_python</buildtool_depend>
+
+  <depend>rclpy</depend>
+  <depend>geometry_msgs</depend>
+  <depend>mavros_msgs</depend>
+  <depend>std_msgs</depend>
+
+  <export>
+    <build_type>ament_python</build_type>
+  </export>
+</package>
+```
+
+---
+
+# 2. `setup.py`
+
+```python
+from setuptools import setup
+from glob import glob
+import os
+
+package_name = 'vicon_waypoint_bridge'
+
+setup(
+    name=package_name,
+    version='0.0.1',
+    packages=[package_name],
+    data_files=[
+        ('share/ament_index/resource_index/packages',
+         ['resource/' + package_name]),
+        ('share/' + package_name, ['package.xml']),
+        (os.path.join('share', package_name, 'launch'), glob('launch/*.launch.py')),
+    ],
+    install_requires=['setuptools'],
+    zip_safe=True,
+    maintainer='Your Name',
+    maintainer_email='you@example.com',
+    description='Bridge Vicon pose to MAVROS vision pose and publish local waypoints for ArduPilot.',
+    license='MIT',
+    tests_require=['pytest'],
+    entry_points={
+        'console_scripts': [
+            'bridge_node = vicon_waypoint_bridge.bridge_node:main',
+        ],
+    },
+)
+```
+
+---
+
+# 3. `setup.cfg`
+
+```ini
+[develop]
+script_dir=$base/lib/vicon_waypoint_bridge
+
+[install]
+install_scripts=$base/lib/vicon_waypoint_bridge
+```
+
+---
+
+# 4. `resource/vicon_waypoint_bridge`
+
+Create an empty file with this exact name:
+
+```text
+vicon_waypoint_bridge
+```
+
+---
+
+# 5. `vicon_waypoint_bridge/__init__.py`
+
+```python
+# empty
+```
+
+---
+
+# 6. `vicon_waypoint_bridge/bridge_node.py`
+
+```python
+#!/usr/bin/env python3
+import math
+from typing import Optional
+
+import rclpy
+from rclpy.node import Node
+
+from geometry_msgs.msg import PoseStamped, Quaternion
+from mavros_msgs.msg import State
+from mavros_msgs.srv import CommandBool, SetMode, CommandTOL
+
+
+def yaw_to_quaternion(yaw_rad: float) -> Quaternion:
+    q = Quaternion()
+    q.w = math.cos(yaw_rad / 2.0)
+    q.x = 0.0
+    q.y = 0.0
+    q.z = math.sin(yaw_rad / 2.0)
+    return q
+
+
+class ViconWaypointBridge(Node):
+    def __init__(self):
+        super().__init__("vicon_waypoint_bridge")
+
+        # Parameters
+        self.declare_parameter("vicon_topic", "/vicon/drone/pose")
+        self.declare_parameter("vision_topic", "/mavros/vision_pose/pose")
+        self.declare_parameter("setpoint_topic", "/mavros/setpoint_position/local")
+
+        self.declare_parameter("target_x", 0.0)
+        self.declare_parameter("target_y", 0.0)
+        self.declare_parameter("target_z", 1.0)
+        self.declare_parameter("target_yaw_deg", 0.0)
+
+        self.declare_parameter("publish_rate_hz", 30.0)
+        self.declare_parameter("arm_and_takeoff", False)
+        self.declare_parameter("takeoff_altitude", 1.0)
+
+        self.vicon_topic = self.get_parameter("vicon_topic").value
+        self.vision_topic = self.get_parameter("vision_topic").value
+        self.setpoint_topic = self.get_parameter("setpoint_topic").value
+
+        self.target_x = float(self.get_parameter("target_x").value)
+        self.target_y = float(self.get_parameter("target_y").value)
+        self.target_z = float(self.get_parameter("target_z").value)
+        self.target_yaw_deg = float(self.get_parameter("target_yaw_deg").value)
+
+        self.publish_rate_hz = float(self.get_parameter("publish_rate_hz").value)
+        self.arm_and_takeoff = bool(self.get_parameter("arm_and_takeoff").value)
+        self.takeoff_altitude = float(self.get_parameter("takeoff_altitude").value)
+
+        # Internal state
+        self.latest_vicon_pose: Optional[PoseStamped] = None
+        self.current_state: Optional[State] = None
+
+        self.sent_guided = False
+        self.sent_arm = False
+        self.sent_takeoff = False
+        self.started_setpoints = False
+
+        # Subscribers
+        self.vicon_sub = self.create_subscription(
+            PoseStamped,
+            self.vicon_topic,
+            self.vicon_cb,
+            10
+        )
+
+        self.state_sub = self.create_subscription(
+            State,
+            "/mavros/state",
+            self.state_cb,
+            10
+        )
+
+        # Publishers
+        self.vision_pub = self.create_publisher(
+            PoseStamped,
+            self.vision_topic,
+            10
+        )
+
+        self.setpoint_pub = self.create_publisher(
+            PoseStamped,
+            self.setpoint_topic,
+            10
+        )
+
+        # Service clients
+        self.arm_cli = self.create_client(CommandBool, "/mavros/cmd/arming")
+        self.mode_cli = self.create_client(SetMode, "/mavros/set_mode")
+        self.takeoff_cli = self.create_client(CommandTOL, "/mavros/cmd/takeoff")
+
+        # Timer
+        period = 1.0 / self.publish_rate_hz
+        self.timer = self.create_timer(period, self.timer_cb)
+
+        self.get_logger().info(f"Subscribed Vicon topic: {self.vicon_topic}")
+        self.get_logger().info(f"Publishing MAVROS vision topic: {self.vision_topic}")
+        self.get_logger().info(f"Publishing local waypoint topic: {self.setpoint_topic}")
+        self.get_logger().info(
+            f"Waypoint = ({self.target_x}, {self.target_y}, {self.target_z}), "
+            f"yaw={self.target_yaw_deg} deg"
+        )
+
+    def vicon_cb(self, msg: PoseStamped):
+        self.latest_vicon_pose = msg
+
+    def state_cb(self, msg: State):
+        self.current_state = msg
+
+    def call_set_mode(self, mode: str):
+        if not self.mode_cli.wait_for_service(timeout_sec=0.2):
+            self.get_logger().warn("SetMode service not available")
+            return
+        req = SetMode.Request()
+        req.base_mode = 0
+        req.custom_mode = mode
+        self.mode_cli.call_async(req)
+
+    def call_arm(self, arm: bool):
+        if not self.arm_cli.wait_for_service(timeout_sec=0.2):
+            self.get_logger().warn("Arming service not available")
+            return
+        req = CommandBool.Request()
+        req.value = arm
+        self.arm_cli.call_async(req)
+
+    def call_takeoff(self, altitude: float):
+        if not self.takeoff_cli.wait_for_service(timeout_sec=0.2):
+            self.get_logger().warn("Takeoff service not available")
+            return
+        req = CommandTOL.Request()
+        req.altitude = altitude
+        req.latitude = 0.0
+        req.longitude = 0.0
+        req.min_pitch = 0.0
+        req.yaw = 0.0
+        self.takeoff_cli.call_async(req)
+
+    def make_waypoint_msg(self) -> PoseStamped:
+        msg = PoseStamped()
+        msg.header.stamp = self.get_clock().now().to_msg()
+        msg.header.frame_id = "map"
+
+        msg.pose.position.x = self.target_x
+        msg.pose.position.y = self.target_y
+        msg.pose.position.z = self.target_z
+        msg.pose.orientation = yaw_to_quaternion(math.radians(self.target_yaw_deg))
+        return msg
+
+    def timer_cb(self):
+        # 1) Forward Vicon pose to MAVROS vision input
+        if self.latest_vicon_pose is not None:
+            vision_msg = PoseStamped()
+            vision_msg.header.stamp = self.get_clock().now().to_msg()
+            vision_msg.header.frame_id = self.latest_vicon_pose.header.frame_id or "map"
+            vision_msg.pose = self.latest_vicon_pose.pose
+            self.vision_pub.publish(vision_msg)
+
+        # 2) Continuously publish local waypoint
+        waypoint_msg = self.make_waypoint_msg()
+        self.setpoint_pub.publish(waypoint_msg)
+        self.started_setpoints = True
+
+        # 3) Optional: switch mode, arm, takeoff
+        if not self.arm_and_takeoff:
+            return
+
+        if self.current_state is None:
+            return
+
+        if self.started_setpoints and not self.sent_guided:
+            self.get_logger().info("Requesting GUIDED mode")
+            self.call_set_mode("GUIDED")
+            self.sent_guided = True
+            return
+
+        if self.current_state.mode == "GUIDED" and not self.current_state.armed and not self.sent_arm:
+            self.get_logger().info("Requesting ARM")
+            self.call_arm(True)
+            self.sent_arm = True
+            return
+
+        if self.current_state.armed and not self.sent_takeoff:
+            self.get_logger().info(f"Requesting TAKEOFF to {self.takeoff_altitude} m")
+            self.call_takeoff(self.takeoff_altitude)
+            self.sent_takeoff = True
+            return
+
+
+def main(args=None):
+    rclpy.init(args=args)
+    node = ViconWaypointBridge()
+    try:
+        rclpy.spin(node)
+    except KeyboardInterrupt:
+        pass
+    finally:
+        node.destroy_node()
+        rclpy.shutdown()
+```
+
+---
+
+# 7. `launch/vicon_waypoint_bridge.launch.py`
+
+```python
+from launch import LaunchDescription
+from launch_ros.actions import Node
+
+
+def generate_launch_description():
+    return LaunchDescription([
+        Node(
+            package='vicon_waypoint_bridge',
+            executable='bridge_node',
+            name='vicon_waypoint_bridge',
+            output='screen',
+            parameters=[
+                {"vicon_topic": "/vicon/drone/pose"},
+                {"vision_topic": "/mavros/vision_pose/pose"},
+                {"setpoint_topic": "/mavros/setpoint_position/local"},
+                {"target_x": 1.0},
+                {"target_y": 0.0},
+                {"target_z": 1.0},
+                {"target_yaw_deg": 0.0},
+                {"publish_rate_hz": 30.0},
+                {"arm_and_takeoff": False},
+                {"takeoff_altitude": 1.0},
+            ]
+        )
+    ])
+```
+
+---
+
+# 8. Build
+
+From your workspace root:
+
+```bash
+colcon build --symlink-install
+source install/setup.bash
+```
+
+---
+
+# 9. Run
+
+Using launch:
+
+```bash
+ros2 launch vicon_waypoint_bridge vicon_waypoint_bridge.launch.py
+```
+
+Or directly:
+
+```bash
+ros2 run vicon_waypoint_bridge bridge_node --ros-args \
+  -p vicon_topic:=/vicon/drone/pose \
+  -p target_x:=1.0 \
+  -p target_y:=0.0 \
+  -p target_z:=1.0 \
+  -p target_yaw_deg:=0.0 \
+  -p arm_and_takeoff:=true \
+  -p takeoff_altitude:=1.0
+```
+
+---
+
+# Detailed explanation of the code
+
+## Overall logic
+
+This node has **two main jobs**:
+
+### First job: external vision injection
+
+It takes the pose coming from Vicon:
+
+```text
+/vicon/drone/pose
+```
+
+and republishes it to:
+
+```text
+/mavros/vision_pose/pose
+```
+
+This is how MAVROS gives ArduPilot an external pose estimate.
+
+### Second job: waypoint command
+
+It continuously publishes a desired local pose to:
+
+```text
+/mavros/setpoint_position/local
+```
+
+That is the waypoint command for the drone in the local frame.
+
+So the full chain is:
+
+```text
+Vicon -> bridge node -> /mavros/vision_pose/pose -> ArduPilot EKF
+                         \
+                          -> /mavros/setpoint_position/local -> guided waypoint
+```
+
+---
+
+## `yaw_to_quaternion`
+
+```python
+def yaw_to_quaternion(yaw_rad: float) -> Quaternion:
+```
+
+ROS orientations are not sent as a single yaw angle.
+They are sent as a quaternion.
+
+This helper converts a yaw angle in radians into a quaternion with:
+
+* no roll
+* no pitch
+* only yaw
+
+So if you want the drone to face a specific heading, this function builds the orientation message.
+
+---
+
+## Parameters
+
+The node declares parameters so you can change behavior without editing the code.
+
+### Topic parameters
+
+```python
+self.declare_parameter("vicon_topic", "/vicon/drone/pose")
+self.declare_parameter("vision_topic", "/mavros/vision_pose/pose")
+self.declare_parameter("setpoint_topic", "/mavros/setpoint_position/local")
+```
+
+These define:
+
+* where Vicon comes from
+* where external vision is sent
+* where waypoint commands are sent
+
+### Waypoint parameters
+
+```python
+self.declare_parameter("target_x", 0.0)
+self.declare_parameter("target_y", 0.0)
+self.declare_parameter("target_z", 1.0)
+self.declare_parameter("target_yaw_deg", 0.0)
+```
+
+These are the desired waypoint coordinates.
+
+Important:
+these coordinates are assumed to already be in the correct local frame expected by MAVROS for `/mavros/setpoint_position/local`.
+
+### Control parameters
+
+```python
+self.declare_parameter("publish_rate_hz", 30.0)
+self.declare_parameter("arm_and_takeoff", False)
+self.declare_parameter("takeoff_altitude", 1.0)
+```
+
+* `publish_rate_hz`: how fast to publish setpoints and vision
+* `arm_and_takeoff`: whether to automatically request Guided, arm, and take off
+* `takeoff_altitude`: altitude used by the takeoff service
+
+---
+
+## Internal state
+
+```python
+self.latest_vicon_pose: Optional[PoseStamped] = None
+self.current_state: Optional[State] = None
+```
+
+The node stores:
+
+* the latest Vicon pose
+* the latest MAVROS state
+
+Then it uses those inside the timer loop.
+
+The boolean flags:
+
+```python
+self.sent_guided = False
+self.sent_arm = False
+self.sent_takeoff = False
+self.started_setpoints = False
+```
+
+prevent repeating mode, arm, and takeoff requests forever.
+
+---
+
+## Subscribers
+
+### Vicon subscriber
+
+```python
+self.vicon_sub = self.create_subscription(
+    PoseStamped,
+    self.vicon_topic,
+    self.vicon_cb,
+    10
+)
+```
+
+This listens to your Vicon pose topic.
+
+When a message arrives, `vicon_cb` stores it:
+
+```python
+def vicon_cb(self, msg: PoseStamped):
+    self.latest_vicon_pose = msg
+```
+
+### MAVROS state subscriber
+
+```python
+self.state_sub = self.create_subscription(
+    State,
+    "/mavros/state",
+    self.state_cb,
+    10
+)
+```
+
+This gives the node information such as:
+
+* connected
+* armed
+* current mode
+
+That is useful for:
+
+* checking whether Guided is active
+* checking whether the vehicle is armed
+
+---
+
+## Publishers
+
+### Vision publisher
+
+```python
+self.vision_pub = self.create_publisher(
+    PoseStamped,
+    self.vision_topic,
+    10
+)
+```
+
+This publishes external vision pose to MAVROS.
+
+### Setpoint publisher
+
+```python
+self.setpoint_pub = self.create_publisher(
+    PoseStamped,
+    self.setpoint_topic,
+    10
+)
+```
+
+This continuously sends the desired waypoint.
+
+It must be published continuously because many autopilot setups expect a stream of setpoints, not a single one-shot command.
+
+---
+
+## Service clients
+
+These are used to command the vehicle:
+
+```python
+self.arm_cli = self.create_client(CommandBool, "/mavros/cmd/arming")
+self.mode_cli = self.create_client(SetMode, "/mavros/set_mode")
+self.takeoff_cli = self.create_client(CommandTOL, "/mavros/cmd/takeoff")
+```
+
+They allow the node to ask MAVROS to:
+
+* arm the drone
+* switch mode to `GUIDED`
+* take off
+
+---
+
+## `make_waypoint_msg`
+
+```python
+def make_waypoint_msg(self) -> PoseStamped:
+```
+
+This creates the waypoint command message.
+
+It fills:
+
+* `header.stamp`
+* `header.frame_id`
+* `pose.position`
+* `pose.orientation`
+
+The position is:
+
+```python
+msg.pose.position.x = self.target_x
+msg.pose.position.y = self.target_y
+msg.pose.position.z = self.target_z
+```
+
+The heading is converted from yaw degrees to a quaternion:
+
+```python
+msg.pose.orientation = yaw_to_quaternion(math.radians(self.target_yaw_deg))
+```
+
+So this function is simply building:
+“go to this position, with this heading.”
+
+---
+
+## `timer_cb`
+
+This is the heart of the node.
+
+It runs at `publish_rate_hz`.
+
+### Part 1: forward Vicon to MAVROS
+
+```python
+if self.latest_vicon_pose is not None:
+    vision_msg = PoseStamped()
+    vision_msg.header.stamp = self.get_clock().now().to_msg()
+    vision_msg.header.frame_id = self.latest_vicon_pose.header.frame_id or "map"
+    vision_msg.pose = self.latest_vicon_pose.pose
+    self.vision_pub.publish(vision_msg)
+```
+
+This takes the latest Vicon pose and republishes it to `/mavros/vision_pose/pose`.
+
+That is how the autopilot receives the external localization estimate.
+
+### Part 2: continuously publish waypoint
+
+```python
+waypoint_msg = self.make_waypoint_msg()
+self.setpoint_pub.publish(waypoint_msg)
+self.started_setpoints = True
+```
+
+Even if the waypoint is fixed, it is sent repeatedly.
+
+This is important because autopilot interfaces often require regular setpoint updates.
+
+### Part 3: optional Guided + arm + takeoff
+
+If `arm_and_takeoff` is false, the node does nothing more.
+
+If true, it follows this sequence:
+
+#### Step A: request Guided mode
+
+```python
+if self.started_setpoints and not self.sent_guided:
+    self.call_set_mode("GUIDED")
+```
+
+It waits until setpoints are being published first.
+
+#### Step B: arm
+
+```python
+if self.current_state.mode == "GUIDED" and not self.current_state.armed and not self.sent_arm:
+    self.call_arm(True)
+```
+
+Only once Guided is active.
+
+#### Step C: takeoff
+
+```python
+if self.current_state.armed and not self.sent_takeoff:
+    self.call_takeoff(self.takeoff_altitude)
+```
+
+Only once the drone is armed.
+
+So the sequence is:
+
+```text
+start setpoint stream -> request GUIDED -> arm -> takeoff
+```
+
+---
+
+# How to adapt this for your arena
+
+The most important thing is the waypoint coordinates.
+
+When you set:
+
+```python
+{"target_x": 1.0},
+{"target_y": 0.0},
+{"target_z": 1.0},
+```
+
+you are saying:
+
+* go to x = 1 m
+* go to y = 0 m
+* go to z = 1 m
+
+But this only works correctly if your local MAVROS frame matches your understanding of the arena.
+
+You should validate with small tests:
+
+* command `(1, 0, 1)` and see which way the drone moves
+* command `(0, 1, 1)` and see which way it moves
+* command different yaw values and verify rotation
+
+That tells you how the local frame aligns with your Vicon arena.
+
+---
+
+# Recommended first test
+
+Do not start with auto arm and takeoff.
+
+Use:
+
+```python
+{"arm_and_takeoff": False}
+```
+
+Then:
+
+* manually put the drone in a safe state
+* verify that Vicon is reaching `/mavros/vision_pose/pose`
+* verify that setpoints are reaching `/mavros/setpoint_position/local`
+* try a very small waypoint near the current position
+
+For example:
+
+```python
+{"target_x": 0.2},
+{"target_y": 0.0},
+{"target_z": 0.8},
+```
+
+---
+
+# Useful debug commands
+
+Check Vicon input:
+
+```bash
+ros2 topic echo /vicon/drone/pose
+```
+
+Check vision output:
+
+```bash
+ros2 topic echo /mavros/vision_pose/pose
+```
+
+Check waypoint output:
+
+```bash
+ros2 topic echo /mavros/setpoint_position/local
+```
+
+Check MAVROS state:
+
+```bash
+ros2 topic echo /mavros/state
+```
+
+Check if ArduPilot local estimate exists:
+
+```bash
+ros2 topic list | grep local
+```
+
+---
+
+# One important caution
+
+This script is a good starting point, but for a very robust ArduPilot setup you may later want:
+
+* position tolerance checking
+* “wait until pose is stable” before takeoff
+* waypoint reached detection
+* multiple waypoint support
+* safety timeout if Vicon is lost
+
+This version keeps things intentionally simple so you can understand and test each part.
+
+I can also give you a **version with a list of waypoints**, where the drone goes from one arena point to another automatically.
